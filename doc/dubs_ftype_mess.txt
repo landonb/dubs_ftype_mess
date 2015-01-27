@@ -1,0 +1,23 @@
+*dubs_ftype_mess.txt*	For Vim version 7.4.	Last change: 2015 Jan 23
+
+Dubsacks Vim -- Filetype~
+
+FILETYPE-SPECIFIC MESS			*dubs-ftype-mess*
+
+1. About This Plugin			|dubs-ftype-about|
+2. Plugin Commands			|dubs-ftype-commands|
+
+==============================================================================
+1. About This Plugin			*dubs-ftype-about*
+
+Some filetype tweaks not important enough for individual ftplugin files.
+Mostly syntax highlighting related.
+
+Project page: https://github.com/landonb/dubs_ftype_mess
+
+==============================================================================
+2. Plugin Commands			*dubs-ftype-commands*
+
+None. This plugin is non-interactive.
+
+ vim:tw=78:ts=8:ft=help:norl:
