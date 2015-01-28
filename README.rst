@@ -8,14 +8,51 @@ This plugin customizes filetype-specific behavior,
 mostly by adding syntax highlighting for non-standard
 filetypes.
 
-Project page: https://github.com/landonb/dubs_ftype_mess
+Installation
+------------
 
-Automatic/Transparent Features
-------------------------------
+Standard Pathogen installation:
+
+.. code-block:: bash
+
+   cd ~/.vim/bundle/
+   git clone https://github.com/landonb/dubs_ftype_mess.git
+
+Or, Standard submodule installation:
+
+.. code-block:: bash
+
+   cd ~/.vim/bundle/
+   git submodule add https://github.com/landonb/dubs_ftype_mess.git
+
+Online help:
+
+.. code-block:: vim
+
+   :Helptags
+   :help dubs-ftype-mess
+
+Key Mappings
+------------
+
+Filetype-Specific Commands
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+reStructured Text
+~~~~~~~~~~~~~~~~~
+
+==================================  ==================================  ==============================================================================
+Key Mapping                         Description                         Notes
+==================================  ==================================  ==============================================================================
+\```                                Start hyperlink                     Type three backticks in a row to insert hyperlink boilerplate.
+==================================  ==================================  ==============================================================================
+
+Other Features
+--------------
 
 - Fix syntax highlighting bug:
 
-  - Sometimes -- especially w/ the Actionscript syntax 
+  - Sometimes -- especially with the ActionScript syntax 
     highlighter -- files look like all-comments or all-text
     (e.g., the text is all pink) because the syntax parser started
     from the top of the window or thereabouts and not from the
@@ -26,7 +63,7 @@ Automatic/Transparent Features
     from the start of the file.
 
 - Tell Vim to automatically load ``ftplugin/*.vim`` files
-  (but specifying ``filetype plugin on``).
+  (by specifying ``filetype plugin on``).
 
   - By default, Vim doesn't load filetype plugins.
 
@@ -39,7 +76,6 @@ Automatic/Transparent Features
 
   - Applies to the following filetypes:
     Vim, Python, Shell (Bash), SQL, ActionScript, and MXML.
-    (FIXME: More to follow?)
 
 - Fix smartindent's handling of octothorpes in Python files:
   by default, smartindent assumes ``#`` is used just for C-style macros,
@@ -47,8 +83,8 @@ Automatic/Transparent Features
   and the start of the line (effectively removing all indentation).
   For Python files, we want to be able to write comments wherever.
 
-  - Also, for shell files, ``smartindent`` is completely disabled,
-    otherwise Vim won't tab your octothorpes.
+  - Also, for shell files, ``smartindent`` is completely
+    disabled, otherwise Vim won't tab your octothorpes.
     E.g., select multiple lines, hit Tab, and pounded lines stay put.
 
 - Miscellaneous features:
@@ -93,19 +129,4 @@ Automatic/Transparent Features
   - Textile (Markup language)
 
   - Wikipedia  
-
-Key Mappings
-------------
-
-Filetype-Specific Commands
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-reStructured Text
-~~~~~~~~~~~~~~~~~
-
-==================================  ==================================  ==============================================================================
-Key Mapping                         Description                         Notes
-==================================  ==================================  ==============================================================================
-\```                                Start hyperlink                     Type three backticks in a row to insert hyperlink boilerplate.
-==================================  ==================================  ==============================================================================
 
