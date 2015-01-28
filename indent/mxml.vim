@@ -1,4 +1,4 @@
-" Last Author: Landon Bouma (dubsacks &#x40; retrosoft &#x2E; com)
+" Last Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
 " Last Change: 2010? 2011?
 " Version:     2.0.1.lbfork (search [lb] to see changes -- just one tweak)
 " ========================================================================

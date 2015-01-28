@@ -1,6 +1,6 @@
 " File: ftplugin/rst_dubsacks.vim
-" Author: Landon Bouma (dubsacks &#x40; retrosoft &#x2E; com)
-" Last Modified: 2015.01.23
+" Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
+" Last Modified: 2015.01.27
 " Project Page: https://github.com/landonb/dubs_ftype_mess
 " Summary: Dubsacks reST filetype behavior
 " License: GPLv3

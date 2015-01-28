@@ -1,6 +1,6 @@
 " Vim indent file
-" Last Author: Landon Bouma (dubsacks &#x40; retrosoft &#x2E; com)
-" Last Change: 2011.01.14
+" Last Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
+" Last Change: 2015.01.27
 " Version:     2008-07-18.1.lbfork (search [lb] to find the 1 change)
 " ========================================================================
 " Language:	    DTD (Document Type Definition for XML)

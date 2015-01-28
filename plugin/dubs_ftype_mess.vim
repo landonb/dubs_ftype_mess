@@ -1,11 +1,11 @@
 " File: dubs_ftype_mess.vim
-" Author: Landon Bouma (dubsacks &#x40; retrosoft &#x2E; com)
-" Last Modified: 2015.01.24
+" Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
+" Last Modified: 2015.01.27
 " Project Page: https://github.com/landonb/dubs_ftype_mess
 " Summary: Dubsacks Filetype Tweaks, Mostly for Syntax Highlighting
 " License: GPLv3
 " -------------------------------------------------------------------
-" Copyright © 2009-2015, 2015 Landon Bouma.
+" Copyright © 2009, 2015 Landon Bouma.
 " 
 " This file is part of Dubsacks.
 " 

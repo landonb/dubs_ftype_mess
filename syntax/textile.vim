@@ -1,5 +1,5 @@
-" Last Author: Landon Bouma (dubsacks &#x40; retrosoft &#x2E; com)
-" Last Change: 2009.09.04
+" Last Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
+" Last Change: 2015.01.27
 " Version:     July 2008.1.lbfork (search [lb] to find three changes)
 "
 "   You will have to restart vim for this to take effect.  In any case
