@@ -1,6 +1,6 @@
 " File: ftplugin/rst_dubsacks.vim
 " Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
-" Last Modified: 2015.01.27
+" Last Modified: 2015.02.03
 " Project Page: https://github.com/landonb/dubs_ftype_mess
 " Summary: Dubsacks reST filetype behavior
 " License: GPLv3
@@ -61,7 +61,7 @@ autocmd BufEnter,BufRead *.rst iabbrev <buffer> ``` `<CR><>`__
 " ------------------------------------------------------
 
 " [lb] just took the default for Python files.
-" The default for rst is:  iskeyword=38,42,43,45,47-58,60-62,64-90,97-122,_
+" The default for rst is: iskeyword=38,42,43,45,47-58,60-62,64-90,97-122,_
 " but then, e.g., colons are included in word-under-cursor selections,
 " which makes searching some_word: not find some_word.
 "
@@ -69,6 +69,11 @@ autocmd BufEnter,BufRead *.rst iabbrev <buffer> ``` `<CR><>`__
 " should run just once which should be all we need.
 "  autocmd BufEnter,BufRead *.rst setlocal iskeyword=@,48-57,_,192-255
 autocmd Filetype rst setlocal iskeyword=@,48-57,_,192-255
+
+" Strange...
+" This is the default and makes, e.g., else: not be highlighted:
+"   iskeyword=@,48-57,_,192-255,:
+autocmd Filetype py setlocal iskeyword=@,48-57,_,192-255
 
 " ------------------------------------------------------
 " Spell Checking! [sic]
