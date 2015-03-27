@@ -1,6 +1,6 @@
 " File: dubs_ftype_mess.vim
 " Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
-" Last Modified: 2015.01.27
+" Last Modified: 2015.03.12
 " Project Page: https://github.com/landonb/dubs_ftype_mess
 " Summary: Dubsacks Filetype Tweaks, Mostly for Syntax Highlighting
 " License: GPLv3
@@ -100,10 +100,12 @@ autocmd BufRead *.map set
 " assuming you're about a write a C-style macro. Nuts to this, I say!
 " (Per the documentation (:h 'smartindent'), the ^H you see below is generated
 " by typing Ctrl-q Ctrl-h (Ctrl-V if dosmode isn't enabled, which makes Ctrl-V
-" paste).) (And you can't copy/paste this command to execute it, if you type :
+" paste).) (And you can't copy/paste this command to execute it, if you type it
 " you'll have to Ctrl-q Ctrl-h the special character.)
 autocmd BufRead *.py inoremap # X#
 "inoremap # X#
+" 2015.03.12: I cannot tab a line starting with a pound...
+autocmd BufEnter,BufRead *.py setlocal nosmartindent
 
 " ------------------------------------------------------
 " Bash Highlighting
