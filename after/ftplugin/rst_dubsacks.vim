@@ -1,11 +1,11 @@
 " File: ftplugin/rst_dubsacks.vim
 " Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
-" Last Modified: 2015.04.02
+" Last Modified: 2016.03.24
 " Project Page: https://github.com/landonb/dubs_ftype_mess
 " Summary: Dubsacks reST filetype behavior
 " License: GPLv3
 " -------------------------------------------------------------------
-" Copyright © 2015 Landon Bouma.
+" Copyright © 2015-2016 Landon Bouma.
 " 
 " This file is part of Dubsacks.
 " 
@@ -86,11 +86,9 @@ autocmd BufEnter,BufRead *.rst setlocal spell
 "   autocmd Filetype rst setlocal spell
 "
 " but for some reason when I switched buffers to a code file, spell checking
-" was still enabled. You could get over that with another command,
+" was still enabled. You could get over that with the above command,
 "
 "   autocmd BufEnter,BufRead *.rst setlocal spell
-"
-" but it makes more sense to just use the BufEnter/Read override for *.rst.
 
 " -----------------------------------------------------------------------------
 " Spell Checking cAPITALIZATION
@@ -126,6 +124,13 @@ autocmd BufEnter,BufRead *.rst setlocal spell
 
 autocmd BufEnter,BufRead *.rst setlocal spellcapcheck=
 
+" Other filetypes to spell check.
+" -------------------------------
+
+" E.g., todo.txt.
+autocmd BufEnter,BufRead *.txt setlocal spell
+autocmd BufEnter,BufRead *.txt setlocal spellcapcheck=
+
 " Override .rst syntax ``.. code-block:: <language>`` mapping.
 " ------------------------------------------------------------
 " SYNC_ME: Similar *.rst changes in dubs_preloads.vim and rst_dubsacks.vim.
@@ -152,26 +157,62 @@ endif
 "   E706: Variable type mismatch for: code.
 " That is, unless you use a unique name rather than `code`.
 " I'm not sure where it's set (the syntax/rst.vim system file?),
-" and it not a global, or at least `:echo g:code` shows naught.
+" and it's not a global, or at least `:echo g:code` shows naught.
 " So either use a unique name or just unlet, to be safe, or both.
 " See: :help E706.
+"
+" findfileing... / &rtp: /home/landonb/.vim,/home/landonb/.vim/bundle_/AutoAdapt,/home/landonb/.vim/bundle_/TeTrIs.vim,/home/landonb/.vim/bundle_/command-t,/home/landonb/.vim/bundle_/ctrlp.vim,/home/landonb/.vim/bundle_/dubs_all,/home/landonb/.vim/bundle_/dubs_appearance,/home/landonb/.vim/bundle_/dubs_buffer_fun,/home/landonb/.vim/bundle_/dubs_core,/home/landonb/.vim/bundle_/dubs_edit_juice,/home/landonb/.vim/bundle_/dubs_excensus,/home/landonb/.vim/bundle_/dubs_file_finder,/home/landonb/.vim/bundle_/dubs_ftype_mess,/home/landonb/.vim/bundle_/dubs_grep_steady,/home/landonb/.vim/bundle_/dubs_html_entities,/home/landonb/.vim/bundle_/dubs_project_tray,/home/landonb/.vim/bundle_/dubs_quickfix_wrap,/home/landonb/.vim/bundle_/dubs_style_guard,/home/landonb/.vim/bundle_/dubs_syntastic_wrap,/home/landonb/.vim/bundle_/dubs_toggle_textwrap,/home/landonb/.vim/bundle_/editorconfig-vim,/home/landonb/.vim/bundle_/generate_links.sh,/home/landonb/.vim/bundle_/ingo-library,/home/landonb/.vim/bundle_/minibufexpl.vim,/home/landonb/.vim/bundle_/nerdtree,/home/landonb/.vim/bundle_/syntastic,/home/landonb/.vim/bundle_/taglist,/home/landonb/.vim/bundle_/tlib_vim,/home/landonb/.vim/bundle_/viki_vim,/home/landonb/.vim/bundle_/vim-bufsurf,/home/landonb/.vim/bundle_/vim-gnupg,/home/landonb/.vim/bundle_/vim-misc,/home/landonb/.vim/bundle_/vim-rails,/home/landonb/.vim/bundle_/vim-wakatime,/var/lib/vim/addons,/usr/share/vim/vimfiles,/usr/share/vim/vim74,/usr/share/vim/vimfiles/after,/var/lib/vim/addons/after,/home/landonb/.vim/bundle_/dubs_edit_juice/after,/home/landonb/.vim/after,/home/landonb/.vim/bundle/ctrlp.vim
+"
+"syntax_file: .vim/bundle_/dubs_ftype_mess/syntax/actionscript.vim
+" WRONG:
+"syntax_file: .vim/bundle_/syntastic/syntax_checkers/sh/sh.vim
+"codemap: htm
+"syntax_file:
+"syntax_file: .vim/bundle_/dubs_ftype_mess/syntax/javascript.vim
+"codemap: mxml
+" WRONG:
+"syntax_file: .vim/bundle_/dubs_ftype_mess/indent/mxml.vim
+"
+let search_paths = pathogen#split(&rtp)
 unlet! codemap
 for codemap in g:rst_syntax_code_list_dubs
   let fext = codemap.fext
   let synf = codemap.synf
   unlet! b:current_syntax
-  let syntax_file = findfile(synf.'.vim', pathogen#split(&rtp)[0] . "/**")
+  " The first entry in the runtime path is the user's base Vim directory,
+  "   usually ~/.vim. We could search that, e.g.,
+  "
+  "     let syntax_file = findfile(synf.'.vim', pathogen#split(&rtp)[0] . '/**')
+  "
+  "   but if you have any symlinks therein to large directory trees (such as
+  "   those links under dubs_all/cmdt_paths), a depthy search can noticeably
+  "   delay Vim boot time.
+  let syntax_file = ''
+  for vim_dir in pathogen#split(&rtp)
+    let try_file = vim_dir . '/after/syntax/' . synf.'.vim'
+    if filereadable(try_file)
+      let syntax_file = try_file
+      break
+    endif
+    let try_file = vim_dir . '/syntax/' . synf.'.vim'
+    if filereadable(try_file)
+      let syntax_file = try_file
+      break
+    endif
+  endfor
   if syntax_file != ''
     " Turn into a full path. See :h filename-modifiers
-    let syntax_file = fnamemodify(syntax_file, ":p")
+    let syntax_file = fnamemodify(syntax_file, ':p')
   else
     let syntax_file = $VIMRUNTIME . '/syntax/' . synf.'.vim'
+  endif
+  "echomsg 'codemap: ' . codemap.fext '/ syntax_file: ' . syntax_file
+  if syntax_file != ''
     if !filereadable(syntax_file)
       echomsg 'Warning: Dubs could find: ' . synf.'.vim'
+    else
+      exe 'syn include @rst' . fext . ' ' . syntax_file
     endif
-  endif
-  if syntax_file != ''
-    exe 'syn include @rst' . fext . ' ' . syntax_file
   endif
   exe 'syn region rstDirective'.fext.' matchgroup=rstDirective fold '
         \.'start=#\%(sourcecode\|code\%(-block\)\=\)::\s\+' . fext . '\s*$# '
