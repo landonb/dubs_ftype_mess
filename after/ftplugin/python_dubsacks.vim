@@ -1,11 +1,11 @@
 " File: ftplugin/python_dubsacks.vim
 " Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
-" Last Modified: 2015.04.04
+" Last Modified: 2016.02.26
 " Project Page: https://github.com/landonb/dubs_ftype_mess
 " Summary: Dubsacks *.py filetype behavior
 " License: GPLv3
 " -------------------------------------------------------------------
-" Copyright © 2015 Landon Bouma.
+" Copyright © 2015-2016 Landon Bouma.
 " 
 " This file is part of Dubsacks.
 " 
@@ -37,7 +37,10 @@ let g:ftplugin_python_dubsacks = 1
 " [lb] loves me some breakpoint action.
 " And this is a silly/great macro to insert in-code bps quickly.
 " Simply type the magic sequence and then hit space or return, et voilà!
-autocmd BufEnter,BufRead *.py iabbrev <buffer> ';'; import pdb;pdb.set_trace()<Home><Up><End><CR><C-O>0<C-O>D#
+"autocmd BufEnter,BufRead *.py iabbrev <buffer> ';'; import pdb;pdb.set_trace()<Home><Up><End><CR><C-O>0<C-O>D#<Down><End><CR>
+autocmd BufEnter,BufRead *.py iabbrev <buffer> ';'; import pdb;pdb.set_trace()<Home><Up><End><CR><C-O>0<C-O>D#<Down><End><CR><C-R>=Eatchar('\s')<CR>
+"setlocal iabbrev <buffer> ';'; import pdb;pdb.set_trace()<Home><Up><End><CR><C-O>0<C-O>D#<Down><End><CR><C-R>=Eatchar('\s')<CR>
+iabbrev <buffer> ';'; import pdb;pdb.set_trace()<Home><Up><End><CR><C-O>0<C-O>D#<Down><End><CR><C-R>=Eatchar('\s')<CR>
 " TEST:
 "  iabbrev ';'; import pdb;pdb.set_trace()<Home><Up><End><CR><C-O>0<C-O>D#
 " PAST: I first tried to abbrev -p-p, something easy and unique, but it
@@ -64,6 +67,38 @@ autocmd BufEnter,BufRead *.py iabbrev <buffer> ';'; import pdb;pdb.set_trace()<H
 " This is the default and makes, e.g., else: not be highlighted:
 "   iskeyword=@,48-57,_,192-255,:
 autocmd Filetype py setlocal iskeyword=@,48-57,_,192-255
+setlocal iskeyword=@,48-57,_,192-255
+
+" ------------------------------------------------------
+" Python Highlighting
+" ------------------------------------------------------
+
+"   for filetype=python
+"     comments=s1:/*,mb:*,ex:*/,://,b:#,:XCOMM,n:>,fb:-
+" NOTE I'm not sure why python considers /* */ a comment...
+autocmd BufRead *.py setlocal
+  \ comments=sb:#\ FIXME:,m:#\ \ \ \ \ \ \ \ ,ex:#.,sb:#\ NOTE:,m:#\ \ \ \ \ \ \ ,ex:#.,sb:#\ FIXME,m:#\ \ \ \ \ \ \ ,ex:#.,sb:#\ NOTE,m:#\ \ \ \ \ \ ,ex:#.,b:#
+  \ formatoptions+=croql
+setlocal
+  \ comments=sb:#\ FIXME:,m:#\ \ \ \ \ \ \ \ ,ex:#.,sb:#\ NOTE:,m:#\ \ \ \ \ \ \ ,ex:#.,sb:#\ FIXME,m:#\ \ \ \ \ \ \ ,ex:#.,sb:#\ NOTE,m:#\ \ \ \ \ \ ,ex:#.,b:#
+  \ formatoptions+=croql
+
+" smartindent is too smart for octothorpes: it removes any indentation,
+" assuming you're about a write a C-style macro. Nuts to this, I say!
+" (Per the documentation (:h 'smartindent'), the ^H you see below is generated
+" by typing Ctrl-q Ctrl-h (Ctrl-V if dosmode isn't enabled, which makes Ctrl-V
+" paste).) (And you can't copy/paste this command to execute it, if you type it
+" you'll have to Ctrl-q Ctrl-h the special character.)
+autocmd BufRead *.py inoremap # X#
+"setlocal inoremap # X#
+inoremap # X#
+"inoremap # X#
+" 2015.03.12: I cannot tab a line starting with a pound...
+autocmd BufEnter,BufRead *.py setlocal nosmartindent
+setlocal nosmartindent
+" 2016.02.25: Is this safe with my overridden syntax/python.vim?
+autocmd BufEnter,BufRead *.py setlocal spell
+setlocal spell
 
 " ======================================================
 " =============================================== EOF ==
