@@ -1,11 +1,11 @@
 " File: dubs_ftype_mess.vim
 " Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
-" Last Modified: 2015.03.12
+" Last Modified: 2016.03.24
 " Project Page: https://github.com/landonb/dubs_ftype_mess
 " Summary: Dubsacks Filetype Tweaks, Mostly for Syntax Highlighting
 " License: GPLv3
 " -------------------------------------------------------------------
-" Copyright © 2009, 2015 Landon Bouma.
+" Copyright © 2009, 2015-2016 Landon Bouma.
 " 
 " This file is part of Dubsacks.
 " 
@@ -47,6 +47,23 @@ endif
 let g:plugin_dubs_ftype_mess = 1
 
 " ------------------------------------------------------
+" Abbreviation Helper: Consume trailing whitespace
+" ------------------------------------------------------
+
+" To trigger an abbreviation (replace some text with other text),
+" one has to type a space or hit return after the abbreviation is
+" typed, but this adds trailing whitespace to your abbreviation.
+" Call Eatchar to consume this trailing whitespace.
+
+" See :helpgrep Eatchar
+func Eatchar(pat)
+  let c = nr2char(getchar(0))
+  return (c =~ a:pat) ? '' : c
+endfunc
+" E.g.,
+"  iabbr <silent> if if ()<Left><C-R>=Eatchar('\s')<CR>
+
+" ------------------------------------------------------
 " Fix Syntax Highlighting (Always Parse from the Top)
 " ------------------------------------------------------
 
@@ -80,32 +97,6 @@ filetype plugin on
 autocmd BufRead *.vim set 
   \ comments=sb:\"\ FIXME:,m:\"\ \ \ \ \ \ \ ,ex:\".,sb:\"\ NOTE:,m:\"\ \ \ \ \ \ ,ex:\".,sb:\"\ FIXME,m:\"\ \ \ \ \ \ ,ex:\".,sb:\"\ NOTE,m:\"\ \ \ \ \ ,ex:\".,sO:\"\ -,mO:\"\ \ ,eO:\"\",:\"
   \ formatoptions+=croql
-
-" ------------------------------------------------------
-" Python Highlighting
-" ------------------------------------------------------
-
-"   for filetype=python
-"     comments=s1:/*,mb:*,ex:*/,://,b:#,:XCOMM,n:>,fb:-
-" NOTE I'm not sure why python considers /* */ a comment...
-autocmd BufRead *.py set 
-  \ comments=sb:#\ FIXME:,m:#\ \ \ \ \ \ \ \ ,ex:#.,sb:#\ NOTE:,m:#\ \ \ \ \ \ \ ,ex:#.,sb:#\ FIXME,m:#\ \ \ \ \ \ \ ,ex:#.,sb:#\ NOTE,m:#\ \ \ \ \ \ ,ex:#.,b:#
-  \ formatoptions+=croql
-
-autocmd BufRead *.map set
-  \ filetype=python 
-  \ formatoptions+=croql
-
-" smartindent is too smart for octothorpes: it removes any indentation,
-" assuming you're about a write a C-style macro. Nuts to this, I say!
-" (Per the documentation (:h 'smartindent'), the ^H you see below is generated
-" by typing Ctrl-q Ctrl-h (Ctrl-V if dosmode isn't enabled, which makes Ctrl-V
-" paste).) (And you can't copy/paste this command to execute it, if you type it
-" you'll have to Ctrl-q Ctrl-h the special character.)
-autocmd BufRead *.py inoremap # X#
-"inoremap # X#
-" 2015.03.12: I cannot tab a line starting with a pound...
-autocmd BufEnter,BufRead *.py setlocal nosmartindent
 
 " ------------------------------------------------------
 " Bash Highlighting
@@ -225,7 +216,22 @@ autocmd BufRead *.mxml set
 " ------------------------------------------------------
 " See: JavaScript syntax : Better JavaScrirpt syntax support
 "      http://www.vim.org/scripts/script.php?script_id=1491
-"  installed at ~/.vim/syntax/javascript.vim
+"  installed at dubs_ftype_mess/syntax/javascript.vim
+
+" The default JavaScript isk has an issue with colons, such that
+" pressing F1 (or *) while the cursor is in a word followed by a
+" colon, the search-on-word includes the colon, which really
+" messes up the functionality of F1/*.
+"   iskeyword=@,48-57,_,192-255,:
+autocmd Filetype js setlocal iskeyword=@,48-57,_,192-255
+
+" Spell check comments.
+autocmd BufEnter,BufRead *.js setlocal spell
+
+" 2016.01.25: What the heck? When did this start happening to bash, too?
+" Ctrl-left/right-arrow is skipping periods
+" I wonder if something... oh, wait, now it's not happening anymore....
+"autocmd Filetype sh setlocal iskeyword=@,48-57,_,192-255,#
 
 " ------------------------------------------------------
 " Wikitext
@@ -236,6 +242,11 @@ autocmd BufRead *.mxml set
 autocmd BufRead,BufNewFile *.wiki setfiletype wikipedia
 autocmd BufRead,BufNewFile *.wikipedia.org* setfiletype wikipedia
 autocmd BufRead,BufNewFile *.wp setfiletype wikipedia
+
+" ------------------------------------------------------
+" Silver Searcher .agignore
+" ------------------------------------------------------
+autocmd BufRead,BufNewFile .agignore setfiletype conf
 
 " ------------------------------------------------------
 " Markdown Syntax
@@ -288,6 +299,12 @@ noremap <Leader>l :let tmp=@/<CR>:s/\(http[s]\?:\/\/[^ \t()\[\]]\+\)/[\1](\1)/ge
 augroup nsis
   au BufRead,BufNewFile *.nsh setfiletype nsis
 augroup END
+
+" ------------------------------------------------------
+" Mardown Markup
+" ------------------------------------------------------
+" 2015.06.09: Strange. You'd think this would be set already.
+autocmd BufRead,BufNewFile .md setfiletype markdown
 
 " ------------------------------------------------------
 " Textile Markup
@@ -449,4 +466,12 @@ function! s:RenderTextileToHtml(bang)
   endif
 
 endfunction
+
+" ------------------------------------------------------
+" What's a .map file?
+" ------------------------------------------------------
+
+autocmd BufRead *.map set
+  \ filetype=python
+  \ formatoptions+=croql
 
