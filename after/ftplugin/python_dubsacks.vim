@@ -1,6 +1,6 @@
 " File: ftplugin/python_dubsacks.vim
 " Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
-" Last Modified: 2016.02.26
+" Last Modified: 2016.05.02
 " Project Page: https://github.com/landonb/dubs_ftype_mess
 " Summary: Dubsacks *.py filetype behavior
 " License: GPLv3
@@ -79,6 +79,7 @@ setlocal iskeyword=@,48-57,_,192-255
 autocmd BufRead *.py setlocal
   \ comments=sb:#\ FIXME:,m:#\ \ \ \ \ \ \ \ ,ex:#.,sb:#\ NOTE:,m:#\ \ \ \ \ \ \ ,ex:#.,sb:#\ FIXME,m:#\ \ \ \ \ \ \ ,ex:#.,sb:#\ NOTE,m:#\ \ \ \ \ \ ,ex:#.,b:#
   \ formatoptions+=croql
+" 2016-05-02: EXPLAIN: Why is setlocal all alone here and not autocmd'd?
 setlocal
   \ comments=sb:#\ FIXME:,m:#\ \ \ \ \ \ \ \ ,ex:#.,sb:#\ NOTE:,m:#\ \ \ \ \ \ \ ,ex:#.,sb:#\ FIXME,m:#\ \ \ \ \ \ \ ,ex:#.,sb:#\ NOTE,m:#\ \ \ \ \ \ ,ex:#.,b:#
   \ formatoptions+=croql
