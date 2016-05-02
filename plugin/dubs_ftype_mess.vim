@@ -1,6 +1,6 @@
 " File: dubs_ftype_mess.vim
 " Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
-" Last Modified: 2016.03.24
+" Last Modified: 2016.05.02
 " Project Page: https://github.com/landonb/dubs_ftype_mess
 " Summary: Dubsacks Filetype Tweaks, Mostly for Syntax Highlighting
 " License: GPLv3
@@ -232,6 +232,40 @@ autocmd BufEnter,BufRead *.js setlocal spell
 " Ctrl-left/right-arrow is skipping periods
 " I wonder if something... oh, wait, now it's not happening anymore....
 "autocmd Filetype sh setlocal iskeyword=@,48-57,_,192-255,#
+
+" ------------------------------------------------------
+" CSS
+" ------------------------------------------------------
+
+" Default:
+"  comments=s1:/*,mb:*,ex:*/
+
+" This works better, I think:
+"  comments=sl:/*\ ,mb:**,ex:*/
+
+" But I think I still opt for none at all.
+
+autocmd BufEnter,BufRead *.css set comments=
+
+" Well, no to a comment-autocomplete, but yes to a comment alias.
+" In spirit of the python 'set_trace' macro.
+
+"autocmd BufEnter,BufRead *.css iabbrev <buffer> /// /*<CR>*/<CR>
+"
+" HAHA: Note: There are four *deliberate* trailing spaces hereafter:
+"autocmd BufEnter,BufRead *.css iabbrev <buffer> // /*<CR><CR>*/<Up>   
+"
+" Ug, nevermind, exo css is tab-delimited, so it almost makes more sense
+" for user to type slash-slash-tab to start a comment.
+"autocmd BufEnter,BufRead *.css iabbrev <buffer> // /*<CR><CR>*/<Up>
+" UG: //<TAB> for some reason is ending up with two spaces in stead of tab...
+"
+" Darn, doesn't delete user's last char, just one from abbrev, duh!:
+"autocmd BufEnter,BufRead *.css iabbrev <buffer> // /*<CR><CR>*/<Up><Tab><Backspace>
+"
+" Oh, whatever, typing slash-slash-space-backspace is still easier than
+" make the stupid slash-star-return-return-star-slash-up-tab motion.
+autocmd BufEnter,BufRead *.css iabbrev <buffer> // /*<CR><CR>*/<Up><Tab>
 
 " ------------------------------------------------------
 " Wikitext
