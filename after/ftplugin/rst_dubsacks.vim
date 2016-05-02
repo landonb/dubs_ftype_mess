@@ -1,6 +1,6 @@
 " File: ftplugin/rst_dubsacks.vim
 " Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
-" Last Modified: 2016.03.24
+" Last Modified: 2016.04.22
 " Project Page: https://github.com/landonb/dubs_ftype_mess
 " Summary: Dubsacks reST filetype behavior
 " License: GPLv3
@@ -123,6 +123,14 @@ autocmd BufEnter,BufRead *.rst setlocal spell
 "   ctermbg=11 gui=undercurl guisp=DarkCyan hl-SpellCap xxx cleared
 
 autocmd BufEnter,BufRead *.rst setlocal spellcapcheck=
+
+" FIXME: MAGIC_VALUE: Hrm, we cannot use a modeline to set highlight.
+"        See: DG_CycleThruStyleGuides_. We parse the head and tail of
+"        each file looking for a modeline and call 'set', so we could
+"        do the same: look for a highlight-type modeline. But for now,
+"        just bake this in. I can only think of one person with a file
+"        of this name, so for most people, this'll be a no-op.
+autocmd BufEnter,BufRead peckerwords.rst highlight clear rstEmphasis
 
 " Other filetypes to spell check.
 " -------------------------------
