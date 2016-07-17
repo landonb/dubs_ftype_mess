@@ -1,6 +1,6 @@
 " File: ftplugin/python_dubsacks.vim
 " Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
-" Last Modified: 2016.05.02
+" Last Modified: 2016.07.12
 " Project Page: https://github.com/landonb/dubs_ftype_mess
 " Summary: Dubsacks *.py filetype behavior
 " License: GPLv3
@@ -59,6 +59,9 @@ iabbrev <buffer> ';'; import pdb;pdb.set_trace()<Home><Up><End><CR><C-O>0<C-O>D#
 "         you're like me and a little OCD and despise all trailing \s$
 " MAYBE: Is there a better way to do this? Just always type it out?
 "        Use a <Leader>macro? \trace? A command/meta-key mapping?
+
+autocmd BufEnter,BufRead *.py iabbrev <buffer> ';;' import rpdb2; rpdb2.start_embedded_debugger('password', fAllowRemote=True)<Home><Up><End><CR><C-O>0<C-O>D#<Down><End><CR><C-R>=Eatchar('\s')<CR>
+iabbrev <buffer> ';;' import rpdb2; rpdb2.start_embedded_debugger('password', fAllowRemote=True)<Home><Up><End><CR><C-O>0<C-O>D#<Down><End><CR><C-R>=Eatchar('\s')<CR>
 
 " What'sAKeyword See The F1 Command / Ctrl-R Ctrl-W
 " ------------------------------------------------------
