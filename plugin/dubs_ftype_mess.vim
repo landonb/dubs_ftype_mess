@@ -1,6 +1,6 @@
 " File: dubs_ftype_mess.vim
 " Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
-" Last Modified: 2016.05.02
+" Last Modified: 2016.05.30
 " Project Page: https://github.com/landonb/dubs_ftype_mess
 " Summary: Dubsacks Filetype Tweaks, Mostly for Syntax Highlighting
 " License: GPLv3
@@ -232,6 +232,12 @@ autocmd BufEnter,BufRead *.js setlocal spell
 " Ctrl-left/right-arrow is skipping periods
 " I wonder if something... oh, wait, now it's not happening anymore....
 "autocmd Filetype sh setlocal iskeyword=@,48-57,_,192-255,#
+
+" 2016-05-30: For about the past week, JavaScript has been single-tab
+"             undented closing braces. What gives! What happened?
+"               :set indentexpr
+"               indentexpr=GetVimIndent()
+autocmd BufEnter,BufRead *.js setlocal indentexpr=
 
 " ------------------------------------------------------
 " CSS
