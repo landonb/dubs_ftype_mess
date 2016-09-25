@@ -1,6 +1,6 @@
 " File: dubs_ftype_mess.vim
 " Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
-" Last Modified: 2016.05.30
+" Last Modified: 2016.08.14
 " Project Page: https://github.com/landonb/dubs_ftype_mess
 " Summary: Dubsacks Filetype Tweaks, Mostly for Syntax Highlighting
 " License: GPLv3
@@ -239,6 +239,15 @@ autocmd BufEnter,BufRead *.js setlocal spell
 "               indentexpr=GetVimIndent()
 autocmd BufEnter,BufRead *.js setlocal indentexpr=
 
+""autocmd BufEnter,BufRead *.js iabbrev <buffer> ";; if (true) { debugger; }<Home><Up><End><CR><C-O>0<C-O>D//<Down><End><CR><C-R>=Eatchar('\s')<CR>
+"autocmd BufEnter,BufRead *.js iabbrev <buffer> ';'; if (true) { debugger; }<Home><Up><End><CR><C-O>0<C-O>D//<Down><End><CR><C-R>=Eatchar('\s')<CR>
+" 2016-08-07: I was hoping to be able to delete to beginning of line,
+" but whatever (with the <C-O>d<C-O>0, effectively nothing happens).
+"autocmd BufEnter,BufRead *.js iabbrev <buffer> ';'; <C-O>d<C-O>0if (true) { debugger; }<Home><Right><Right><Right><Right><C-R>=Eatchar('\s')<CR>
+autocmd BufEnter,BufRead *.js iabbrev <buffer> ';'; if (true) { debugger; }<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><C-R>=Eatchar('\s')<CR>
+
+autocmd BufEnter,BufRead *.js iabbrev <buffer> ';; console.log('');<Left><Left><Left><C-R>
+
 " ------------------------------------------------------
 " CSS
 " ------------------------------------------------------
@@ -287,6 +296,14 @@ autocmd BufRead,BufNewFile *.wp setfiletype wikipedia
 " Silver Searcher .agignore
 " ------------------------------------------------------
 autocmd BufRead,BufNewFile .agignore setfiletype conf
+
+" ------------------------------------------------------
+" I have a little Gradle, I made it out of clay.
+" ------------------------------------------------------
+" Eh, good enough. Or maybe not. python looks okay except for comments.
+"autocmd BufRead,BufNewFile *.gradle setfiletype python
+" So `//` comments work:
+autocmd BufRead,BufNewFile *.gradle setfiletype java
 
 " ------------------------------------------------------
 " Markdown Syntax
