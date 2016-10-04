@@ -540,5 +540,6 @@ autocmd BufRead,BufNewFile Dockerfile setfiletype conf
 " ------------------------------------------------------
 " Go can spell
 " ------------------------------------------------------
+autocmd BufRead,BufNewFile *.go setfiletype go
 autocmd BufEnter,BufRead *.go setlocal spell
 
