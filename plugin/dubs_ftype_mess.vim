@@ -541,5 +541,7 @@ autocmd BufRead,BufNewFile Dockerfile setfiletype conf
 " Go can spell
 " ------------------------------------------------------
 autocmd BufRead,BufNewFile *.go setfiletype go
-autocmd BufEnter,BufRead *.go setlocal spell
+" Argh, I have it when it does that, all the quoted
+" map keys get red squiggly underlined. Nuts to that.
+"autocmd BufEnter,BufRead *.go setlocal spell
 
