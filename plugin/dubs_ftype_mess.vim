@@ -1,6 +1,6 @@
 " File: dubs_ftype_mess.vim
 " Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
-" Last Modified: 2016.08.14
+" Last Modified: 2016.10.03
 " Project Page: https://github.com/landonb/dubs_ftype_mess
 " Summary: Dubsacks Filetype Tweaks, Mostly for Syntax Highlighting
 " License: GPLv3
@@ -531,4 +531,9 @@ endfunction
 autocmd BufRead *.map set
   \ filetype=python
   \ formatoptions+=croql
+
+" ------------------------------------------------------
+" Dockerfile 'tis of thee
+" ------------------------------------------------------
+autocmd BufRead,BufNewFile Dockerfile setfiletype conf
 
