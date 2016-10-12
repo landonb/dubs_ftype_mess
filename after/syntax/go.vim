@@ -1,4 +1,4 @@
-" Copyright 2009 The Go Authors. All rights reserved.
+" Copyright 2009, 2016 The Go Authors. All rights reserved.
 " Use of this source code is governed by a BSD-style
 " license that can be found in the LICENSE file.
 "
@@ -169,8 +169,8 @@ hi def link     goEscapeError       Error
 " Strings and their contents
 syn cluster     goStringGroup       contains=goEscapeOctal,goEscapeC,goEscapeX,goEscapeU,goEscapeBigU,goEscapeError
 if g:go_highlight_string_spellcheck != 0
-  syn region      goString            start=+"+ skip=+\\\\\|\\"+ end=+"+ contains=@goStringGroup,@Spell
-  syn region      goRawString         start=+`+ end=+`+ contains=@Spell
+  syn region      goString            start=+"+ skip=+\\\\\|\\"+ end=+"+ contains=@goStringGroup,@NoSpell
+  syn region      goRawString         start=+`+ end=+`+ contains=@NoSpell
 else
   syn region      goString            start=+"+ skip=+\\\\\|\\"+ end=+"+ contains=@goStringGroup
   syn region      goRawString         start=+`+ end=+`+
