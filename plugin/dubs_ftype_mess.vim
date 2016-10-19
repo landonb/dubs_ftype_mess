@@ -1,6 +1,6 @@
 " File: dubs_ftype_mess.vim
 " Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
-" Last Modified: 2016.10.11
+" Last Modified: 2016.10.18
 " Project Page: https://github.com/landonb/dubs_ftype_mess
 " Summary: Dubsacks Filetype Tweaks, Mostly for Syntax Highlighting
 " License: GPLv3
@@ -545,4 +545,10 @@ autocmd BufRead,BufNewFile *.go setfiletype go
 " map keys get red squiggly underlined. Nuts to that.
 " 2016-10-11: I add contains=@NoSpell to goString in syntax/go.vim.
 autocmd BufEnter,BufRead *.go setlocal spell
+
+" ------------------------------------------------------
+" Yaml don't spell
+" ------------------------------------------------------
+" 2016-10-18 Since when?
+autocmd BufEnter,BufRead *.yaml setlocal nospell
 
