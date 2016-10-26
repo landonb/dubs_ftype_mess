@@ -1,1 +1,1 @@
-/usr/share/vim/vim74/syntax/sh.vim
+sh.vim
