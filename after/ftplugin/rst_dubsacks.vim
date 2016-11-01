@@ -1,6 +1,6 @@
 " File: ftplugin/rst_dubsacks.vim
 " Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
-" Last Modified: 2016.05.10
+" Last Modified: 2016.11.01
 " Project Page: https://github.com/landonb/dubs_ftype_mess
 " Summary: Dubsacks reST filetype behavior
 " License: GPLv3
@@ -149,6 +149,8 @@ autocmd BufEnter,BufRead *.txt setlocal spellcapcheck=
 
 " Add a few of our own syntaxes, er, syntaxii.
 " Included Alternative File Extension Syntax File Type Mappings.
+"
+" To add syntax language highlighting to the ..code-block:: list, see: rst_syntax_code_list
 if !exists('g:rst_syntax_code_list_dubs')
   let g:rst_syntax_code_list_dubs = [
     \ { 'fext': 'actionscript', 'synf': 'actionscript' },
