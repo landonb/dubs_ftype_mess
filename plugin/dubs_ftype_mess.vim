@@ -1,24 +1,24 @@
 " File: dubs_ftype_mess.vim
 " Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
-" Last Modified: 2016.10.26
+" Last Modified: 2016.11.01
 " Project Page: https://github.com/landonb/dubs_ftype_mess
 " Summary: Dubsacks Filetype Tweaks, Mostly for Syntax Highlighting
 " License: GPLv3
 " -------------------------------------------------------------------
 " Copyright © 2009, 2015-2016 Landon Bouma.
-" 
+"
 " This file is part of Dubsacks.
-" 
+"
 " Dubsacks is free software: you can redistribute it and/or
 " modify it under the terms of the GNU General Public License
 " as published by the Free Software Foundation, either version
 " 3 of the License, or (at your option) any later version.
-" 
+"
 " Dubsacks is distributed in the hope that it will be useful,
 " but WITHOUT ANY WARRANTY; without even the implied warranty
 " of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
 " the GNU General Public License for more details.
-" 
+"
 " You should have received a copy of the GNU General Public License
 " along with Dubsacks. If not, see <http://www.gnu.org/licenses/>
 " or write Free Software Foundation, Inc., 51 Franklin Street,
@@ -32,9 +32,9 @@
 
 " ====================================================================
 " NOTE: This file is... Not Very Vim
-"       See http://vim.wikia.com/wiki/Keep_your_vimrc_file_clean, and 
+"       See http://vim.wikia.com/wiki/Keep_your_vimrc_file_clean, and
 "         :help vimfiles, :help ftplugin-overrule, :help after-directory
-"       I should use the ~/.vim/ftplugin directory and replace all the 
+"       I should use the ~/.vim/ftplugin directory and replace all the
 "       autocmd's below with one file for each filetype... but a lot of
 "       the changes for each filetype are similar, so having everything
 "       here is probably easier to maintain.
@@ -67,7 +67,7 @@ endfunc
 " Fix Syntax Highlighting (Always Parse from the Top)
 " ------------------------------------------------------
 
-" Sometimes -- especially w/ the Actionscript syntax 
+" Sometimes -- especially w/ the Actionscript syntax
 " highlighter -- files look like all-comments (the text is
 " all pink) because the syntaxer started from the top of the
 " window or thereabouts and not from the start of the buffer.
@@ -94,7 +94,7 @@ filetype plugin on
 "     comments=sO:" -,mO:"  ,eO:"",:"
 "   You have to escape this string to set it, i.e.,
 "     set comments=sO:\"\ -,mO:\"\ \ ,eO:\"\",:\"
-autocmd BufRead *.vim set 
+autocmd BufRead *.vim set
   \ comments=sb:\"\ FIXME:,m:\"\ \ \ \ \ \ \ ,ex:\".,sb:\"\ NOTE:,m:\"\ \ \ \ \ \ ,ex:\".,sb:\"\ FIXME,m:\"\ \ \ \ \ \ ,ex:\".,sb:\"\ NOTE,m:\"\ \ \ \ \ ,ex:\".,sO:\"\ -,mO:\"\ \ ,eO:\"\",:\"
   \ formatoptions+=croql
 
@@ -103,7 +103,7 @@ autocmd BufRead *.vim set
 " ------------------------------------------------------
 
 " Do the same for Bash shell script files
-autocmd BufRead *.sh set 
+autocmd BufRead *.sh set
   \ comments=sb:#\ FIXME:,m:#\ \ \ \ \ \ \ ,ex:#.,sb:#\ NOTE:,m:#\ \ \ \ \ \ ,ex:#.,sb:#\ FIXME,m:#\ \ \ \ \ \ ,ex:#.,sb:#\ NOTE,m:#\ \ \ \ \ ,ex:#.,s1:/*,mb:**,ex:*/,://,b:#,:XCOMM,n:>,fb:-
   \ formatoptions+=croql
   \ smartindent
@@ -161,12 +161,12 @@ autocmd BufRead *.sql set
 " ------------------------------------------------------
 " (No comment.)
 " (Okay, one comment:)
-" Specify comments and additional formatoptions 
-" so that writing comments is easier (Vim indents 
+" Specify comments and additional formatoptions
+" so that writing comments is easier (Vim indents
 " and adds the comment prefix).
-" FIXME Mayhaps this belongs in the actionscript and 
+" FIXME Mayhaps this belongs in the actionscript and
 "       mxml syntax files?
-" formatoptions: 
+" formatoptions:
 "   c = Auto-wrap comments using textwidth, inserting comment leader
 "   r = Automatically insert comment leader after <Enter> in Insert mode
 "   o = Automatically insert comment leader after 'o' or 'O' in normal mode
@@ -174,19 +174,19 @@ autocmd BufRead *.sql set
 "       FIXME I have <F1> mapped to !par, so I probably don't care about q
 "   l = Long lines are not broken in Insert mode (if already long when edited)
 " NOTE The first two sb/m/ex force smart formatting of FIXME and NOTE
-"      comments. I'm not quite sure this is the place for it, but it 
+"      comments. I'm not quite sure this is the place for it, but it
 "      works quite nicely.
-" NOTE The funny ex://- is to get around a problem in Vim: if the string isn't 
+" NOTE The funny ex://- is to get around a problem in Vim: if the string isn't
 "      unique, Vim misinterprets our intention and then auto-commenting doesn't
 "      work well. We could use a bunch of spaces (i.e., ex://\ \ \ \ \ \ \ ) to
-"      make ex: unique, but then we can't kill our comment with a single 
+"      make ex: unique, but then we can't kill our comment with a single
 "      keystroke. So instead we make a bogus ex: so we can kill it with a dot.
 
-" NOTE I tried to get //. to work w/ just :// but it's not having it. That is, 
+" NOTE I tried to get //. to work w/ just :// but it's not having it. That is,
 "          sb://,mb://,ex://.
 
-autocmd BufRead *.as set 
-  \ filetype=actionscript 
+autocmd BufRead *.as set
+  \ filetype=actionscript
   \ comments=sb://\ FIXME:,m://\ \ \ \ \ \ \ \ ,ex://.,sb://\ NOTE:,m://\ \ \ \ \ \ \ ,ex://.,sb://\ FIXME,m://\ \ \ \ \ \ \ ,ex://.,sb://\ NOTE,m://\ \ \ \ \ \ ,ex://.,s:/*\ FIXME:,m:*\ \ \ \ \ \ \ \ \ ,ex:*/,s:/*\ NOTE:,m:*\ \ \ \ \ \ \ \ ,ex:*/,://,s:/*\ FIXME,m:*\ \ \ \ \ \ \ \ ,ex:*/,s:/*\ NOTE,m:*\ \ \ \ \ \ \ ,ex:*/,://,s1:/*,mb:**,ex:*/
   \ formatoptions+=croql
   \ smartindent
@@ -195,7 +195,7 @@ autocmd BufRead *.as set
 " This is messing me up: XML indenting causes both lines to re-indent
 "    indentexpr=XmlIndentGet(v:lnum,1)
 autocmd BufRead *.mxml set
-  \ filetype=mxml 
+  \ filetype=mxml
   \ comments=sb://\ FIXME:,m://\ \ \ \ \ \ \ \ ,ex://.,sb://\ NOTE:,m://\ \ \ \ \ \ \ ,ex://.,sb://\ FIXME,m://\ \ \ \ \ \ \ ,ex://.,sb://\ NOTE,m://\ \ \ \ \ \ ,ex://.,s:/*\ FIXME:,m:*\ \ \ \ \ \ \ \ \ ,ex:*/,s:/*\ NOTE:,m:*\ \ \ \ \ \ \ \ ,ex:*/,://,s:/*\ FIXME,m:*\ \ \ \ \ \ \ \ ,ex:*/,s:/*\ NOTE,m:*\ \ \ \ \ \ \ ,ex:*/,sb:<!--\ FIXME:,m:\ \ \ \ \ \ \ \ \ \ \ \ ,ex:-->,sb:<!--\ NOTE:,m:\ \ \ \ \ \ \ \ \ \ \ ,ex:-->,sb:<!--\ FIXME,m:\ \ \ \ \ \ \ \ \ \ \ ,ex:-->,sb:<!--\ NOTE,m:\ \ \ \ \ \ \ \ \ \ ,ex:-->,://,s1:/*,mb:**,ex:*/,sb:<!--,m:\ \ \ \ \ ,ex:-->
   \ formatoptions+=croql
   \ smartindent
@@ -268,7 +268,7 @@ autocmd BufEnter,BufRead *.css set comments=
 "autocmd BufEnter,BufRead *.css iabbrev <buffer> /// /*<CR>*/<CR>
 "
 " HAHA: Note: There are four *deliberate* trailing spaces hereafter:
-"autocmd BufEnter,BufRead *.css iabbrev <buffer> // /*<CR><CR>*/<Up>   
+"autocmd BufEnter,BufRead *.css iabbrev <buffer> // /*<CR><CR>*/<Up>
 "
 " Ug, nevermind, exo css is tab-delimited, so it almost makes more sense
 " for user to type slash-slash-tab to start a comment.
@@ -313,9 +313,9 @@ autocmd BufRead,BufNewFile *.gradle setfiletype java
 augroup markdown
   au! BufRead,BufNewFile *.mkd setfiletype mkd
   autocmd BufRead *.mkd set ai formatoptions=tcroqn2 comments=n:>
-  " Also map *.txt files, since you 
+  " Also map *.txt files, since you
   " love Markdown so much
-  " au! BufRead,BufNewFile *.txt 
+  " au! BufRead,BufNewFile *.txt
   "   \ set nowrap sw=2 sts=2 ts=8
   "au BufRead,BufNewFile *.txt setfiletype mkd
   "autocmd BufRead *.txt set ai formatoptions=tcroqn2 comments=n:>
@@ -324,7 +324,7 @@ augroup END
 "  autocmd BufRead *.mkd set ai formatoptions=tcroqn2 comments=n:>
 "augroup END
 
-" I keep waffling on this, but I can get used to 
+" I keep waffling on this, but I can get used to
 " naming my text files *.mkd, I suppose...
 "au BufRead,BufNewFile *.txt setfiletype mkd
 
@@ -335,11 +335,11 @@ augroup END
 " becomes
 "   [http://www.google.com/a/cpanel/domain/new](http://www.google.com/a/cpanel/domain/new)
 noremap <Leader>l :let tmp=@/<CR>:s/\(http[s]\?:\/\/[^ \t()\[\]]\+\)/[\1](\1)/ge<CR>:let @/=tmp<CR>
-" MAYBE: In Markdown, surround the link in angle 
+" MAYBE: In Markdown, surround the link in angle
 "        brackets does the same thing, e.g.,
 "          <http://www.google.com/a/cpanel/domain/new>
 "        So maybe \L adds brackets
-"        and \l converts to 
+"        and \l converts to
 "          [](http://www.google.com/a/cpanel/domain/new)
 "        and puts the cursor in the brackets
 " MAYBE: There's also the [reference][ref-id] format
@@ -347,11 +347,11 @@ noremap <Leader>l :let tmp=@/<CR>:s/\(http[s]\?:\/\/[^ \t()\[\]]\+\)/[\1](\1)/ge
 " ------------------------------------------------------
 " NSIS Installer Script Syntax
 " ------------------------------------------------------
-" The Nullsoft Scriptable Installer System 
-" makes Windows .exe executables ('cause  
+" The Nullsoft Scriptable Installer System
+" makes Windows .exe executables ('cause
 " Windows isn't cool enough for gems).
-" The defauft NSIS file extension is .nsi, 
-" but convention says to use .nsh for 
+" The defauft NSIS file extension is .nsi,
+" but convention says to use .nsh for
 " include (header?) files.
 augroup nsis
   au BufRead,BufNewFile *.nsh setfiletype nsis
@@ -367,21 +367,21 @@ autocmd BufRead,BufNewFile .md setfiletype markdown
 " Textile Markup
 " ------------------------------------------------------
 
-" Map the script function to a global :command 
-command! -bang -nargs=0 RenderTextileToHtml 
+" Map the script function to a global :command
+command! -bang -nargs=0 RenderTextileToHtml
   \ call <SID>RenderTextileToHtml('<bang>')
 
 " Map the :command to <Leader>tt
-noremap <silent> <Leader>tt 
+noremap <silent> <Leader>tt
   \ :RenderTextileToHtml<CR>
 
 " ------------------------------------------
 " Private Interface for Textile
 
-" LoadRedClothWrapper loads the textile.rb code, 
+" LoadRedClothWrapper loads the textile.rb code,
 " which is a wrapper around the RedCloth gem.
-" NOTE RedClothWrapperLoaded is -1 until run the 
-"      first time, then it's either 0 or 1 
+" NOTE RedClothWrapperLoaded is -1 until run the
+"      first time, then it's either 0 or 1
 "      depending on the outcome
 let s:RedClothWrapperFile = "textile.rb"
 let s:RedClothWrapperPath = ""
@@ -396,35 +396,35 @@ function s:LoadRedClothWrapper()
       " Turn into a full path. See :h filename-modifiers
       let s:RedClothWrapperPath = fnamemodify(s:rubyf, ":p")
     elseif filereadable($HOME
-                        \ . "/.vim/plugin/" 
+                        \ . "/.vim/plugin/"
                         \ . s:RedClothWrapperFile)
       " $HOME/.vim is *nix
-      let s:RedClothWrapperPath = $HOME 
+      let s:RedClothWrapperPath = $HOME
                                   \ . "/.vim/plugin/"
                                   \ . s:RedClothWrapperFile
-    elseif filereadable($USERPROFILE 
-                        \ . "/vimfiles/plugin/" 
+    elseif filereadable($USERPROFILE
+                        \ . "/vimfiles/plugin/"
                         \ . s:RedClothWrapperFile)
       " $HOME/vimfiles is Windows
-      let s:RedClothWrapperPath = $USERPROFILE 
-                                  \ . "/vimfiles/plugin/" 
+      let s:RedClothWrapperPath = $USERPROFILE
+                                  \ . "/vimfiles/plugin/"
                                   \ . s:RedClothWrapperFile
-    elseif filereadable($VIMRUNTIME 
-                        \ . "/plugin/" 
+    elseif filereadable($VIMRUNTIME
+                        \ . "/plugin/"
                         \ . s:RedClothWrapperFile)
       " $VIMRUNTIME for both *nix and Windows
-      let s:RedClothWrapperPath = $VIMRUNTIME 
-                                  \ . "/plugin/" 
+      let s:RedClothWrapperPath = $VIMRUNTIME
+                                  \ . "/plugin/"
                                   \ . s:RedClothWrapperFile
     endif
   endif
 
   if (-1 == s:RedClothWrapperLoaded)
       \ && !empty(s:RedClothWrapperPath)
-    " TODO Since this is native Windows gVim 
+    " TODO Since this is native Windows gVim
     "      and our Ruby environment is Cygwin,
-    "      we can start to load the Ruby file, 
-    "      but it bombs on any 'requires', 
+    "      we can start to load the Ruby file,
+    "      but it bombs on any 'requires',
     "      probably just 'cause the PATHs aren't
     "      set...
     "
@@ -432,23 +432,23 @@ function s:LoadRedClothWrapper()
     "
     "        rubyfile $RUBYREDCLOTHWRAPPER
     "
-    "      Instead, we'll just know the file 
-    "      exists, and then, when the user runs 
-    "      the command, we'll just execute !ruby, 
+    "      Instead, we'll just know the file
+    "      exists, and then, when the user runs
+    "      the command, we'll just execute !ruby,
     "      rather than ruby
     let s:RedClothWrapperLoaded = 1
   else
     let s:RedClothWrapperLoaded = 0
     call confirm(
-      \ "Unable to load Vim plugin file: \"" 
-      \ . expand("%") . "\".\n\n" 
-      \ . "Cannot find Ruby RedCloth wrapper: \"" 
-      \ . s:RedClothWrapperFile . "\".\n\n" 
+      \ "Unable to load Vim plugin file: \""
+      \ . expand("%") . "\".\n\n"
+      \ . "Cannot find Ruby RedCloth wrapper: \""
+      \ . s:RedClothWrapperFile . "\".\n\n"
       \ . "Please place "
       \ . "\"" . s:RedClothWrapperFile . "\""
-      \ . " in one of the plugin \n" 
+      \ . " in one of the plugin \n"
       \ . "directories -- you can use either the "
-      \ .   "one in your \n" 
+      \ .   "one in your \n"
       \ . "Vim home directory or the one in "
       \ .   "Vim's application \n"
       \ . "directory.")
@@ -456,24 +456,24 @@ function s:LoadRedClothWrapper()
 
 endfunction
 
-" RenderTextileToHtml renders the active buffer 
-" to a new HTML file. The name and path of the 
-" HTML are derived from the name and path of 
-" the active buffer, and the user is asked to 
-" confirm replacement of the HTML file if it 
-" already exists (though one can use a bang to 
+" RenderTextileToHtml renders the active buffer
+" to a new HTML file. The name and path of the
+" HTML are derived from the name and path of
+" the active buffer, and the user is asked to
+" confirm replacement of the HTML file if it
+" already exists (though one can use a bang to
 " force replacement without prompting).
 function! s:RenderTextileToHtml(bang)
 
-  " First things first, make sure the 
+  " First things first, make sure the
   " RedCloth wrapper exists
   call <SID>LoadRedClothWrapper()
 
   if 1 == s:RedClothWrapperLoaded
 
-    " Start by constructing the path of the HTML 
+    " Start by constructing the path of the HTML
     " output file.
-    " NOTE Vim maps % to the current buffer's full 
+    " NOTE Vim maps % to the current buffer's full
     "      path and filename when used in bang cmds
     "      or when expanded.
     let HtmlFile = substitute(
@@ -486,7 +486,7 @@ function! s:RenderTextileToHtml(bang)
       let HtmlFile = expand("%") . ".htm"
     endif
 
-    " Next, see if the HTML output file already 
+    " Next, see if the HTML output file already
     " exists
     let ftype = getftype(HtmlFile)
     " ftype is non-empty if the item exists
@@ -494,7 +494,7 @@ function! s:RenderTextileToHtml(bang)
     if ftype != ""
       if ftype != "file"
         echoerr "Cannot create Textile HTML file: "
-          \ ."already exists and not a file: " 
+          \ ."already exists and not a file: "
           \ . HtmlFile
         let confirmed = 0
       elseif a:bang == "!"
@@ -502,7 +502,7 @@ function! s:RenderTextileToHtml(bang)
           \ . ": " . HtmlFile
       else
         let choice = confirm(
-          \ "Overwrite \"" . HtmlFile . "\"?", 
+          \ "Overwrite \"" . HtmlFile . "\"?",
           \ "&Yes\n&No\n&Cancel")
         if 1 != choice
           let confirmed = 0
@@ -514,7 +514,7 @@ function! s:RenderTextileToHtml(bang)
     if 1 == confirmed
       " NOTE In a bang command, % gets expanded
       " NOTE Yes, that's a stdout > redirect
-      execute "!ruby " 
+      execute "!ruby "
         \ . '"' . s:RedClothWrapperPath . '"'
         \ . " % > "
         \ . '"' . HtmlFile . '"'
