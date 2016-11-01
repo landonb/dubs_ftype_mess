@@ -546,9 +546,22 @@ autocmd BufRead,BufNewFile *.go setfiletype go
 " 2016-10-11: I add contains=@NoSpell to goString in syntax/go.vim.
 autocmd BufEnter,BufRead *.go setlocal spell
 
+autocmd BufEnter,BufRead *.go iabbrev <buffer> ';'; contract.Contract(false)<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><C-R>=Eatchar('\s')<CR>
+
 " ------------------------------------------------------
 " Yaml don't spell
 " ------------------------------------------------------
 " 2016-10-18 Since when?
 autocmd BufEnter,BufRead *.yaml setlocal nospell
+
+" ------------------------------------------------------
+" Go can comments
+" ------------------------------------------------------
+autocmd BufRead *.go set
+  \ filetype=go
+  \ comments=sb://\ FIXME:,m://\ \ \ \ \ \ \ \ ,ex://.,sb://\ NOTE:,m://\ \ \ \ \ \ \ ,ex://.,sb://\ FIXME,m://\ \ \ \ \ \ \ ,ex://.,sb://\ NOTE,m://\ \ \ \ \ \ ,ex://.,s:/*\ FIXME:,m:*\ \ \ \ \ \ \ \ \ ,ex:*/,s:/*\ NOTE:,m:*\ \ \ \ \ \ \ \ ,ex:*/,://,s:/*\ FIXME,m:*\ \ \ \ \ \ \ \ ,ex:*/,s:/*\ NOTE,m:*\ \ \ \ \ \ \ ,ex:*/,://,s1:/*,mb:**,ex:*/
+  \ formatoptions+=croql
+  \ smartindent
+  \ indentexpr=
+  \ indentkeys=0{,0},!^F,o,O,e,<:>,=elif,=except
 
