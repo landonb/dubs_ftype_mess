@@ -1,6 +1,6 @@
 " File: dubs_ftype_mess.vim
 " Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
-" Last Modified: 2016.11.01
+" Last Modified: 2016.11.04
 " Project Page: https://github.com/landonb/dubs_ftype_mess
 " Summary: Dubsacks Filetype Tweaks, Mostly for Syntax Highlighting
 " License: GPLv3
@@ -564,4 +564,11 @@ autocmd BufRead *.go set
   \ smartindent
   \ indentexpr=
   \ indentkeys=0{,0},!^F,o,O,e,<:>,=elif,=except
+
+" ------------------------------------------------------
+" Ino has an itis
+" ------------------------------------------------------
+autocmd BufRead,BufNewFile *.ino setfiletype cpp
+autocmd BufEnter,BufRead *.h setlocal spell
+autocmd BufEnter,BufRead *.cpp setlocal spell
 
