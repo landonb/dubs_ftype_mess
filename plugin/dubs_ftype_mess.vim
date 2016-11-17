@@ -1,6 +1,6 @@
 " File: dubs_ftype_mess.vim
 " Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
-" Last Modified: 2016.11.04
+" Last Modified: 2016.11.17
 " Project Page: https://github.com/landonb/dubs_ftype_mess
 " Summary: Dubsacks Filetype Tweaks, Mostly for Syntax Highlighting
 " License: GPLv3
@@ -571,4 +571,12 @@ autocmd BufRead *.go set
 autocmd BufRead,BufNewFile *.ino setfiletype cpp
 autocmd BufEnter,BufRead *.h setlocal spell
 autocmd BufEnter,BufRead *.cpp setlocal spell
+
+" ------------------------------------------------------
+" To HJSON is Human.
+" ------------------------------------------------------
+" 2016-11-17: So, like, what the heck? Now setfiletype isn't sticking?
+"autocmd BufRead,BufNewFile *.json setfiletype hjson
+"autocmd BufRead,BufNewFile *.json setfiletype=hjson
+autocmd BufRead,BufNewFile *.json set ft=hjson
 
