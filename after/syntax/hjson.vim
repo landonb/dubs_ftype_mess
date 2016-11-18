@@ -1,10 +1,8 @@
 " Vim syntax file
 " Language:	HJSON
 " Maintainer:	Eli Parra <eli@elzr.com>
-" Last Change:	2016 Nov 17
+" Last Change:	2016 Nov 18
 " Version:      0.12
-
-echomsg "YEEHAW hjson.vim"
 
 if !exists("main_syntax")
   if version < 600
