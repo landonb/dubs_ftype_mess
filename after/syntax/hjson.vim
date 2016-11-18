@@ -76,7 +76,8 @@ if (!exists("g:vim_json_warnings") || g:vim_json_warnings==1)
 	syn match   hjsonSemicolonError  ";"
 
 	" Syntax: No trailing comma after the last element of arrays or objects
-	syn match   hjsonTrailingCommaError  ",\_s*[}\]]"
+	" [lb]: Disabled
+	"syn match   hjsonTrailingCommaError  ",\_s*[}\]]"
 
 	" Syntax: Watch out for missing commas between elements
 	syn match   hjsonMissingCommaError /\("\|\]\|\d\)\zs\_s\+\ze"/
@@ -134,7 +135,8 @@ if version >= 508 || !exists("did_json_syn_inits")
 	  HiLink hjsonNumError        Error
 	  "HiLink hjsonCommentError    Error
 	  HiLink hjsonSemicolonError  Error
-	  HiLink hjsonTrailingCommaError     Error
+	  " [lb]: Disabled
+	  "HiLink hjsonTrailingCommaError     Error
 	  HiLink hjsonMissingCommaError      Error
 	  HiLink hjsonStringSQError        	Error
 	  HiLink hjsonNoQuotesError        	Error
