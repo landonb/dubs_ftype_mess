@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:	Python
 " Maintainer:	Neil Schemenauer <nas@python.ca>
-" Last Change:	2016 Feb 25
+" Last Change:	2016 Nov 19
 " Credits:	Zvezdan Petkovic <zpetkovic@acm.org>
 "		Neil Schemenauer <nas@python.ca>
 "		Dmitry Vasiliev
@@ -42,7 +42,13 @@
 if version < 600
   syntax clear
 elseif exists("b:current_syntax")
-  finish
+  " 2016-11-19: When did this start happening? Or haven't I noticed?
+  " We're loaded after the system file, which sets b:current_syntax,
+  " and the behavior is normally to do nothing. Nuts to that, do it.
+  " Instead of:
+  "  finish
+  " Just reset the syntax and do over.
+  syntax clear
 endif
 
 " We need nocompatible mode in order to continue lines with backslashes.
