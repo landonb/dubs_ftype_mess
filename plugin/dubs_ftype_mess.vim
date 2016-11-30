@@ -1,6 +1,6 @@
 " File: dubs_ftype_mess.vim
 " Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
-" Last Modified: 2016.11.17
+" Last Modified: 2016.11.29
 " Project Page: https://github.com/landonb/dubs_ftype_mess
 " Summary: Dubsacks Filetype Tweaks, Mostly for Syntax Highlighting
 " License: GPLv3
@@ -112,6 +112,16 @@ autocmd BufRead *.sh set
 " 2014.11.19: See DG_CycleThruStyleGuides for :setting ts, sw, and tw.
 "autocmd BufEnter,BufRead *.sh setlocal tabstop=2 shiftwidth=2 tw=79 nosmartindent
 autocmd BufEnter,BufRead *.sh setlocal nosmartindent
+
+" 2016-11-29: When did this start happening? I think we I copied bash.vim
+" in dubs_ftype_mess/after/syntax/, periods starting getting sucked into
+" search-under-cursor.
+"   Wrong:
+"     iskeyword=@,48-57,_,192-255,.
+"   If we just set g:sh_noisk, bash.vim won't add . to the isk.
+if !exists("g:sh_noisk")
+    let g:sh_noisk = 1
+endif
 
 " ------------------------------------------------------
 " SQL Highlighting
