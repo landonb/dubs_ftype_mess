@@ -1,6 +1,6 @@
 " File: dubs_ftype_mess.vim
 " Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
-" Last Modified: 2016.12.02
+" Last Modified: 2016.12.06
 " Project Page: https://github.com/landonb/dubs_ftype_mess
 " Summary: Dubsacks Filetype Tweaks, Mostly for Syntax Highlighting
 " License: GPLv3
@@ -556,7 +556,7 @@ autocmd BufRead,BufNewFile *.go setfiletype go
 " 2016-10-11: I add contains=@NoSpell to goString in syntax/go.vim.
 autocmd BufEnter,BufRead *.go setlocal spell
 
-autocmd BufEnter,BufRead *.go iabbrev <buffer> ';'; contract.Contract(false)<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><C-R>=Eatchar('\s')<CR>
+autocmd BufEnter,BufRead *.go iabbrev <buffer> ';'; contract.Contract(false)<Left><C-R>=Eatchar('\s')<CR>
 
 " ------------------------------------------------------
 " Yaml don't spell
@@ -605,4 +605,12 @@ autocmd BufRead *.sh set indentkeys-=<:>
 "  indentexpr=GetYAMLIndent(v:lnum)
 "  indentkeys=!^F,o,O,0#,0},0],<:>,-
 autocmd BufRead *.yaml set indentkeys-=<:>
+
+" ------------------------------------------------------
+" Ruby on my mind.
+" ------------------------------------------------------
+autocmd BufEnter,BufRead *.rb iabbrev <buffer> ';'; require 'byebug' ; byebug if true<C-R>=Eatchar('\s')<CR>
+" Alternative debugger; but not step capabilities.
+"autocmd BufEnter,BufRead *.rb iabbrev <buffer> ';'; require 'pry' ; binding.pry if true<C-R>=Eatchar('\s')<CR>
+
 
