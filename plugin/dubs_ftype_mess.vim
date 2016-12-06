@@ -1,6 +1,6 @@
 " File: dubs_ftype_mess.vim
 " Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
-" Last Modified: 2016.11.29
+" Last Modified: 2016.12.02
 " Project Page: https://github.com/landonb/dubs_ftype_mess
 " Summary: Dubsacks Filetype Tweaks, Mostly for Syntax Highlighting
 " License: GPLv3
@@ -589,4 +589,20 @@ autocmd BufEnter,BufRead *.cpp setlocal spell
 "autocmd BufRead,BufNewFile *.json setfiletype hjson
 "autocmd BufRead,BufNewFile *.json setfiletype=hjson
 autocmd BufRead,BufNewFile *.json set ft=hjson
+
+" ------------------------------------------------------
+" Stop: Re-indenting: Lines: When: I, <:>Colon<:>
+" ------------------------------------------------------
+" See:
+"  :help cinkeys-format
+"
+" Sh Defaults:
+"  indentexpr=GetShIndent()
+"  indentkeys=0{,0},!^F,o,O,e,<:>,=elif,=except,0=then,0=do,0=else,0=elif,0=fi,0=esac,0=done,),0=;;,0=;&,0=fin,0=fil,0=fip,0=fir,0=fix
+autocmd BufRead *.sh set indentkeys-=<:>
+"
+" Yaml Defaults:
+"  indentexpr=GetYAMLIndent(v:lnum)
+"  indentkeys=!^F,o,O,0#,0},0],<:>,-
+autocmd BufRead *.yaml set indentkeys-=<:>
 
