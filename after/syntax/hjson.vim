@@ -1,8 +1,10 @@
 " Vim syntax file
-" Language:	HJSON
-" Maintainer:	Eli Parra <eli@elzr.com>
-" Last Change:	2016 Nov 18
-" Version:      0.12
+" [lb] hjsonified from https://github.com/elzr/vim-json/blob/master/syntax/json.vim
+" Language: HJSON
+" Maintainer: Landon Bouma <landonb@retrosoft.com>
+" Original Author: Eli Parra <eli@elzr.com>
+" Last Change: 2017 Feb 22
+" Version: 0.13
 
 if !exists("main_syntax")
   if version < 600
@@ -27,6 +29,7 @@ else
 endif
 
 " Syntax: JSON does not allow strings with single quotes, unlike JavaScript.
+" - Except HJSON don't care. We disable hjsonStringSQError below [lb].
 syn region  hjsonStringSQError oneline  start=+'+  skip=+\\\\\|\\"+  end=+'+
 
 " Syntax: JSON Keywords
@@ -36,6 +39,24 @@ if has('conceal')
    syn region  hjsonKeyword matchgroup=hjsonQuote start=/"/  end=/"\ze[[:blank:]\r\n]*\:/ concealends contained
 else
    syn region  hjsonKeyword matchgroup=hjsonQuote start=/"/  end=/"\ze[[:blank:]\r\n]*\:/ contained
+endif
+
+" Syntax: Strings, Single-Quoted / Copy-pasted from above
+" Separated into a match and region because a region by itself is always greedy
+syn match  hjsonStringMatch /'\([^']\|\\\'\)\+'\ze[[:blank:]\r\n]*[,}\]]/ contains=hjsonString
+if has('conceal')
+	syn region  hjsonString oneline matchgroup=hjsonQuote start=/'/  skip=/\\\\\|\\'/  end=/'/ concealends contains=hjsonEscape contained
+else
+	syn region  hjsonString oneline matchgroup=hjsonQuote start=/'/  skip=/\\\\\|\\'/  end=/'/ contains=hjsonEscape contained
+endif
+
+" Syntax: JSON Keywords, Single-Quoted / Copy-pasted from above
+" Separated into a match and region because a region by itself is always greedy
+syn match  hjsonKeywordMatch /'\([^']\|\\\'\)\+'[[:blank:]\r\n]*\:/ contains=hjsonKeyword
+if has('conceal')
+   syn region  hjsonKeyword matchgroup=hjsonQuote start=/'/  end=/'\ze[[:blank:]\r\n]*\:/ concealends contained
+else
+   syn region  hjsonKeyword matchgroup=hjsonQuote start=/'/  end=/'\ze[[:blank:]\r\n]*\:/ contained
 endif
 
 " Syntax: Escape sequences
@@ -136,7 +157,8 @@ if version >= 508 || !exists("did_json_syn_inits")
 	  " [lb]: Disabled
 	  "HiLink hjsonTrailingCommaError     Error
 	  HiLink hjsonMissingCommaError      Error
-	  HiLink hjsonStringSQError        	Error
+	  " [lb]: Disabled
+	  "HiLink hjsonStringSQError        	Error
 	  HiLink hjsonNoQuotesError        	Error
 	  HiLink hjsonTripleQuotesError     	Error
   endif
