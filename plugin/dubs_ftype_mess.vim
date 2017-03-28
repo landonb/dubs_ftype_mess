@@ -613,4 +613,14 @@ autocmd BufEnter,BufRead *.rb iabbrev <buffer> ';'; require 'byebug' ; byebug if
 " Alternative debugger; but not step capabilities.
 "autocmd BufEnter,BufRead *.rb iabbrev <buffer> ';'; require 'pry' ; binding.pry if true<C-R>=Eatchar('\s')<CR>
 
+" ------------------------------------------------------
+" Golang Templates
+" ------------------------------------------------------
+" 2017-03-28: [lb] swiped Go template syntax file from:
+"  https://github.com/fatih/vim-go
+" I don't think I need all the other fancy stuff that
+" project offers.
+autocmd BufRead,BufNewFile *.gotpl setfiletype gotexttmpl
+autocmd BufRead,BufNewFile *.gotmpl setfiletype gotexttmpl
+"autocmd BufRead,BufNewFile *.tmpl setfiletype gotexttmpl
 
