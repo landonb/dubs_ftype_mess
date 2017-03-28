@@ -1,11 +1,11 @@
 " File: dubs_ftype_mess.vim
 " Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
-" Last Modified: 2016.12.06
+" Last Modified: 2017.03.28
 " Project Page: https://github.com/landonb/dubs_ftype_mess
 " Summary: Dubsacks Filetype Tweaks, Mostly for Syntax Highlighting
 " License: GPLv3
 " -------------------------------------------------------------------
-" Copyright © 2009, 2015-2016 Landon Bouma.
+" Copyright © 2009, 2015-2017 Landon Bouma.
 "
 " This file is part of Dubsacks.
 "
@@ -109,7 +109,7 @@ autocmd BufRead *.sh set
   \ smartindent
 
 " Specify nosmartindent, else Vim won't tab your octothorpes
-" 2014.11.19: See DG_CycleThruStyleGuides for :setting ts, sw, and tw.
+" 2014.11.19: See CycleThruStyleGuides for :setting ts, sw, and tw.
 "autocmd BufEnter,BufRead *.sh setlocal tabstop=2 shiftwidth=2 tw=79 nosmartindent
 autocmd BufEnter,BufRead *.sh setlocal nosmartindent
 
