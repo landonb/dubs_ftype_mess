@@ -1,6 +1,6 @@
 " File: dubs_ftype_mess.vim
 " Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
-" Last Modified: 2017.03.28
+" Last Modified: 2017.03.29
 " Project Page: https://github.com/landonb/dubs_ftype_mess
 " Summary: Dubsacks Filetype Tweaks, Mostly for Syntax Highlighting
 " License: GPLv3
@@ -620,7 +620,7 @@ autocmd BufEnter,BufRead *.rb iabbrev <buffer> ';'; require 'byebug' ; byebug if
 "  https://github.com/fatih/vim-go
 " I don't think I need all the other fancy stuff that
 " project offers.
-autocmd BufRead,BufNewFile *.gotpl setfiletype gotexttmpl
 autocmd BufRead,BufNewFile *.gotmpl setfiletype gotexttmpl
-"autocmd BufRead,BufNewFile *.tmpl setfiletype gotexttmpl
+autocmd BufRead,BufNewFile *.gotpl setfiletype gotexttmpl
+autocmd BufRead,BufNewFile *.tmpl setfiletype gotexttmpl
 
