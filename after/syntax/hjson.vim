@@ -3,7 +3,7 @@
 " Language: HJSON
 " Maintainer: Landon Bouma <landonb@retrosoft.com>
 " Original Author: Eli Parra <eli@elzr.com>
-" Last Change: 2017 Feb 22
+" Last Change: 2017 May 01
 " Version: 0.13
 
 if !exists("main_syntax")
@@ -29,7 +29,7 @@ else
 endif
 
 " Syntax: JSON does not allow strings with single quotes, unlike JavaScript.
-" - Except HJSON don't care. We disable hjsonStringSQError below [lb].
+" [lb]: Except that HJSON don't care. We disable hjsonStringSQError below.
 syn region  hjsonStringSQError oneline  start=+'+  skip=+\\\\\|\\"+  end=+'+
 
 " Syntax: JSON Keywords
@@ -69,6 +69,7 @@ syn match   hjsonNumber    "-\=\<\%(0\|[1-9]\d*\)\%(\.\d\+\)\=\%([eE][-+]\=\d\+\
 " ERROR WARNINGS **********************************************
 if (!exists("g:vim_json_warnings") || g:vim_json_warnings==1)
 	" Syntax: Strings should always be enclosed with quotes.
+    " [lb]: Except in HJSON. Disabled below.
 	syn match   hjsonNoQuotesError  "\<[[:alpha:]][[:alnum:]]*\>"
 	syn match   hjsonTripleQuotesError  /"""/
 
@@ -159,7 +160,8 @@ if version >= 508 || !exists("did_json_syn_inits")
 	  HiLink hjsonMissingCommaError      Error
 	  " [lb]: Disabled
 	  "HiLink hjsonStringSQError        	Error
-	  HiLink hjsonNoQuotesError        	Error
+	  " [lb]: Disabled
+	  "HiLink hjsonNoQuotesError        	Error
 	  HiLink hjsonTripleQuotesError     	Error
   endif
   HiLink hjsonQuote           Quote
