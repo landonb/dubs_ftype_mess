@@ -590,6 +590,8 @@ autocmd BufEnter,BufRead *.cpp setlocal spell
 "autocmd BufRead,BufNewFile *.json setfiletype=hjson
 autocmd BufRead,BufNewFile *.json set ft=hjson
 
+autocmd BufEnter,BufRead *.hjson setlocal spell
+
 " ------------------------------------------------------
 " Stop: Re-indenting: Lines: When: I, <:>Colon<:>
 " ------------------------------------------------------
