@@ -1,6 +1,6 @@
 " File: dubs_ftype_mess.vim
 " Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
-" Last Modified: 2017.05.01
+" Last Modified: 2017.09.25
 " Project Page: https://github.com/landonb/dubs_ftype_mess
 " Summary: Dubsacks Filetype Tweaks, Mostly for Syntax Highlighting
 " License: GPLv3
@@ -257,6 +257,8 @@ autocmd BufEnter,BufRead *.js setlocal indentexpr=
 autocmd BufEnter,BufRead *.js iabbrev <buffer> ';'; if (true) { debugger; }<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><C-R>=Eatchar('\s')<CR>
 
 autocmd BufEnter,BufRead *.js iabbrev <buffer> ';; console.log('');<Left><Left><Left><C-R>
+
+autocmd BufEnter,BufRead *.jsx iabbrev <buffer> ';'; if (true) { debugger; }<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><C-R>=Eatchar('\s')<CR>
 
 " ------------------------------------------------------
 " CSS
