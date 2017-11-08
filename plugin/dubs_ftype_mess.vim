@@ -1,6 +1,6 @@
 " File: dubs_ftype_mess.vim
 " Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
-" Last Modified: 2017.09.25
+" Last Modified: 2017.11.08
 " Project Page: https://github.com/landonb/dubs_ftype_mess
 " Summary: Dubsacks Filetype Tweaks, Mostly for Syntax Highlighting
 " License: GPLv3
@@ -259,6 +259,9 @@ autocmd BufEnter,BufRead *.js iabbrev <buffer> ';'; if (true) { debugger; }<Left
 autocmd BufEnter,BufRead *.js iabbrev <buffer> ';; console.log('');<Left><Left><Left><C-R>
 
 autocmd BufEnter,BufRead *.jsx iabbrev <buffer> ';'; if (true) { debugger; }<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><C-R>=Eatchar('\s')<CR>
+
+" Vim-surround JSX auto-commenter. In normal mode, to comment-out line: yss-
+autocmd FileType javascript.jsx let b:surround_45 = "{/* \r */}"
 
 " ------------------------------------------------------
 " CSS
