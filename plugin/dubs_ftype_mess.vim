@@ -1,6 +1,6 @@
 " File: dubs_ftype_mess.vim
 " Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
-" Last Modified: 2017.11.08
+" Last Modified: 2017.11.12
 " Project Page: https://github.com/landonb/dubs_ftype_mess
 " Summary: Dubsacks Filetype Tweaks, Mostly for Syntax Highlighting
 " License: GPLv3
@@ -236,7 +236,12 @@ autocmd BufRead *.mxml set
 autocmd Filetype js setlocal iskeyword=@,48-57,_,192-255
 
 " Spell check comments.
-autocmd BufEnter,BufRead *.js setlocal spell
+"autocmd BufEnter,BufRead *.js setlocal spell
+" 2017-11-12: Argh. Too distracting. Or maybe I should change the highlight...
+" FIXME/MAYBE/2017-11-12: <leader>s to toggle spell check??
+"   I'd have to change all the autocmd's to not undo it. Or not.
+autocmd BufEnter,BufRead *.js setlocal nospell
+autocmd BufEnter,BufRead *.jsx setlocal nospell
 
 " 2016.01.25: What the heck? When did this start happening to bash, too?
 " Ctrl-left/right-arrow is skipping periods
