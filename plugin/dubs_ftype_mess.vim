@@ -1,6 +1,6 @@
 " File: dubs_ftype_mess.vim
 " Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
-" Last Modified: 2017.11.12
+" Last Modified: 2017.12.06
 " Project Page: https://github.com/landonb/dubs_ftype_mess
 " Summary: Dubsacks Filetype Tweaks, Mostly for Syntax Highlighting
 " License: GPLv3
@@ -97,6 +97,11 @@ filetype plugin on
 autocmd BufRead *.vim set
   \ comments=sb:\"\ FIXME:,m:\"\ \ \ \ \ \ \ ,ex:\".,sb:\"\ NOTE:,m:\"\ \ \ \ \ \ ,ex:\".,sb:\"\ FIXME,m:\"\ \ \ \ \ \ ,ex:\".,sb:\"\ NOTE,m:\"\ \ \ \ \ ,ex:\".,sO:\"\ -,mO:\"\ \ ,eO:\"\",:\"
   \ formatoptions+=croql
+
+" 2017-12-06: Suprised I hadn't been bothered by the octothorpe
+" being included in '*' and <F1> searches...
+"autocmd Filetype vim setlocal iskeyword=@,48-57,_,192-255,#
+autocmd Filetype vim setlocal iskeyword=@,48-57,_,192-255
 
 " ------------------------------------------------------
 " Bash Highlighting
