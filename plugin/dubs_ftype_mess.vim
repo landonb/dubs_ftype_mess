@@ -1,6 +1,6 @@
 " File: dubs_ftype_mess.vim
 " Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
-" Last Modified: 2017.12.06
+" Last Modified: 2017.12.11
 " Project Page: https://github.com/landonb/dubs_ftype_mess
 " Summary: Dubsacks Filetype Tweaks, Mostly for Syntax Highlighting
 " License: GPLv3
@@ -627,7 +627,7 @@ autocmd BufRead *.yaml set indentkeys-=<:>
 " Ruby on my mind.
 " ------------------------------------------------------
 autocmd BufEnter,BufRead *.rb iabbrev <buffer> ';'; require 'byebug' ; byebug if true<C-R>=Eatchar('\s')<CR>
-" Alternative debugger; but not step capabilities.
+" Alternative debugger; but no step capabilities.
 "autocmd BufEnter,BufRead *.rb iabbrev <buffer> ';'; require 'pry' ; binding.pry if true<C-R>=Eatchar('\s')<CR>
 
 " 2017-05-01: I find that most co-workers don't care about spelling. But I do!
