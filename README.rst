@@ -52,7 +52,7 @@ Other Features
 
 - Fix syntax highlighting bug:
 
-  - Sometimes -- especially with the ActionScript syntax 
+  - Sometimes -- especially with the ActionScript syntax
     highlighter -- files look like all-comments or all-text
     (e.g., the text is all pink) because the syntax parser started
     from the top of the window or thereabouts and not from the
@@ -128,5 +128,5 @@ Other Features
 
   - Textile (Markup language)
 
-  - Wikipedia  
+  - Wikipedia
 
