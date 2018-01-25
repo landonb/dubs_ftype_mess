@@ -644,3 +644,21 @@ autocmd BufRead,BufNewFile *.gotmpl setfiletype gotexttmpl
 autocmd BufRead,BufNewFile *.gotpl setfiletype gotexttmpl
 autocmd BufRead,BufNewFile *.tmpl setfiletype gotexttmpl
 
+" ------------------------------------------------------
+" VIM GPG/GPG2 DECRYPT/ENCRYPT PLUGIN [hits no metal]
+" ------------------------------------------------------
+" See:
+"   /home/landonb/.vim/bundle_/vim-gnupg/plugin/gnupg.vim
+" 2018-01-24: Default to gpg2. For old 14.04 machine whose gpg is whack.
+if (!exists("g:GPGExecutable"))
+  if executable("gpg2")
+    let g:GPGExecutable = "gpg2 --trust-model always"
+  elseif executable("gpg")
+    let g:GPGExecutable = "gpg --trust-model always"
+  "else
+  "  echom "GnuPG: No `gpg` or `gpg2"
+  endif
+endif
+" Uncomment to see ``:messages``. Levels 1, 2, and 3.
+"let g:GPGDebugLevel = 3
+
