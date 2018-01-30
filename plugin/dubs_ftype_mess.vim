@@ -125,7 +125,7 @@ autocmd BufEnter,BufRead *.sh setlocal nosmartindent
 "     iskeyword=@,48-57,_,192-255,.
 "   If we just set g:sh_noisk, bash.vim won't add . to the isk.
 if !exists("g:sh_noisk")
-    let g:sh_noisk = 1
+  let g:sh_noisk = 1
 endif
 
 " ------------------------------------------------------
@@ -402,6 +402,7 @@ noremap <silent> <Leader>tt
 
 " ------------------------------------------
 " Private Interface for Textile
+" ------------------------------------------
 
 " LoadRedClothWrapper loads the textile.rb code,
 " which is a wrapper around the RedCloth gem.
