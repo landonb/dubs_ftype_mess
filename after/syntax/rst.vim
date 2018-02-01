@@ -81,7 +81,7 @@ syn match rstSections "\v^%(([=`:.'"~^_*+#!@$%&()[\]{}<>/\\|,;?-])\1{2,}\n)?.{3,
 "   .vim file. But if I `:syn clear` in reST, typing doesn't seem any less
 "   responsive. Still slightly less responsive than writing this comment.
 "   Or at least so it seems. Maybe I'm just misperceiving things.
-syn match Password15Good '\([^[:space:]]*[a-z][^[:space:]]*\)\@=\([^[:space:]]*[A-Z][^[:space:]]*\)\@=\([^[:space:]]*[0-9][^[:space:]]*\)\@=\<[^[:space:]]\{15,16\}\>' contains=@NoSpell
+syn match Password15Good '\([[:space:]\n]\)\@<=\([^[:space:]]*[a-z][^[:space:]]*\)\@=\([^[:space:]]*[A-Z][^[:space:]]*\)\@=\([^[:space:]]*[0-9][^[:space:]]*\)\@=\<[^[:space:]]\{15,16\}\([[:space:]\n]\)\@=' contains=@NoSpell
 " NOTE: We don't need a Password15Best to include special characters unless
 "       we wanted to color them differently; currently, they'll match Password15Good.
 hi def Password15Good term=reverse guibg=DarkRed guifg=Yellow ctermfg=1 ctermbg=6
@@ -100,7 +100,10 @@ syn match UrlNoSpell '\w\+:\/\/[^[:space:]]\+' contains=@NoSpell
 syn match AcronymNoSpell '\<\(\u\|\d\)\{3,}s\?\>' contains=@NoSpell
 
 " (lb) added this one to ignore emails@somewhere.com.
-syn match EmailNoSpell '[^[:space:]]\+@[^[:space:]]\+\.com' contains=@NoSpell
+" NOTE: Look-behind: \([[:space:]\n]\)\@<= ensures space or newline precedes match.
+" NOTE: Look-ahead:  \([[:space:]\n]\)\@=  ensures space or newline follows  match.
+syn match EmailNoSpell '\([[:space:]\n]\)\@<=\<[^[:space:]]\+@[^[:space:]]\+\.com\([[:space:]\n]\)\@=' contains=@NoSpell
+hi def EmailNoSpell guifg=LightGreen
 
 " +----------------------------------------------------------------------+
 
