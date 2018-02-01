@@ -65,6 +65,8 @@ syn match rstSections "\v^%(([=`:.'"~^_*+#!@$%&()[\]{}<>/\\|,;?-])\1{2,}\n)?.{3,
 
 " 2018-02-01: NOICE! Ignore spelling of URLs and ACRONYMs. And highlight PWDs?
 
+" *** Passwords first, so URL and Email matches override.
+
 " Match "passwords" (why would you have those in a text file??).
 " Inspired by:
 "   https://dzone.com/articles/use-regex-test-password
@@ -75,28 +77,31 @@ syn match rstSections "\v^%(([=`:.'"~^_*+#!@$%&()[\]{}<>/\\|,;?-])\1{2,}\n)?.{3,
 " HINT: To test, run ``syn clear``, then try the new ``syn match``.
 " NOTE: \@= is Vim look-ahead. I also trie \@<= look-behind but it didn't work for me.
 " NOTE: Do this before EmailNoSpell, so that we don't think emails are passwords.
-" 2018-02-01: Trying {15,16} just to not match too much.
-" CONCERN/2018-02-01: How much does syntax matching affect performance?
-"   reST file typing seems a little more sluggish then, say, editing this
-"   .vim file. But if I `:syn clear` in reST, typing doesn't seem any less
-"   responsive. Still slightly less responsive than writing this comment.
-"   Or at least so it seems. Maybe I'm just misperceiving things.
+" NOTE: Trying {15,16} just to not match too much.
 syn match Password15Good '\([[:space:]\n]\)\@<=\([^[:space:]]*[a-z][^[:space:]]*\)\@=\([^[:space:]]*[A-Z][^[:space:]]*\)\@=\([^[:space:]]*[0-9][^[:space:]]*\)\@=\<[^[:space:]]\{15,16\}\([[:space:]\n]\)\@=' contains=@NoSpell
 " NOTE: We don't need a Password15Best to include special characters unless
-"       we wanted to color them differently; currently, they'll match Password15Good.
+"       we wanted to color them differently; currently, such passwords will
+"       match Password15Good.
 hi def Password15Good term=reverse guibg=DarkRed guifg=Yellow ctermfg=1 ctermbg=6
+
+" *** URLs, Acronyms, Emails
 
 " Thanks!
 "   http://www.panozzaj.com/blog/2016/03/21/
 "     ignore-urls-and-acroynms-while-spell-checking-vim/
-"
+
+" WEIRD: Why did I make this filter? Oh! Because that new Vim syntax code I
+"   tried (vim-restructuredtext) was not highlighting URLs? Or was it, and I
+"   just did notnotice? In any case, the Vim system rst.vim syntax
+"   highlighter hsa a rstStandaloneHyperlink group, which we don't want
+"   to override.
 " `Don't mark URL-like things as spelling errors`
-syn match UrlNoSpell '\w\+:\/\/[^[:space:]]\+' contains=@NoSpell
+"syn match UrlNoSpell '\w\+:\/\/[^[:space:]]\+' contains=@NoSpell
+
 " `Don't count acronyms / abbreviations as spelling errors
 "  (all upper-case letters, at least three characters)
 "  Also will not count acronym with 's' at the end a spelling error
-"  Also will not count numbers that are part of this
-"  Recognizes the following as correct:`
+"  Also will not count numbers that are part of this`
 syn match AcronymNoSpell '\<\(\u\|\d\)\{3,}s\?\>' contains=@NoSpell
 
 " (lb) added this one to ignore emails@somewhere.com.
