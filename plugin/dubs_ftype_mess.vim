@@ -386,7 +386,13 @@ augroup END
 " Mardown Markup
 " ------------------------------------------------------
 " 2015.06.09: Strange. You'd think this would be set already.
-autocmd BufRead,BufNewFile .md setfiletype markdown
+"autocmd BufRead,BufNewFile .md setfiletype markdown
+" 2018-02-08: You'd think I'd've noticed the missing glob!
+"   (Which goes to show: I almost never touch Markdown!
+"   Long Live reST!)
+autocmd BufRead,BufNewFile *.md setfiletype markdown
+" 2018-02-08: Markdown Makefile!
+autocmd BufRead,BufNewFile *.ronn setfiletype markdown
 
 " ------------------------------------------------------
 " Textile Markup
