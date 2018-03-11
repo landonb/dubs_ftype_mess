@@ -142,29 +142,29 @@ hi def EmailNoSpell guifg=LightGreen
 "
 " Match lines with the same character repeating 8 or more times,
 " with optional preceding and trailing whitespace.
-syn match   rstFakeHRAll            '\n\s*\(.\)\1\{8,}\s*\n$'
+syn match rstFakeHRAll   '\n\s*\(.\)\1\{8,}\s*\n$'
 " Match lines of repeating `|`s.
-syn match   rstFakeHRPipes          '\n\s*|\{8,}\s*\n$'
+syn match rstFakeHRPipes '\n\s*|\{8,}\s*\n$'
 " Match lines of repeating `$`s.
-syn match   rstFakeHRBills          '\n\s*\$\{8,}\s*\n$'
+syn match rstFakeHRBills '\n\s*\$\{8,}\s*\n$'
 " Match lines of repeating `*`s.
-syn match   rstFakeHRStars          '\n\s*\*\{8,}\s*\n$'
+syn match rstFakeHRStars '\n\s*\*\{8,}\s*\n$'
 " Match lines of repeating `(`s or `)`s.
-syn match   rstFakeHRParns          '\n\s*[()]\{8,}\s*\n$'
+syn match rstFakeHRParns '\n\s*[()]\{8,}\s*\n$'
 " Match lines of repeating `%`s.
-syn match   rstFakeHRPercs          '\n\s*%\{8,}\s*\n$'
+syn match rstFakeHRPercs '\n\s*%\{8,}\s*\n$'
 
 " Orange-yellow: Statement, or Keyword
-hi! def link rstFakeHRAll           Statement
+hi! def link rstFakeHRAll   Statement
 " More orangy (darker than orange-yellow)
-hi! def link rstFakeHRStars         Delimiter
+hi! def link rstFakeHRStars Delimiter
 " Light pinkish-orangish-reddish
-hi! def link rstFakeHRPercs         String
+hi! def link rstFakeHRPercs String
 " Green: Type, or Question
-hi! def link rstFakeHRPipes         Question
+hi! def link rstFakeHRPipes Question
 " White on baby blue
-hi! def link rstFakeHRParns         MatchParen
+hi! def link rstFakeHRParns MatchParen
 " Black on baby blue
 hi def rstHorizRuleUser01 term=reverse guibg=DarkCyan guifg=Black ctermfg=1 ctermbg=6
-hi! def link rstFakeHRBills         rstHorizRuleUser01
+hi! def link rstFakeHRBills rstHorizRuleUser01
 
