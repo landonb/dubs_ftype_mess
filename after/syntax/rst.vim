@@ -78,6 +78,8 @@ syn match rstSections "\v^%(([=`:.'"~^_*+#!@$%&()[\]{}<>/\\|,;?-])\1{2,}\n)?.{3,
 " NOTE: \@= is Vim look-ahead. I also trie \@<= look-behind but it didn't work for me.
 " NOTE: Do this before EmailNoSpell, so that we don't think emails are passwords.
 " NOTE: Trying {15,16} just to not match too much.
+" CUTE: If I misspell a normal FIXME/YYYY-MM-DD comment, e.g.,
+"       "FiXME/2018-03-21", then it gets highlighted as a password! So cute!!
 syn match Password15Good '\([[:space:]\n]\)\@<=\([^[:space:]]*[a-z][^[:space:]]*\)\@=\([^[:space:]]*[A-Z][^[:space:]]*\)\@=\([^[:space:]]*[0-9][^[:space:]]*\)\@=\<[^[:space:]]\{15,16\}\([[:space:]\n]\)\@=' contains=@NoSpell
 " NOTE: We don't need a Password15Best to include special characters unless
 "       we wanted to color them differently; currently, such passwords will
