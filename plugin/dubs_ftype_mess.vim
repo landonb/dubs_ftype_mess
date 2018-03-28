@@ -667,3 +667,9 @@ endif
 " Uncomment to see ``:messages``. Levels 1, 2, and 3.
 "let g:GPGDebugLevel = 3
 
+" ------------------------------------------------------
+" Git ignore can ignore spelling mistakes!
+" ------------------------------------------------------
+
+autocmd BufRead .gitignore setlocal nospell
+
