@@ -319,6 +319,8 @@ autocmd BufRead,BufNewFile *.wp setfiletype wikipedia
 " Silver Searcher .agignore
 " ------------------------------------------------------
 autocmd BufRead,BufNewFile .agignore setfiletype conf
+" All the tools coalesced around .ignore.
+autocmd BufRead,BufNewFile .ignore setfiletype conf
 
 " ------------------------------------------------------
 " I have a little Gradle, I made it out of clay.
