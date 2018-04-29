@@ -675,3 +675,17 @@ endif
 
 autocmd BufRead .gitignore setlocal nospell
 
+" ------------------------------------------------------
+" Tweak Spell Checking Capitalization Warning
+" ------------------------------------------------------
+
+" Tell SpellCap not to flag words following inline bangs
+" or question marks. Ruby has methods like this! and let
+" that? for which we don't want to trigger capitalization
+" warnings.
+"
+" Default:
+"   spellcapcheck=[.?!]\_[\])'"^I ]\+
+
+set spellcapcheck=[.]\_[\])'"^I ]\+
+
