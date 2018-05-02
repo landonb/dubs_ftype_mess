@@ -673,7 +673,14 @@ endif
 " Git ignore can ignore spelling mistakes!
 " ------------------------------------------------------
 
-autocmd BufRead .gitignore setlocal nospell
+" 2018-05-02: Do I really want to disable spell checking,
+" or just enable for comments only?
+"autocmd BufRead .gitignore setlocal nospell
+"autocmd BufRead .gitignore.local setlocal nospell
+
+" Not needed:
+"   autocmd BufRead .gitignore setlocal nospell
+autocmd BufRead .gitignore.local setfiletype conf
 
 " ------------------------------------------------------
 " Tweak Spell Checking Capitalization Warning
