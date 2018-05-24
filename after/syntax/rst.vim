@@ -144,17 +144,17 @@ hi def EmailNoSpell guifg=LightGreen
 "
 " Match lines with the same character repeating 8 or more times,
 " with optional preceding and trailing whitespace.
-syn match rstFakeHRAll   '\n\s*\(.\)\1\{8,}\s*\n$'
+syn match rstFakeHRAll   '^\s*\(.\)\1\{8,}\s*\n$'
 " Match lines of repeating `|`s.
-syn match rstFakeHRPipes '\n\s*|\{8,}\s*\n$'
+syn match rstFakeHRPipes '^\s*|\{8,}\s*\n$'
 " Match lines of repeating `$`s.
-syn match rstFakeHRBills '\n\s*\$\{8,}\s*\n$'
+syn match rstFakeHRBills '^\s*\$\{8,}\s*\n$'
 " Match lines of repeating `*`s.
-syn match rstFakeHRStars '\n\s*\*\{8,}\s*\n$'
+syn match rstFakeHRStars '^\s*\*\{8,}\s*\n$'
 " Match lines of repeating `(`s or `)`s.
-syn match rstFakeHRParns '\n\s*[()]\{8,}\s*\n$'
+syn match rstFakeHRParns '^\s*[()]\{8,}\s*\n$'
 " Match lines of repeating `%`s.
-syn match rstFakeHRPercs '\n\s*%\{8,}\s*\n$'
+syn match rstFakeHRPercs '^\s*%\{8,}\s*\n$'
 
 " Orange-yellow: Statement, or Keyword
 hi! def link rstFakeHRAll   Statement
