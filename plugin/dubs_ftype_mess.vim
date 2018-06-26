@@ -696,3 +696,9 @@ autocmd BufRead .gitignore.local setfiletype conf
 
 set spellcapcheck=[.]\_[\])'"^I ]\+
 
+" ------------------------------------------------------
+" dirshenvy
+" ------------------------------------------------------
+
+autocmd BufRead,BufNewFile .envrc setfiletype sh
+
