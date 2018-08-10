@@ -633,7 +633,7 @@ autocmd BufRead *.yaml set indentkeys-=<:>
 " ------------------------------------------------------
 " Ruby on my mind.
 " ------------------------------------------------------
-autocmd BufEnter,BufRead *.rb iabbrev <buffer> ';'; require 'byebug' ; byebug if true<C-R>=Eatchar('\s')<CR>
+autocmd BufEnter,BufRead *.rb,Rakefile iabbrev <buffer> ';'; require 'byebug' ; byebug if true<C-R>=Eatchar('\s')<CR>
 " Alternative debugger; but no step capabilities.
 "autocmd BufEnter,BufRead *.rb iabbrev <buffer> ';'; require 'pry' ; binding.pry if true<C-R>=Eatchar('\s')<CR>
 
