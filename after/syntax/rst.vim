@@ -58,8 +58,18 @@ syn clear rstSections
 "
 " This adds the missing punctuation: !@$%&()[]{}<>/\|,;?
 "
+" :h pattern-overview
+" |/\v|  \v  \v  the following chars in the pattern are "very magic"
+" \%(\)	A pattern enclosed by escaped parentheses.	*/\%(\)* */\%(* *E53*
+" 	Just like \(\), but without counting it as a sub-expression.  This
+" 	allows using more groups and it's a little bit faster.
+"
 "syn match rstSections "\v^%(([=`:.'"~^_*+#!@$%&()[\]{}<>/\\|,;?-])\1+\n)?.{1,2}\n([=`:.'"~^_*+#!@$%&()[\]{}<>/\\|,;?-])\2+$" contains=@Spell
+
+" 2018-09-19: Without dash "-" in first word of reST section title, before any whitespace, not matching! WTF!!
 syn match rstSections "\v^%(([=`:.'"~^_*+#!@$%&()[\]{}<>/\\|,;?-])\1{2,}\n)?.{3,}\n([=`:.'"~^_*+#!@$%&()[\]{}<>/\\|,;?-])\2{2,}$" contains=@Spell
+" 2018-09-19: Without dash "-" in first word of reST section title, before any whitespace, not matching! WTF!!
+autocmd BufEnter,BufRead *.rst syn match rstSections "\v^%(([=`:.'"~^_*+#!@$%&()[\]{}<>/\\|,;?-])\1{2,}\n)?.{3,}\n([=`:.'"~^_*+#!@$%&()[\]{}<>/\\|,;?-])\2{2,}$" contains=@Spell
 
 " +----------------------------------------------------------------------+
 
