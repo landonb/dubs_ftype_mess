@@ -180,3 +180,27 @@ hi! def link rstFakeHRParns MatchParen
 hi def rstHorizRuleUser01 term=reverse guibg=DarkCyan guifg=Black ctermfg=1 ctermbg=6
 hi! def link rstFakeHRBills rstHorizRuleUser01
 
+" 2018-09-24: (lb): Hmmm. Syntax highlighting randomly “not working”,
+" appears to be that it's not enabled on load. I cannot find anything in Dubs,
+" or in any plugin that's calling `syntax on|off|enable`. So I'm guessing
+" Vim does it automatically, but if syntax highlighting is taking too long,
+" it abandons the operation. / I tried hooking BufRead to enable syntax
+" highlighing, but that did nothing; and I tried using BufEnter, e.g.,
+"   autocmd BufEnter *.rst syn enable
+" but that causes a long “pause” when switching buffers into a long, few
+" K lines- long reST file. So that's not an option. (And I don't think it's a
+" slow syntax parse operation, because running "syn on" on its own does not
+" take as long as a BufEnter syn-on. Something else fishy is happening.) /
+" Finally, I'm not sure what changed; syntax highlighting had been working
+" fine and fast on reST files up to 10K lines, but today I've noticed these
+" issues! / Trying what ":help syntax" suggests: map syntax enable, for when
+" it's not automatic. But not the toggle version:
+"   map <F7> :if exists("g:syntax_on") <Bar>
+"   	\   syntax off <Bar>
+"   	\ else <Bar>
+"   	\   syntax enable <Bar>
+"   	\ endif <CR>
+"map <F7> :syn on<CR>
+map <F7> :syn enable<CR>
+" NOTE: A trick for reload syntax highlighting: ":e", to edit the file anew.
+
