@@ -66,10 +66,11 @@ syn clear rstSections
 "
 "syn match rstSections "\v^%(([=`:.'"~^_*+#!@$%&()[\]{}<>/\\|,;?-])\1+\n)?.{1,2}\n([=`:.'"~^_*+#!@$%&()[\]{}<>/\\|,;?-])\2+$" contains=@Spell
 
+let s:expensiveSectionRegex = '\v^%(([=`:.''"~^_*+#!@$%&()[\]{}<>/\\|,;?-])\1{2,}\n)?.{3,}\n([=`:.''"~^_*+#!@$%&()[\]{}<>/\\|,;?-])\2{2,}$'
 " 2018-09-19: Without dash "-" in first word of reST section title, before any whitespace, not matching! WTF!!
-syn match rstSections "\v^%(([=`:.'"~^_*+#!@$%&()[\]{}<>/\\|,;?-])\1{2,}\n)?.{3,}\n([=`:.'"~^_*+#!@$%&()[\]{}<>/\\|,;?-])\2{2,}$" contains=@Spell
+execute 'syn match rstSections "' . s:expensiveSectionRegex . '" contains=@Spell'
 " 2018-09-19: Without dash "-" in first word of reST section title, before any whitespace, not matching! WTF!!
-autocmd BufEnter,BufRead *.rst syn match rstSections "\v^%(([=`:.'"~^_*+#!@$%&()[\]{}<>/\\|,;?-])\1{2,}\n)?.{3,}\n([=`:.'"~^_*+#!@$%&()[\]{}<>/\\|,;?-])\2{2,}$" contains=@Spell
+execute 'autocmd BufEnter,BufRead *.rst syn match rstSections "' . s:expensiveSectionRegex . '" contains=@Spell'
 
 " +----------------------------------------------------------------------+
 
