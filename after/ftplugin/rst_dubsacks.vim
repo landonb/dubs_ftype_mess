@@ -124,14 +124,6 @@ autocmd BufEnter,BufRead *.rst setlocal spell
 
 autocmd BufEnter,BufRead *.rst setlocal spellcapcheck=
 
-" FIXME: MAGIC_VALUE: Hrm, we cannot use a modeline to set highlight.
-"        See: CycleThruStyleGuides_. We parse the head and tail of
-"        each file looking for a modeline and call 'set', so we could
-"        do the same: look for a highlight-type modeline. But for now,
-"        just bake this in. I can only think of one person with a file
-"        of this name, so for most people, this'll be a no-op.
-autocmd BufEnter,BufRead peckerwords.rst highlight clear rstEmphasis
-
 " Other filetypes to spell check.
 " -------------------------------
 
@@ -161,7 +153,7 @@ if !exists('g:rst_syntax_code_list_dubs')
     \ ]
 endif
 " The following code is adapted from
-"   /usr/share/vim/vim74/syntax/rst.vim
+"   /usr/share/vim/vim81/syntax/rst.vim
 " I added ~/.vim/, the nested list, a lookup in ~, and some spaces.
 " Note that you cannot run the for-in loop without unletting first, else,
 "   E706: Variable type mismatch for: code.
@@ -169,20 +161,8 @@ endif
 " I'm not sure where it's set (the syntax/rst.vim system file?),
 " and it's not a global, or at least `:echo g:code` shows naught.
 " So either use a unique name or just unlet, to be safe, or both.
-" See: :help E706.
-"
-" findfileing... / &rtp: /home/user/.vim,/home/user/.vim/bundle_/AutoAdapt,/home/user/.vim/bundle_/TeTrIs.vim,/home/user/.vim/bundle_/command-t,/home/user/.vim/bundle_/ctrlp.vim,/home/user/.vim/bundle_/dubs_all,/home/user/.vim/bundle_/dubs_appearance,/home/user/.vim/bundle_/dubs_buffer_fun,/home/user/.vim/bundle_/dubs_core,/home/user/.vim/bundle_/dubs_edit_juice,/home/user/.vim/bundle_/dubs_excensus,/home/user/.vim/bundle_/dubs_file_finder,/home/user/.vim/bundle_/dubs_ftype_mess,/home/user/.vim/bundle_/dubs_grep_steady,/home/user/.vim/bundle_/dubs_html_entities,/home/user/.vim/bundle_/dubs_project_tray,/home/user/.vim/bundle_/dubs_quickfix_wrap,/home/user/.vim/bundle_/dubs_style_guard,/home/user/.vim/bundle_/dubs_syntastic_wrap,/home/user/.vim/bundle_/dubs_toggle_textwrap,/home/user/.vim/bundle_/editorconfig-vim,/home/user/.vim/bundle_/generate_links.sh,/home/user/.vim/bundle_/ingo-library,/home/user/.vim/bundle_/minibufexpl.vim,/home/user/.vim/bundle_/nerdtree,/home/user/.vim/bundle_/syntastic,/home/user/.vim/bundle_/taglist,/home/user/.vim/bundle_/tlib_vim,/home/user/.vim/bundle_/viki_vim,/home/user/.vim/bundle_/vim-bufsurf,/home/user/.vim/bundle_/vim-gnupg,/home/user/.vim/bundle_/vim-misc,/home/user/.vim/bundle_/vim-rails,/var/lib/vim/addons,/usr/share/vim/vimfiles,/usr/share/vim/vim74,/usr/share/vim/vimfiles/after,/var/lib/vim/addons/after,/home/user/.vim/bundle_/dubs_edit_juice/after,/home/user/.vim/after,/home/user/.vim/bundle/ctrlp.vim
-"
-"syntax_file: .vim/bundle_/dubs_ftype_mess/syntax/actionscript.vim
-" WRONG:
-"syntax_file: .vim/bundle_/syntastic/syntax_checkers/sh/sh.vim
-"codemap: htm
-"syntax_file:
-"syntax_file: .vim/bundle_/dubs_ftype_mess/syntax/javascript.vim
-"codemap: mxml
-" WRONG:
-"syntax_file: .vim/bundle_/dubs_ftype_mess/indent/mxml.vim
-"
+" See also:
+"   :help E706.
 let search_paths = pathogen#split(&rtp)
 unlet! codemap
 for codemap in g:rst_syntax_code_list_dubs
@@ -232,7 +212,7 @@ for codemap in g:rst_syntax_code_list_dubs
   unlet codemap
 endfor
 " There's also a non-syntax, filetype plugin:
-"  /usr/share/vim/vim74/ftplugin/rst.vim
+"  /usr/share/vim/vim81/ftplugin/rst.vim
 
 " ======================================================
 " =============================================== EOF ==
