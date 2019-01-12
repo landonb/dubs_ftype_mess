@@ -681,6 +681,8 @@ endif
 " Not needed:
 "   autocmd BufRead .gitignore setlocal nospell
 autocmd BufRead .gitignore.local setfiletype conf
+" 2019-01-12: Since when? A random .gitignore (nark's, no less!) not being filetype'd!
+autocmd BufRead .gitignore setfiletype conf
 
 " ------------------------------------------------------
 " Tweak Spell Checking Capitalization Warning
