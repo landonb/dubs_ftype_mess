@@ -34,14 +34,38 @@ let g:ftplugin_python_dubsacks = 1
 " Snippets-Insertion Shortcuts
 " ------------------------------------------------------
 
+
+" :h line-continuation
+
 function! s:Python_Abbrev_PDB_Left_Hand_Middle_Pointy_Middle_Pointy()
   " [lb] loves me some breakpoint action.
   " And this is a silly/great macro to insert in-code bps quickly.
   " Simply type the magic sequence and then hit space or return, et voilà!
-  "autocmd BufEnter,BufRead *.py iabbrev <buffer> ';'; import pdb;pdb.set_trace()<Home><Up><End><CR><C-O>0<C-O>D#<Down><End><CR>
-  autocmd BufEnter,BufRead *.py iabbrev <buffer> ';'; import pdb;pdb.set_trace()<Home><Up><End><CR><C-O>0<C-O>D#<Down><End><CR><C-R>=Eatchar('\s')<CR>
-  "setlocal iabbrev <buffer> ';'; import pdb;pdb.set_trace()<Home><Up><End><CR><C-O>0<C-O>D#<Down><End><CR><C-R>=Eatchar('\s')<CR>
-  iabbrev <buffer> ';'; import pdb;pdb.set_trace()<Home><Up><End><CR><C-O>0<C-O>D#<Down><End><CR><C-R>=Eatchar('\s')<CR>
+
+  let l:lhs_magic = "';';"
+
+  " Originally:
+  "   l:rhs_pdbbp = 'import sys, pdb; pdb.set_trace()'
+  " Include Pdb(...) to fix pdb stdin echo, in case PPT, or other, stole it.
+  let l:rhs_pdbbp = 'import sys, pdb; pdb.Pdb(stdout=sys.__stdout__).set_trace()'
+
+  " Was originally:
+  "   l:rhs_clean = '<Home><Up><End><CR><C-O>0<C-O>D#<Down><End><CR>'
+  " Include Eatchar so use can type abbrev, then space (to trigger replacement)
+  " and then Eatchar will gobble the space.
+  let l:rhs_clean = "<Home><Up><End><CR><C-O>0<C-O>D#<Down><End><CR><C-R>=Eatchar('\\\s')<CR>"
+
+  " Just for ref, without the intermediate variables, it'd be:
+  "   autocmd BufEnter,BufRead *.py
+  "     \ iabbrev <buffer> ';';
+  "     \ import pdb;pdb.set_trace()<Home><Up><End><CR><C-O>0<C-O>D#<Down><End><CR><C-R>=Eatchar('\s')<CR>
+  "   iabbrev <buffer> ';';
+  "     \ import pdb;pdb.set_trace()<Home><Up><End><CR><C-O>0<C-O>D#<Down><End><CR><C-R>=Eatchar('\s')<CR>
+  exec 'autocmd BufEnter,BufRead *.py iabbrev <buffer> ' . l:lhs_magic . ' ' . l:rhs_pdbbp . l:rhs_clean
+  " 2019-01-14: I had `setlocal iabbrev...` commented out. But this is a filetype plugin, so... should be fine?
+  " FIXME/2019-01-14: Why both an autocmd, and this iabbrev. 1 or the other is all we gotta really need!
+  exec 'iabbrev <buffer> ' . l:lhs_magic . ' ' . l:rhs_pdbbp . l:rhs_clean
+
   " TEST:
   "  iabbrev ';'; import pdb;pdb.set_trace()<Home><Up><End><CR><C-O>0<C-O>D#
   " PAST: I first tried to abbrev -p-p, something easy and unique, but it
@@ -60,7 +84,9 @@ function! s:Python_Abbrev_PDB_Left_Hand_Middle_Pointy_Middle_Pointy()
   "         you're like me and a little OCD and despise all trailing \s$
   " MAYBE: Is there a better way to do this? Just always type it out?
   "        Use a <Leader>macro? \trace? A command/meta-key mapping?
+endfunction
 
+function! s:Python_Abbrev_RPDB2_Left_Hand_Middle_Pointy_Pointy_Middle()
   autocmd BufEnter,BufRead *.py iabbrev <buffer> ';;' import rpdb2; rpdb2.start_embedded_debugger('password', fAllowRemote=True)<Home><Up><End><CR><C-O>0<C-O>D#<Down><End><CR><C-R>=Eatchar('\s')<CR>
   iabbrev <buffer> ';;' import rpdb2; rpdb2.start_embedded_debugger('password', fAllowRemote=True)<Home><Up><End><CR><C-O>0<C-O>D#<Down><End><CR><C-R>=Eatchar('\s')<CR>
 endfunction
@@ -123,6 +149,7 @@ endfunction
 
 function! s:Python_Main()
   call <SID>Python_Abbrev_PDB_Left_Hand_Middle_Pointy_Middle_Pointy()
+  call <SID>Python_Abbrev_RPDB2_Left_Hand_Middle_Pointy_Pointy_Middle()
   call <SID>Python_Configure_iskeyword()
   call <SID>Python_Comments_FIXME_NOTE_highlighting()
   call <SID>Python_Prevent_smartindent_Undent_Cstyle_Macro()
