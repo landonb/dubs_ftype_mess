@@ -42,29 +42,34 @@ function! s:Python_Abbrev_PDB_Left_Hand_Middle_Pointy_Middle_Pointy()
   " And this is a silly/great macro to insert in-code bps quickly.
   " Simply type the magic sequence and then hit space or return, et voilà!
 
-  let l:lhs_magic = "';';"
-
-  " Originally:
-  "   l:rhs_pdbbp = 'import sys, pdb; pdb.set_trace()'
-  " Include Pdb(...) to fix pdb stdin echo, in case PPT, or other, stole it.
-  let l:rhs_pdbbp = 'import sys, pdb; pdb.Pdb(stdout=sys.__stdout__).set_trace()'
-
-  " Was originally:
+  " Final part of abbreviation, used to position cursor and cleanup the trigger.
+  " This was originally:
   "   l:rhs_clean = '<Home><Up><End><CR><C-O>0<C-O>D#<Down><End><CR>'
-  " Include Eatchar so use can type abbrev, then space (to trigger replacement)
-  " and then Eatchar will gobble the space.
+  " but wnclude the Eatchar so that whatever triggers the replacement gets removed,
+  " e.g., the user can type the abbrev, then hit space to trigger it, and Eatchar
+  " will gobble the space.
   let l:rhs_clean = "<Home><Up><End><CR><C-O>0<C-O>D#<Down><End><CR><C-R>=Eatchar('\\\s')<CR>"
 
+  let l:lhs_pdbbp = "';';"
+  let l:rhs_pdbbp = 'import sys, pdb; pdb.set_trace()'
   " Just for ref, without the intermediate variables, it'd be:
   "   autocmd BufEnter,BufRead *.py
   "     \ iabbrev <buffer> ';';
   "     \ import pdb;pdb.set_trace()<Home><Up><End><CR><C-O>0<C-O>D#<Down><End><CR><C-R>=Eatchar('\s')<CR>
   "   iabbrev <buffer> ';';
   "     \ import pdb;pdb.set_trace()<Home><Up><End><CR><C-O>0<C-O>D#<Down><End><CR><C-R>=Eatchar('\s')<CR>
-  exec 'autocmd BufEnter,BufRead *.py iabbrev <buffer> ' . l:lhs_magic . ' ' . l:rhs_pdbbp . l:rhs_clean
+  exec 'autocmd BufEnter,BufRead *.py iabbrev <buffer> ' . l:lhs_pdbbp . ' ' . l:rhs_pdbbp . l:rhs_clean
   " 2019-01-14: I had `setlocal iabbrev...` commented out. But this is a filetype plugin, so... should be fine?
   " FIXME/2019-01-14: Why both an autocmd, and this iabbrev. 1 or the other is all we gotta really need!
-  exec 'iabbrev <buffer> ' . l:lhs_magic . ' ' . l:rhs_pdbbp . l:rhs_clean
+  exec 'iabbrev <buffer> ' . l:lhs_pdbbp . ' ' . l:rhs_pdbbp . l:rhs_clean
+
+  " https://vi.stackexchange.com/questions/18146/iabbrev-starting-with-semicolon
+  "let l:lhs_saner = ";l;l"
+  let l:lhs_saner = "';;'"
+  let l:rhs_saner = 'import os, pdb; os.system("stty sane"); pdb.set_trace()'
+  " For working with PPT, and other front end frameworks that rewire the terminal pipes.
+  exec 'autocmd BufEnter,BufRead *.py iabbrev <buffer> ' . l:lhs_saner . ' ' . l:rhs_saner . l:rhs_clean
+  exec 'iabbrev <buffer> ' . l:lhs_saner . ' ' . l:rhs_saner . l:rhs_clean
 
   " TEST:
   "  iabbrev ';'; import pdb;pdb.set_trace()<Home><Up><End><CR><C-O>0<C-O>D#
@@ -87,8 +92,8 @@ function! s:Python_Abbrev_PDB_Left_Hand_Middle_Pointy_Middle_Pointy()
 endfunction
 
 function! s:Python_Abbrev_RPDB2_Left_Hand_Middle_Pointy_Pointy_Middle()
-  autocmd BufEnter,BufRead *.py iabbrev <buffer> ';;' import rpdb2; rpdb2.start_embedded_debugger('password', fAllowRemote=True)<Home><Up><End><CR><C-O>0<C-O>D#<Down><End><CR><C-R>=Eatchar('\s')<CR>
-  iabbrev <buffer> ';;' import rpdb2; rpdb2.start_embedded_debugger('password', fAllowRemote=True)<Home><Up><End><CR><C-O>0<C-O>D#<Down><End><CR><C-R>=Eatchar('\s')<CR>
+  autocmd BufEnter,BufRead *.py iabbrev <buffer> ;ll; import rpdb2; rpdb2.start_embedded_debugger('password', fAllowRemote=True)<Home><Up><End><CR><C-O>0<C-O>D#<Down><End><CR><C-R>=Eatchar('\s')<CR>
+  iabbrev <buffer> ;ll; import rpdb2; rpdb2.start_embedded_debugger('password', fAllowRemote=True)<Home><Up><End><CR><C-O>0<C-O>D#<Down><End><CR><C-R>=Eatchar('\s')<CR>
 endfunction
 
 " What'sAKeyword See The F1 Command / Ctrl-R Ctrl-W
