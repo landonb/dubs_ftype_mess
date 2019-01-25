@@ -19,5 +19,5 @@ To add a Syntax file:
 
 - The source file will be loaded the logic that sets up reST syntaxing.
 
-  ``dubs_ftype_mess/after/ftplugin/rst_dubsacks.vim``
+  ``dubs_ftype_mess/after/ftplugin/rst_dubsvim.vim``
 

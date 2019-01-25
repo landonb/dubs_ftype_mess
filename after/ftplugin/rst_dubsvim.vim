@@ -1,35 +1,35 @@
-" File: ftplugin/rst_dubsacks.vim
+" File: ftplugin/rst_dubsvim.vim
 " Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
 " Last Modified: 2017.03.28
 " Project Page: https://github.com/landonb/dubs_ftype_mess
-" Summary: Dubsacks reST filetype behavior
+" Summary: Dubs Vim reST filetype behavior
 " License: GPLv3
 " -------------------------------------------------------------------
 " Copyright © 2015-2017 Landon Bouma.
 " 
-" This file is part of Dubsacks.
+" This file is part of Dubs Vim.
 " 
-" Dubsacks is free software: you can redistribute it and/or
+" Dubs Vim is free software: you can redistribute it and/or
 " modify it under the terms of the GNU General Public License
 " as published by the Free Software Foundation, either version
 " 3 of the License, or (at your option) any later version.
 " 
-" Dubsacks is distributed in the hope that it will be useful,
+" Dubs Vim is distributed in the hope that it will be useful,
 " but WITHOUT ANY WARRANTY; without even the implied warranty
 " of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
 " the GNU General Public License for more details.
 " 
 " You should have received a copy of the GNU General Public License
-" along with Dubsacks. If not, see <http://www.gnu.org/licenses/>
+" along with Dubs Vim. If not, see <http://www.gnu.org/licenses/>
 " or write Free Software Foundation, Inc., 51 Franklin Street,
 "                     Fifth Floor, Boston, MA 02110-1301, USA.
 " ===================================================================
 
 " Only do this when not done yet for this buffer
-if exists("g:ftplugin_rst_dubsacks") || &cp
+if exists("g:ftplugin_rst_dubsvim") || &cp
   finish
 endif
-let g:ftplugin_rst_dubsacks = 1
+let g:ftplugin_rst_dubsvim = 1
 
 " Snippets-Insertion Shortcuts
 " ------------------------------------------------------
@@ -133,7 +133,7 @@ autocmd BufEnter,BufRead *.txt setlocal spellcapcheck=
 
 " Override .rst syntax ``.. code-block:: <language>`` mapping.
 " ------------------------------------------------------------
-" SYNC_ME: Similar *.rst changes in dubs_preloads.vim and rst_dubsacks.vim.
+" SYNC_ME: Similar *.rst changes in dubs_preloads.vim and rst_dubsvim.vim.
 
 " In the preload file we added a few of the built-in syntaxes for
 " Sphinx's `.. code-block:: <language>` mapping. Here we add syntaxes

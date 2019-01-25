@@ -1,5 +1,5 @@
-Dubsacks Vim — Filetype Hacks
-=============================
+Dubs Vim — Filetype Hacks
+=========================
 
 About This Plugin
 -----------------

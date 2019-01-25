@@ -1,6 +1,6 @@
 *dubs_ftype_mess.txt*	For Vim version 7.4.	Last change: 2015 Jan 23
 
-Dubsacks Vim -- Filetype~
+Dubs Vim -- Filetype~
 
 FILETYPE-SPECIFIC MESS			*dubs-ftype-mess*
 

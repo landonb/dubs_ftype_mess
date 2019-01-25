@@ -10,10 +10,10 @@
 let s:cpo_save = &cpo
 set cpo&vim
 
-" 2011.01.14 -- This is annoying [lb]: Typing the closing angle causes who the 
+" 2011.01.14 -- This is annoying [lb]: Typing the closing angle causes the
 "               whole line to be tabbed. And pressing o or O to open a new
 "               line puts the cursor at a funny spot. If I disable this,
-"               things work normally (probably because dubsacks.vim is just 
+"               things work normally (probably because Dubs Vim is just
 "               that good! =).
 "setlocal indentexpr=GetDTDIndent()
 "setlocal indentkeys=!^F,o,O,>
