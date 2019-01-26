@@ -1,15 +1,18 @@
-Dubs Vim — Filetype Hacks
-=========================
+#################################
+Dubs Vim |em_dash| Filetype Hacks
+#################################
+
+.. |em_dash| unicode:: 0x2014 .. em dash
 
 About This Plugin
------------------
+=================
 
 This plugin customizes filetype-specific behavior,
 mostly by adding syntax highlighting for non-standard
 filetypes.
 
 Installation
-------------
+============
 
 Standard Pathogen installation:
 
@@ -33,13 +36,13 @@ Online help:
    :help dubs-ftype-mess
 
 Key Mappings
-------------
+============
 
 Filetype-Specific Commands
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------
 
 reStructured Text
-~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^
 
 ==================================  ==================================  ==============================================================================
 Key Mapping                         Description                         Notes
@@ -48,7 +51,7 @@ Key Mapping                         Description                         Notes
 ==================================  ==================================  ==============================================================================
 
 Other Features
---------------
+==============
 
 - Fix syntax highlighting bug:
 
