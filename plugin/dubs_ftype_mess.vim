@@ -247,6 +247,8 @@ autocmd Filetype js setlocal iskeyword=@,48-57,_,192-255
 "   I'd have to change all the autocmd's to not undo it. Or not.
 autocmd BufEnter,BufRead *.js setlocal nospell
 autocmd BufEnter,BufRead *.jsx setlocal nospell
+" 2019-12-30: TypeScript (React).
+autocmd BufEnter,BufRead *.tsx setlocal nospell
 
 " 2016.01.25: What the heck? When did this start happening to bash, too?
 " Ctrl-left/right-arrow is skipping periods
@@ -264,12 +266,17 @@ autocmd BufEnter,BufRead *.js setlocal indentexpr=
 " 2016-08-07: I was hoping to be able to delete to beginning of line,
 " but whatever (with the <C-O>d<C-O>0, effectively nothing happens).
 "autocmd BufEnter,BufRead *.js iabbrev <buffer> ';'; <C-O>d<C-O>0if (true) { debugger; }<Home><Right><Right><Right><Right><C-R>=Eatchar('\s')<CR>
-autocmd BufEnter,BufRead *.js,*.jsx iabbrev <buffer> ';'; if (true) { debugger; }<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><C-R>=Eatchar('\s')<CR>
+autocmd BufEnter,BufRead *.js,*.jsx,*.tsx iabbrev <buffer> ';'; if (true) { debugger; }<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><C-R>=Eatchar('\s')<CR>
 
-autocmd BufEnter,BufRead *.js,*.jsx iabbrev <buffer> ';; console.log('');<Left><Left><Left><C-R>
+autocmd BufEnter,BufRead *.js,*.jsx,*.tsx iabbrev <buffer> ';; console.log('');<Left><Left><Left><C-R>
 
 " Vim-surround JSX auto-commenter. In normal mode, to comment-out line: yss-
 autocmd FileType javascript.jsx let b:surround_45 = "{/* \r */}"
+
+" In lieu of editing:
+"   vim-jsx/ftdetect/javascript.vim
+autocmd BufNewFile,BufRead *.tsx let b:jsx_ext_found = 1
+autocmd BufNewFile,BufRead *.tsx set filetype=javascript.jsx
 
 " ------------------------------------------------------
 " CSS
