@@ -108,8 +108,38 @@ autocmd Filetype vim setlocal iskeyword=@,48-57,_,192-255
 " ------------------------------------------------------
 
 " Do the same for Bash shell script files
+" 2020-01-23: The `XCOMM` comment is some holdover from somewhere.
+"   - I see it atop Imakefile files when I grggle it, and at least
+"     the `imake` tool converts 'XCOMM' to '#'.
+"       https://linux.die.net/man/1/imake
+"   - Removed from tail of comments:
+"       ,:XCOMM
+" 2020-01-23: But really I came here to remove another holdover that
+"   erroneously prefixes echoes to stderr, e.g., if I type a line of
+"   code that redirects an echo to stderr, and then hit return:
+"       >&2 echo "ERROR: blarg"<CR>
+"       >
+"   you'll see than Vim starts with what it thinks is a comment char.
+"   - Removed from tail of comments:
+"       ,n:>
+" 2020-01-23: While I'm at it, a few notes.
+"   - The rule ``://`` really is two forward slashes;
+"     I'm not sure if what context this is useful.
+"       /* Maybe some people
+"       // like to format their
+"       // long comments weird-like.
+"       */
+"     - Whatever, let's remove it! Nixxed:
+"       ,://
+"   - The ``fb:-`` is for supposedly for a bullet list, i.e.,
+"     Vim will not repeat the dash character on subsequent lines,
+"     but it will preserve indentation.
+"     - But Vim currently preserves indentation when I type in Bash,
+"       whether as code or in comments, so I think ``fb:-`` is a no-op.
+"     - As such, also nixxed!:
+"       ,fb:-
 autocmd BufRead *.sh set
-  \ comments=sb:#\ FIXME:,m:#\ \ \ \ \ \ \ ,ex:#.,sb:#\ NOTE:,m:#\ \ \ \ \ \ ,ex:#.,sb:#\ FIXME,m:#\ \ \ \ \ \ ,ex:#.,sb:#\ NOTE,m:#\ \ \ \ \ ,ex:#.,s1:/*,mb:**,ex:*/,://,b:#,:XCOMM,n:>,fb:-
+  \ comments=sb:#\ FIXME:,m:#\ \ \ \ \ \ \ ,ex:#.,sb:#\ NOTE:,m:#\ \ \ \ \ \ ,ex:#.,sb:#\ FIXME,m:#\ \ \ \ \ \ ,ex:#.,sb:#\ NOTE,m:#\ \ \ \ \ ,ex:#.,s1:/*,mb:**,ex:*/,b:#
   \ formatoptions+=croql
   \ smartindent
 
