@@ -158,6 +158,12 @@ if !exists("g:sh_noisk")
   let g:sh_noisk = 1
 endif
 
+" 2020-02-03: I find myself editing conf files more recently, and less json and yaml.
+autocmd FileType dosini set
+  \ comments=sb:#\ FIXME:,m:#\ \ \ \ \ \ \ ,ex:#.,sb:#\ NOTE:,m:#\ \ \ \ \ \ ,ex:#.,sb:#\ FIXME,m:#\ \ \ \ \ \ ,ex:#.,sb:#\ NOTE,m:#\ \ \ \ \ ,ex:#.,b:#
+  \ formatoptions+=croql
+  \ smartindent
+
 " ------------------------------------------------------
 " SQL Highlighting
 " ------------------------------------------------------
