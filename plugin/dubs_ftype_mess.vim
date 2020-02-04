@@ -728,6 +728,12 @@ autocmd BufRead .gitignore.local setfiletype conf
 autocmd BufRead .gitignore setfiletype conf
 
 " ------------------------------------------------------
+" Git commit --verbose editing template should show spelling errors
+" ------------------------------------------------------
+
+autocmd FileType gitcommit set spell
+
+" ------------------------------------------------------
 " Tweak Spell Checking Capitalization Warning
 " ------------------------------------------------------
 
