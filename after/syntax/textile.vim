@@ -16,10 +16,13 @@
 "   tim.theenchanter.com
 " @(#) $Id$
 
-if version < 600
-    syntax clear
-elseif exists("b:current_syntax")
-    finish
+if !exists("main_syntax")
+    if version < 600
+        syntax clear
+    elseif exists("b:current_syntax")
+        finish
+    endif
+    let main_syntax = 'textile'
 endif
 
 " Textile commands like "h1" are case sensitive, AFAIK.
@@ -92,6 +95,11 @@ if version >= 508 || !exists("did_txt_syn_inits")
     hi def txtBold term=bold cterm=bold gui=bold
 
     delcommand HiLink
+endif
+
+let b:current_syntax = "textile"
+if main_syntax == 'textile'
+    unlet main_syntax
 endif
 
 " vim: set ai et sw=4 :
