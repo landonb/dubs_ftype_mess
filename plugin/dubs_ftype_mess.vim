@@ -311,6 +311,10 @@ autocmd FileType javascript.jsx let b:surround_45 = "{/* \r */}"
 
 " In lieu of editing:
 "   vim-jsx/ftdetect/javascript.vim
+"     [2020-02-08 21:46: Note that vim-jsx deprecated and removed,
+"      and replaced by vim-js and vim-jsx-pretty. See also new TS
+"      syntax highlighter, yats.vim.
+"      - Not sure how that affects this code!]
 autocmd BufNewFile,BufRead *.tsx let b:jsx_ext_found = 1
 autocmd BufNewFile,BufRead *.tsx set filetype=javascript.jsx
 
