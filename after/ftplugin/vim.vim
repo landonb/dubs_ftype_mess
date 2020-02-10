@@ -25,7 +25,7 @@
 "                     Fifth Floor, Boston, MA 02110-1301, USA.
 " ===================================================================
 
-" Press F9 to source the Vim file being edited.
+" Press F9 to source the Vim file being edited. (#reload)
 "   http://vim.wikia.com/wiki/Source_current_file_when_editing_a_script
 noremap <silent><buffer> <F9> :exec 'source '.bufname('%')<CR>
 
