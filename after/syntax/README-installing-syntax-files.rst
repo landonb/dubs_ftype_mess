@@ -2,22 +2,19 @@
 Installing Vim Syntax Files under dubs_ftype_mess/after/syntax
 ##############################################################
 
-2016-11-17: How did I not have a problem with or notice this issue until now?
-
-I guess Pathogen isn't sourcing ``dubs_ftype_mess/after/syntax`` after all --
-it's been Dubs all along!
-
 To add a Syntax file:
 
-- Add the file to the syntax directory.
+- Add the file to the syntax directory::
 
-  ``dubs_ftype_mess/after/syntax``
+    dubs_ftype_mess/after/syntax
 
-- Edit the list of reST syntax highlighters (I know, round-about!).
+- Edit the list of reST syntax highlighters:
 
-  Find ``rst_syntax_code_list`` in ``dubs_all/dubs_preloads.vim``.
+  - Find ``rst_syntax_code_list`` in ``dubs_ftype_mess/plugin/dubs_preloads.vim``,
+    and have your master ``.vimrc`` source that file before loading system plugs.
 
-- The source file will be loaded the logic that sets up reST syntaxing.
+- The source file will then be loaded by the logic that wires reST syntax.
+  See::
 
-  ``dubs_ftype_mess/after/ftplugin/rst_dubsvim.vim``
+    dubs_ftype_mess/after/ftplugin/rst_dubsvim.vim
 

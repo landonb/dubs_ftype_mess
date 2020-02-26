@@ -9,7 +9,8 @@
 " I even tried putting it in /home/landonb/.vim/after/syntax (but I think Pathogen skips that).
 " So then I just replaced the one on the machine... but I didn't put this in any setup.sh.
 "   sudo mv /usr/share/vim/vim74/syntax/sh.vim /usr/share/vim/vim74/syntax/sh.vim-`date +%Y.%m.%d.%H.%M.%S`
-"   sudo /bin/ln -s ${HOME}/.vim/bundle_/dubs_ftype_mess/after/syntax/sh.vim /usr/share/vim/vim74/syntax/sh.vim
+"   sudo /bin/ln -s ${HOME}/.vim/pack/landonb/start/dubs_ftype_mess/after/syntax/sh.vim \
+"                   /usr/share/vim/vim74/syntax/sh.vim
 
 " Vim syntax file
 " Language:		shell (sh) Korn shell (ksh) bash (sh)

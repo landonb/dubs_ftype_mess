@@ -142,7 +142,8 @@ autocmd BufEnter,BufRead *.txt setlocal spellcapcheck=
 " Add a few of our own syntaxes, er, syntaxii.
 " Included Alternative File Extension Syntax File Type Mappings.
 "
-" To add syntax language highlighting to the ..code-block:: list, see: rst_syntax_code_list
+" To add syntax language highlighting to the ..code-block:: list,
+" search: rst_syntax_code_list
 if !exists('g:rst_syntax_code_list_dubs')
   let g:rst_syntax_code_list_dubs = [
     \ { 'fext': 'actionscript', 'synf': 'actionscript' },
@@ -170,13 +171,13 @@ for codemap in g:rst_syntax_code_list_dubs
   let synf = codemap.synf
   unlet! b:current_syntax
   " The first entry in the runtime path is the user's base Vim directory,
-  "   usually ~/.vim. We could search that, e.g.,
+  " usually ~/.vim. We could search all files therein, e.g.,
   "
   "     let syntax_file = findfile(synf.'.vim', pathogen#split(&rtp)[0] . '/**')
   "
-  "   but if you have any symlinks therein to large directory trees (such as
-  "   those links under dubs_all/cmdt_paths), a depthy search can noticeably
-  "   delay Vim boot time.
+  " but if you have, e.g., a symlink to a large directory tree somewhere,
+  " a depthy search can noticeably delay Vim boot time. So only look in a
+  " few specific places for the syntax file.
   let syntax_file = ''
   for vim_dir in pathogen#split(&rtp)
     let try_file = vim_dir . '/after/syntax/' . synf.'.vim'
@@ -196,7 +197,7 @@ for codemap in g:rst_syntax_code_list_dubs
   else
     let syntax_file = $VIMRUNTIME . '/syntax/' . synf.'.vim'
   endif
-  "echomsg 'codemap: ' . codemap.fext '/ syntax_file: ' . syntax_file
+  " echomsg 'codemap: ' . codemap.fext '/ syntax_file: ' . syntax_file
   if syntax_file != ''
     if !filereadable(syntax_file)
       echomsg 'Warning: Dubs could find: ' . synf.'.vim'
