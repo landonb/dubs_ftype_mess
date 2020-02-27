@@ -1,5 +1,3 @@
-" [lb] FIXME/2018-12-24: Remove this file. Problems with heredoc highlighting appear fixed in vim80.
-
 " [lb] Copied from /usr/share/vim/vim74/syntax/sh.vim / Ubuntu trusty 14.04
 
 " Vim syntax file
