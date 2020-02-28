@@ -1,34 +1,15 @@
-" File: dubs_ftype_mess.vim
+" Opinionated Vim filetype (buffer setlocal) tweaks (syntax highlighting, etc.).
 " Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
-" Last Modified: 2017.12.11
-" Project Page: https://github.com/landonb/dubs_ftype_mess
-" Summary: Dubs Vim Filetype Tweaks, Mostly for Syntax Highlighting
-" License: GPLv3
-" -------------------------------------------------------------------
-" Copyright © 2009, 2015-2017 Landon Bouma.
-"
-" This file is part of Dubs Vim.
-"
-" Dubs Vim is free software: you can redistribute it and/or
-" modify it under the terms of the GNU General Public License
-" as published by the Free Software Foundation, either version
-" 3 of the License, or (at your option) any later version.
-"
-" Dubs Vim is distributed in the hope that it will be useful,
-" but WITHOUT ANY WARRANTY; without even the implied warranty
-" of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
-" the GNU General Public License for more details.
-"
-" You should have received a copy of the GNU General Public License
-" along with Dubs Vim. If not, see <http://www.gnu.org/licenses/>
-" or write Free Software Foundation, Inc., 51 Franklin Street,
-"                     Fifth Floor, Boston, MA 02110-1301, USA.
-" ===================================================================
+" Online: https://github.com/landonb/dubs_ftype_mess
+" License: https://creativecommons.org/publicdomain/zero/1.0/
 
 " ====================================================================
 " In lieu of a bunch of small ~/.vim/ftplugin/*.vim files, this file!
 " ====================================================================
 " (Also to keep a bunch of not-so-DRY CxPx code together).
+
+" FIXME/2020-02-27: Keep slitting this file to smaller ftplugin/ scripts.
+" - See ftplugin/sh_dubsvim.vim, the first one, keep up the momentum!
 
 " ====================================================================
 " NOTE: This file is... Not Very Vim
@@ -40,11 +21,19 @@
 "       here is probably easier to maintain.
 " ====================================================================
 
+" ========================================================================
+" ------------------------------------------------------------------------
+" ========================================================================
+
 " Load this script just once
 if exists("g:plugin_dubs_ftype_mess") || &cp
   finish
 endif
 let g:plugin_dubs_ftype_mess = 1
+
+" ========================================================================
+" ------------------------------------------------------------------------
+" ========================================================================
 
 " ------------------------------------------------------
 " Abbreviation Helper: Consume trailing whitespace
@@ -82,6 +71,10 @@ autocmd BufNewFile,BufRead * syntax sync fromstart
 
 filetype plugin on
 
+" ========================================================================
+" ------------------------------------------------------------------------
+" ========================================================================
+
 " ------------------------------------------------------
 " Vim Highlighting
 " ------------------------------------------------------
@@ -107,46 +100,9 @@ autocmd Filetype vim setlocal iskeyword=@,48-57,_,192-255
 " Bash Highlighting
 " ------------------------------------------------------
 
-" Do the same for Bash shell script files
-" 2020-01-23: The `XCOMM` comment is some holdover from somewhere.
-"   - I see it atop Imakefile files when I grggle it, and at least
-"     the `imake` tool converts 'XCOMM' to '#'.
-"       https://linux.die.net/man/1/imake
-"   - Removed from tail of comments:
-"       ,:XCOMM
-" 2020-01-23: But really I came here to remove another holdover that
-"   erroneously prefixes echoes to stderr, e.g., if I type a line of
-"   code that redirects an echo to stderr, and then hit return:
-"       >&2 echo "ERROR: blarg"<CR>
-"       >
-"   you'll see than Vim starts with what it thinks is a comment char.
-"   - Removed from tail of comments:
-"       ,n:>
-" 2020-01-23: While I'm at it, a few notes.
-"   - The rule ``://`` really is two forward slashes;
-"     I'm not sure if what context this is useful.
-"       /* Maybe some people
-"       // like to format their
-"       // long comments weird-like.
-"       */
-"     - Whatever, let's remove it! Nixxed:
-"       ,://
-"   - The ``fb:-`` is for supposedly for a bullet list, i.e.,
-"     Vim will not repeat the dash character on subsequent lines,
-"     but it will preserve indentation.
-"     - But Vim currently preserves indentation when I type in Bash,
-"       whether as code or in comments, so I think ``fb:-`` is a no-op.
-"     - As such, also nixxed!:
-"       ,fb:-
-autocmd BufRead *.sh set
-  \ comments=sb:#\ FIXME:,m:#\ \ \ \ \ \ \ ,ex:#.,sb:#\ NOTE:,m:#\ \ \ \ \ \ ,ex:#.,sb:#\ FIXME,m:#\ \ \ \ \ \ ,ex:#.,sb:#\ NOTE,m:#\ \ \ \ \ ,ex:#.,s1:/*,mb:**,ex:*/,b:#
-  \ formatoptions+=croql
-  \ smartindent
+" FIXME/2020-02-27: Move other snippets from this file to appropriate ftplugin/ files.
 
-" Specify nosmartindent, else Vim won't tab your octothorpes
-" 2014.11.19: See CycleThruStyleGuides for :setting ts, sw, and tw.
-"autocmd BufEnter,BufRead *.sh setlocal tabstop=2 shiftwidth=2 tw=79 nosmartindent
-autocmd BufEnter,BufRead *.sh setlocal nosmartindent
+" ***
 
 " 2016-11-29: When did this start happening? I think we I copied bash.vim
 " in dubs_ftype_mess/after/syntax/, periods starting getting sucked into
@@ -157,6 +113,10 @@ autocmd BufEnter,BufRead *.sh setlocal nosmartindent
 if !exists("g:sh_noisk")
   let g:sh_noisk = 1
 endif
+
+" ------------------------------------------------------
+" DOSINI Behavior
+" ------------------------------------------------------
 
 " 2020-02-03: I find myself editing conf files more recently, and less json and yaml.
 autocmd FileType dosini set
