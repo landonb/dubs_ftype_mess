@@ -71,6 +71,32 @@ autocmd BufNewFile,BufRead * syntax sync fromstart
 
 filetype plugin on
 
+" ------------------------------------------------------
+" Search-under-cursor tweak.
+" ------------------------------------------------------
+
+" LATER/2020-02-27: This code came after the `autocmd BufRead *.sh`
+" code that was moved to ftplugin/sh_dubsvim.vim, so I think it was
+" related to an issue with Bash/shell filetypes. However the code was
+" not part of the autocmd, so applied globally.
+" - In any case, I looked at the latest syntax/sh.vim, and there's now
+"   code therein that touches g:sh_noisk if the user has not set it.
+"   So I'm trying without this enabled anymore, with the hopes of
+"   LATER/2020-02-27: ... removing this code eventually.
+"   - But for now, just disabled, should I have a problem in the near
+"     future, so I can easily re-enable it.
+if 0
+  " 2016-11-29: When did this start happening? I think we I copied bash.vim
+  " in dubs_ftype_mess/after/syntax/, periods starting getting sucked into
+  " search-under-cursor.
+  "   Wrong:
+  "     iskeyword=@,48-57,_,192-255,.
+  "   If we just set g:sh_noisk, bash.vim won't add . to the isk.
+  if !exists("g:sh_noisk")
+    let g:sh_noisk = 1
+  endif
+endif
+
 " ========================================================================
 " ------------------------------------------------------------------------
 " ========================================================================
@@ -95,24 +121,6 @@ autocmd BufRead *.vim set
 " being included in '*' and <F1> searches...
 "autocmd Filetype vim setlocal iskeyword=@,48-57,_,192-255,#
 autocmd Filetype vim setlocal iskeyword=@,48-57,_,192-255
-
-" ------------------------------------------------------
-" Bash Highlighting
-" ------------------------------------------------------
-
-" FIXME/2020-02-27: Move other snippets from this file to appropriate ftplugin/ files.
-
-" ***
-
-" 2016-11-29: When did this start happening? I think we I copied bash.vim
-" in dubs_ftype_mess/after/syntax/, periods starting getting sucked into
-" search-under-cursor.
-"   Wrong:
-"     iskeyword=@,48-57,_,192-255,.
-"   If we just set g:sh_noisk, bash.vim won't add . to the isk.
-if !exists("g:sh_noisk")
-  let g:sh_noisk = 1
-endif
 
 " ------------------------------------------------------
 " DOSINI Behavior
