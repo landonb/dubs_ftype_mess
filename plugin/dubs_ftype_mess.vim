@@ -700,6 +700,14 @@ autocmd BufRead .gitignore.local setfiletype conf
 autocmd BufRead .gitignore setfiletype conf
 
 " ------------------------------------------------------
+" Fugitive Blame Buffers, too!
+" ------------------------------------------------------
+
+" 2020-08-07: Otherwise the hashes each have a red squiggly underline.
+
+autocmd BufEnter,BufRead *.fugitiveblame setlocal nospell
+
+" ------------------------------------------------------
 " Git commit --verbose editing template should show spelling errors
 " ------------------------------------------------------
 
