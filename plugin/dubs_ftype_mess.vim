@@ -286,6 +286,14 @@ autocmd FileType javascript.jsx let b:surround_45 = "{/* \r */}"
 autocmd BufNewFile,BufRead *.tsx let b:jsx_ext_found = 1
 autocmd BufNewFile,BufRead *.tsx set filetype=javascript.jsx
 
+" 2020-09-16: It's just a JSON file.
+autocmd BufNewFile,BufRead *.eslintrc set ft=json
+
+" 2020-09-16: Thanks!
+"   https://gist.github.com/richardsonlima/fd42bf8f34ca4444cc828a34c8093f4c
+" <Jenkinsfile VIM syntax highlighting>
+autocmd BufNewFile,BufRead Jenkinsfile setf groovy
+
 " ------------------------------------------------------
 " CSS
 " ------------------------------------------------------
