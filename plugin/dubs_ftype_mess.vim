@@ -276,6 +276,7 @@ autocmd BufEnter,BufRead *.js,*.jsx,*.tsx iabbrev <buffer> ';; console.log('');<
 
 " Vim-surround JSX auto-commenter. In normal mode, to comment-out line: yss-
 autocmd FileType javascript.jsx let b:surround_45 = "{/* \r */}"
+autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
 
 " In lieu of editing:
 "   vim-jsx/ftdetect/javascript.vim
@@ -284,7 +285,7 @@ autocmd FileType javascript.jsx let b:surround_45 = "{/* \r */}"
 "      syntax highlighter, yats.vim.
 "      - Not sure how that affects this code!]
 autocmd BufNewFile,BufRead *.tsx let b:jsx_ext_found = 1
-autocmd BufNewFile,BufRead *.tsx set filetype=javascript.jsx
+autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
 
 " 2020-09-16: It's just a JSON file.
 autocmd BufNewFile,BufRead *.eslintrc set ft=json
