@@ -272,7 +272,8 @@ autocmd BufEnter,BufRead *.js setlocal indentexpr=
 "autocmd BufEnter,BufRead *.js iabbrev <buffer> ';'; <C-O>d<C-O>0if (true) { debugger; }<Home><Right><Right><Right><Right><C-R>=Eatchar('\s')<CR>
 autocmd BufEnter,BufRead *.js,*.jsx,*.tsx iabbrev <buffer> ';'; if (true) { debugger; }<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><C-R>=Eatchar('\s')<CR>
 
-autocmd BufEnter,BufRead *.js,*.jsx,*.tsx iabbrev <buffer> ';; console.log('');<Left><Left><Left><C-R>
+" autocmd BufEnter,BufRead *.js,*.jsx,*.tsx iabbrev <buffer> ';; console.log('');<Left><Left><Left><C-R>
+autocmd BufEnter,BufRead *.js,*.jsx,*.tsx iabbrev <buffer> ';; console.log(''); // eslint-disable-line no-console<C-o>36<Left><C-R>
 
 " Vim-surround JSX auto-commenter. In normal mode, to comment-out line: yss-
 autocmd FileType javascript.jsx let b:surround_45 = "{/* \r */}"
