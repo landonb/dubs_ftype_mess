@@ -276,6 +276,10 @@ autocmd BufEnter,BufRead *.js,*.jsx,*.tsx iabbrev <buffer> ';'; if (true) { debu
 " autocmd BufEnter,BufRead *.js,*.jsx,*.tsx iabbrev <buffer> ';; console.log('');<Left><Left><Left><C-R>
 autocmd BufEnter,BufRead *.js,*.jsx,*.tsx iabbrev <buffer> ';; console.log(''); // eslint-disable-line no-console<C-o>36<Left><C-R>
 
+" 2020-09-24: See also ESLint `alert` warning disablement (I don't really use alert, so not wired).
+"
+"  autocmd BufEnter,BufRead *.js,*.jsx,*.tsx iabbrev <buffer> ';; alert(''); // eslint-disable-line no-alert<C-o>34<Left><C-R>
+
 " Vim-surround JSX auto-commenter. In normal mode, to comment-out line: yss-
 autocmd FileType javascript.jsx let b:surround_45 = "{/* \r */}"
 autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
