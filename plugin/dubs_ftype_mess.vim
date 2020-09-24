@@ -265,15 +265,22 @@ autocmd BufEnter,BufRead *.tsx setlocal nospell
 "               indentexpr=GetVimIndent()
 autocmd BufEnter,BufRead *.js setlocal indentexpr=
 
-""autocmd BufEnter,BufRead *.js iabbrev <buffer> ";; if (true) { debugger; }<Home><Up><End><CR><C-O>0<C-O>D//<Down><End><CR><C-R>=Eatchar('\s')<CR>
-"autocmd BufEnter,BufRead *.js iabbrev <buffer> ';'; if (true) { debugger; }<Home><Up><End><CR><C-O>0<C-O>D//<Down><End><CR><C-R>=Eatchar('\s')<CR>
-" 2016-08-07: I was hoping to be able to delete to beginning of line,
-" but whatever (with the <C-O>d<C-O>0, effectively nothing happens).
-"autocmd BufEnter,BufRead *.js iabbrev <buffer> ';'; <C-O>d<C-O>0if (true) { debugger; }<Home><Right><Right><Right><Right><C-R>=Eatchar('\s')<CR>
-" autocmd BufEnter,BufRead *.js,*.jsx,*.tsx iabbrev <buffer> ';'; if (true) { debugger; }<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><C-R>=Eatchar('\s')<CR>
-autocmd BufEnter,BufRead *.js,*.jsx,*.tsx iabbrev <buffer> ';'; if (true) { debugger; /* eslint-disable-line no-debugger */ }<C-o>52<Left><C-R>=Eatchar('\s')<CR>
+" 2020-09-24: (lb): I had a `=Eatchar('\s')<CR>` postfix on the iabbrev,
+" but I'm not sure why. Demoing, I see that, with Eatchar, if I use <CR>
+" after abbrev, i.e., if I type ';';<CR>, then there's a linebreak after
+" the 'true'. But without the Eatcahr, if you end the abbrev with a space
+" or a return, neither the space nor the return is injected, and the cursor
+" ends up after 'true' and before the ')'. So removing the Eatchar, and
+" leaving this note in its place...
+"
+"   autocmd BufEnter,BufRead *.js,*.jsx,*.tsx iabbrev <buffer> ';'; ...52<Left><C-R>=Eatchar('\s')<CR>
+"
+" Note that typing space or enter triggers the iabbrev substitution,
+" as does typing a single quote character (so you can type either
+" ';;' or ';';' to immediately inject the substitution).
 
-" autocmd BufEnter,BufRead *.js,*.jsx,*.tsx iabbrev <buffer> ';; console.log('');<Left><Left><Left><C-R>
+autocmd BufEnter,BufRead *.js,*.jsx,*.tsx iabbrev <buffer> ';'; if (true) { debugger; /* eslint-disable-line no-debugger */ }<C-o>52<Left><C-R>
+
 autocmd BufEnter,BufRead *.js,*.jsx,*.tsx iabbrev <buffer> ';; console.log(''); // eslint-disable-line no-console<C-o>36<Left><C-R>
 
 " 2020-09-24: See also ESLint `alert` warning disablement (I don't really use alert, so not wired).
