@@ -270,7 +270,8 @@ autocmd BufEnter,BufRead *.js setlocal indentexpr=
 " 2016-08-07: I was hoping to be able to delete to beginning of line,
 " but whatever (with the <C-O>d<C-O>0, effectively nothing happens).
 "autocmd BufEnter,BufRead *.js iabbrev <buffer> ';'; <C-O>d<C-O>0if (true) { debugger; }<Home><Right><Right><Right><Right><C-R>=Eatchar('\s')<CR>
-autocmd BufEnter,BufRead *.js,*.jsx,*.tsx iabbrev <buffer> ';'; if (true) { debugger; }<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><C-R>=Eatchar('\s')<CR>
+" autocmd BufEnter,BufRead *.js,*.jsx,*.tsx iabbrev <buffer> ';'; if (true) { debugger; }<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><C-R>=Eatchar('\s')<CR>
+autocmd BufEnter,BufRead *.js,*.jsx,*.tsx iabbrev <buffer> ';'; if (true) { debugger; /* eslint-disable-line no-debugger */ }<C-o>52<Left><C-R>=Eatchar('\s')<CR>
 
 " autocmd BufEnter,BufRead *.js,*.jsx,*.tsx iabbrev <buffer> ';; console.log('');<Left><Left><Left><C-R>
 autocmd BufEnter,BufRead *.js,*.jsx,*.tsx iabbrev <buffer> ';; console.log(''); // eslint-disable-line no-console<C-o>36<Left><C-R>
