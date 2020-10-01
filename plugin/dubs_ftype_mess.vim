@@ -279,7 +279,11 @@ autocmd BufEnter,BufRead *.js setlocal indentexpr=
 " as does typing a single quote character (so you can type either
 " ';;' or ';';' to immediately inject the substitution).
 
-autocmd BufEnter,BufRead *.js,*.jsx,*.tsx iabbrev <buffer> ';'; if (true) { debugger; /* eslint-disable-line no-debugger */ }<C-o>52<Left><C-R>
+" Pattern if you want to inject an if-block, to make a conditional `debugger`,
+" but not as useful because not allowed in some situations.
+"   autocmd BufEnter,BufRead *.js,*.jsx,*.tsx iabbrev <buffer> ';'; if (true) { debugger; /* eslint-disable-line no-debugger */ }<C-o>52<Left><C-R>
+" 46: Place cursor at the start of the injection, before the 'd'ebugger.
+autocmd BufEnter,BufRead *.js,*.jsx,*.tsx iabbrev <buffer> ';'; debugger; /* eslint-disable-line no-debugger */<C-o>46<Left><C-R>
 
 autocmd BufEnter,BufRead *.js,*.jsx,*.tsx iabbrev <buffer> ';; console.log(''); // eslint-disable-line no-console<C-o>36<Left><C-R>
 
