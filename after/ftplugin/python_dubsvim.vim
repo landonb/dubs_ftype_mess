@@ -37,7 +37,7 @@ let g:ftplugin_python_dubsvim = 1
 
 " :h line-continuation
 
-function! s:Python_Abbrev_PDB_Left_Hand_Middle_Pointy_Middle_Pointy()
+function! s:Python_Abbrev_PDB_Left_Hand_Middle_Pointy_Middle_Pointy_SO_COMPLICATED()
   " [lb] loves me some breakpoint action.
   " And this is a silly/great macro to insert in-code bps quickly.
   " Simply type the magic sequence and then hit space or return, et voilà!
@@ -89,6 +89,14 @@ function! s:Python_Abbrev_PDB_Left_Hand_Middle_Pointy_Middle_Pointy()
   "         you're like me and a little OCD and despise all trailing \s$
   " MAYBE: Is there a better way to do this? Just always type it out?
   "        Use a <Leader>macro? \trace? A command/meta-key mapping?
+endfunction
+
+" 2020-12-05: Why is the previous function _SO_COMPLICATED? This one-liner much better!
+" I think it works better, too, something with l:rhs_clean was not working
+" and I kept getting left with an extra character after the alias...? prob
+" user error, but, anyway, at least for now, this!
+function! s:Python_Abbrev_PDB_Left_Hand_Middle_Pointy_Middle_Pointy()
+  autocmd BufEnter,BufRead *.py iabbrev <buffer> ';'; import os, pdb; os.system("stty sane"); pdb.set_trace()<C-o>54<Left><C-R>
 endfunction
 
 function! s:Python_Abbrev_RPDB2_Left_Hand_Middle_Pointy_Pointy_Middle()
