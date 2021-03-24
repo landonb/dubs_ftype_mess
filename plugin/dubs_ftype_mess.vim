@@ -283,9 +283,9 @@ autocmd BufEnter,BufRead *.js setlocal indentexpr=
 " but not as useful because not allowed in some situations.
 "   autocmd BufEnter,BufRead *.js,*.jsx,*.tsx iabbrev <buffer> ';'; if (true) { debugger; /* eslint-disable-line no-debugger */ }<C-o>52<Left><C-R>
 " 46: Place cursor at the start of the injection, before the 'd'ebugger.
-autocmd BufEnter,BufRead *.js,*.jsx,*.tsx iabbrev <buffer> ';'; debugger; /* eslint-disable-line no-debugger */<C-o>46<Left><C-R>
+autocmd BufEnter,BufRead *.js,*.jsx,*.ts,*.tsx iabbrev <buffer> ';'; debugger; /* eslint-disable-line no-debugger */<C-o>46<Left><C-R>
 
-autocmd BufEnter,BufRead *.js,*.jsx,*.tsx iabbrev <buffer> ';; console.log(''); // eslint-disable-line no-console<C-o>36<Left><C-R>
+autocmd BufEnter,BufRead *.js,*.jsx,*.ts,*.tsx iabbrev <buffer> ';; console.log(''); // eslint-disable-line no-console<C-o>36<Left><C-R>
 
 " 2020-09-24: See also ESLint `alert` warning disablement (I don't really use alert, so not wired).
 "
