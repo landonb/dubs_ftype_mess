@@ -244,15 +244,9 @@ autocmd BufRead *.mxml set
 "   iskeyword=@,48-57,_,192-255,:
 autocmd Filetype js setlocal iskeyword=@,48-57,_,192-255
 
-" Spell check comments.
-"autocmd BufEnter,BufRead *.js setlocal spell
-" 2017-11-12: Argh. Too distracting. Or maybe I should change the highlight...
-" FIXME/MAYBE/2017-11-12: <leader>s to toggle spell check??
-"   I'd have to change all the autocmd's to not undo it. Or not.
-autocmd BufEnter,BufRead *.js setlocal nospell
-autocmd BufEnter,BufRead *.jsx setlocal nospell
-" 2019-12-30: TypeScript (React).
-autocmd BufEnter,BufRead *.tsx setlocal nospell
+" 2017-11-12: Activating spell check on comments is too distracting.
+" - Prefer enabling manually (w/ [os).
+autocmd BufEnter,BufRead *.js,*.jsx,*.ts,*.tsx setlocal nospell
 
 " 2016.01.25: What the heck? When did this start happening to bash, too?
 " Ctrl-left/right-arrow is skipping periods
