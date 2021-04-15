@@ -287,7 +287,17 @@ autocmd BufEnter,BufRead *.js,*.jsx,*.ts,*.tsx iabbrev <buffer> ';; console.log(
 
 " Vim-surround JSX auto-commenter. In normal mode, to comment-out line: yss-
 autocmd FileType javascript.jsx let b:surround_45 = "{/* \r */}"
-autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
+
+" 2021-04-15: Disabling these ft's so that *.jsx and *.tsx default to
+"             ft=javascriptreact and ft=typescriptreact, respectively.
+" - I'm not sure how typescript.tsx differs from typescriptreact, other
+"   than I think typescriptreact is preferred (although I see, e.g., in
+"   CoC that it accepts either; but if I search all my plugins, I get
+"   17 hits on typescript.tsx, and 66 on typescriptreact).
+"   - See also this discussion: https://github.com/vim/vim/issues/4830
+"     *Adding javascriptreact / typescriptreact filetypes*
+"  autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
+"  autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
 
 " In lieu of editing:
 "   vim-jsx/ftdetect/javascript.vim
@@ -296,7 +306,6 @@ autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
 "      syntax highlighter, yats.vim.
 "      - Not sure how that affects this code!]
 autocmd BufNewFile,BufRead *.tsx let b:jsx_ext_found = 1
-autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
 
 " 2020-09-16: It's just a JSON file.
 autocmd BufNewFile,BufRead *.eslintrc set ft=json
