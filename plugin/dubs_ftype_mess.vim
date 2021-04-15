@@ -260,7 +260,7 @@ autocmd BufEnter,BufRead *.tsx setlocal nospell
 "autocmd Filetype sh setlocal iskeyword=@,48-57,_,192-255,#
 
 " 2016-05-30: For about the past week, JavaScript has been single-tab
-"             undented closing braces. What gives! What happened?
+"             undenting closing braces. What gives! What happened?
 "               :set indentexpr
 "               indentexpr=GetVimIndent()
 autocmd BufEnter,BufRead *.js setlocal indentexpr=
