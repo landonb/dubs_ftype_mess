@@ -16,16 +16,7 @@ let b:did_vim_syntax_rst_set_spell = 1
 " Spell Checking! [sic]
 " ------------------------------------------------------
 
-autocmd BufEnter,BufRead *.rst setlocal spell
-
-" Note that I tried a variation on the command,
-"
-"   autocmd Filetype rst setlocal spell
-"
-" but for some reason when I switched buffers to a code file, spell checking
-" was still enabled. You could get over that with the above command,
-"
-"   autocmd BufEnter,BufRead *.rst setlocal spell
+setlocal spell
 
 " -----------------------------------------------------------------------------
 " Spell Checking cAPITALIZATION
@@ -52,6 +43,31 @@ autocmd BufEnter,BufRead *.rst setlocal spell
 "
 " - You can use TabMessage to grab a copy of the current spellcapcheck value, e.g.,
 "
+"     :TabMessage set spellcapcheck
+"
+"   For a reST file I had open, I saw the value:
+"
+"     spellcapcheck=[.?!]\_[\])'"^I ]\+
+"
+"   Which is similar to the default value documented by `:h spellcapcheck`:
+"
+"     spellcapcheck="[.?!]\_[\])'" \t]\+"
+"
+"   To set again, escape it profoundly:
+"
+"     set spellcapcheck=[.?!]\\_[\\])\'\"^\t\ ]\\+
+"
+"   But try as I might, I couldn't get a negative look-behind to work, e.g.,
+"
+"     set spellcapcheck=\(\.\.\.\)\@<![.?!]\\_[\\])\'\"^\t\ ]\\+
+"
+"   I even tried a regular 'o' to try to get the 'bar' in 'foo bar'
+"   highlighted, but this didn't work:
+"
+"     set spellcapcheck=o\\_[\\])\'\"^\t\ ]\\+
+"
+"   But I've had this option disabled since 2014, and I don't miss it,
+"   so stick with the easy solution — just disable it altogether.
 
-autocmd BufEnter,BufRead *.rst setlocal spellcapcheck=
+setlocal spellcapcheck=
 
