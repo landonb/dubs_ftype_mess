@@ -124,13 +124,6 @@ autocmd BufEnter,BufRead *.rst setlocal spell
 
 autocmd BufEnter,BufRead *.rst setlocal spellcapcheck=
 
-" Other filetypes to spell check.
-" -------------------------------
-
-" E.g., todo.txt.
-autocmd BufEnter,BufRead *.txt setlocal spell
-autocmd BufEnter,BufRead *.txt setlocal spellcapcheck=
-
 " Override .rst syntax ``.. code-block:: <language>`` mapping.
 " ------------------------------------------------------------
 " SYNC_ME: Similar *.rst changes in dubs_preloads.vim and rst_dubsvim.vim.
