@@ -57,7 +57,7 @@ set cpo&vim
 "        \ contains=@NoSpell
 "
 " And then here's a little combination of both (update skip so that a line
-" of only whitespace, but which fewer characters than the literal block
+" of only whitespace, but with fewer characters than the literal block
 " indent, does not break the block).
 
 syn region  rstLiteralBlock         matchgroup=rstDelimiter
