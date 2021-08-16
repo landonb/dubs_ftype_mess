@@ -16,11 +16,6 @@ let b:did_vim_syntax_rst_set_spell = 1
 " Spell Checking! [sic]
 " ------------------------------------------------------
 
-" [lb] tested spell checking for obviously-texty files,
-" like txt and log, but there's too much of a mix
-" of English and non-dictionary tokens. Only reST seems
-" to work, especially since spell check ignores ``literals``.
-
 autocmd BufEnter,BufRead *.rst setlocal spell
 
 " Note that I tried a variation on the command,
@@ -36,33 +31,27 @@ autocmd BufEnter,BufRead *.rst setlocal spell
 " Spell Checking cAPITALIZATION
 " -----------------------------------------------------------------------------
 
-" 2014.11.20: on 'blah... blah', the latter blah is underlined blue, indicating
-" it's not capitalized. How would you fix the spellcapcheck to be okay with
-" that?
+" 2014-11-20: Writing the text, 'blah... blah', the latter 'blah' is
+"             undercurled, to indicate that it is not capitalized.
 "
-" There are two ways to disable caps checking: changing the spellcapcheck
-" variable,
+" 2021-08-16: Updated investigation follows:
 "
-"   set spellcapcheck=
+" - The highlight is controlled by the SpellCap highlight, e.g.,
 "
-" or disabling the highlight:
+"     SpellCap xxx term=reverse cterm=undercurl ctermbg=12 gui=undercurl guibg=#2E3440 guisp=#EBCB8B
 "
-"   highlight clear SpellCap
+"   (Open a reST document and run `:TabMessage hi` to see the (long) list of highlights.)
 "
-" You can copy the default spellcapcheck using TabMessage:
+"   A naive approach might be to remove the highlight, e.g.,
 "
-"   :TabMessage set spellcapcheck spellcapcheck=[.?!]\_[\])'"^I ]\+
+"     highlight clear SpellCap
 "
-" And you can easily peruse the list of over 1,000 highlights similary:
+" - A more appropriate solution is to tweak or clear the spellcapcheck rule, e.g.,
 "
-"   :TabMessage hi
+"     set spellcapcheck=
 "
-" There are five highlights with the word 'spell' in their name:
+" - You can use TabMessage to grab a copy of the current spellcapcheck value, e.g.,
 "
-"   SpellBad xxx term=reverse ctermbg=12 gui=undercurl guisp=Red SpellCap xxx
-"   term=reverse ctermbg=9 gui=undercurl guisp=Blue SpellRare xxx term=reverse
-"   ctermbg=13 gui=undercurl guisp=Magenta SpellLocal xxx term=underline
-"   ctermbg=11 gui=undercurl guisp=DarkCyan hl-SpellCap xxx cleared
 
 autocmd BufEnter,BufRead *.rst setlocal spellcapcheck=
 
