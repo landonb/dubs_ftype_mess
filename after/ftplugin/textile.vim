@@ -23,13 +23,7 @@
 "                     Fifth Floor, Boston, MA 02110-1301, USA.
 " ===================================================================
 
-" [lb] addedthis one-line autocmd.
-" ---------------------------------
 
-" Map *.textile files to the syntax highlighter
-augroup textile
-  au BufRead,BufNewFile *.textile setf textile
-augroup END
 
 " Tim Harper (tim.theenchanter.com)
 " authored the rest of the code.

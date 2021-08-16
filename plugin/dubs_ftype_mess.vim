@@ -442,6 +442,13 @@ autocmd BufRead,BufNewFile *.ronn setfiletype markdown
 " Textile Markup
 " ------------------------------------------------------
 
+" 2021-08-16: Not that I've used textile in at least 5 years, but while
+" cleaning up some old code, I noticed that the textile filetype was not
+" being applied. So here it is, just in case you ever read another textile
+" document (per projects I have cloned on my machine, I see that Glyr uses
+" it; and there's one such doc in the Cassandra source; but nothing else).
+autocmd BufRead,BufNewFile *.textile setfiletype textile
+
 " Map the script function to a global :command
 command! -bang -nargs=0 RenderTextileToHtml
   \ call <SID>RenderTextileToHtml('<bang>')
