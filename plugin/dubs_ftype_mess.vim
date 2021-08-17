@@ -545,6 +545,11 @@ autocmd BufRead,BufNewFile *.gotpl setfiletype gotexttmpl
 autocmd BufRead,BufNewFile *.tmpl setfiletype gotexttmpl
 
 " ------------------------------------------------------
+" Shell Polish
+" ------------------------------------------------------
+autocmd FileType bash,sh iabbrev <buffer> ';; >&2 echo ""<C-o><Left><Right><C-R>
+
+" ------------------------------------------------------
 " VIM GPG/GPG2 DECRYPT/ENCRYPT PLUGIN [hits no metal]
 " ------------------------------------------------------
 " See:
