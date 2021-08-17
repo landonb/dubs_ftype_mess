@@ -4,6 +4,47 @@
 " URL:			https://github.com/vim-ruby/vim-ruby
 " Release Coordinator:	Doug Kearns <dougkearns@gmail.com>
 " Last Change:		2019 Jul 13
+"
+" Customized:           2021-08-16, by Landon Bouma
+"
+" - I added @NoSpell so that only comments are spelled checked.
+"
+"   - See rubyMethodBlock and rubyDoBlock, below.
+"
+" - HINT: Use ]os and [os to toggle spelling off and on.
+"
+"   - (From the venerable `vim-unimpaired` plugin.)
+"
+" - To see what changes I made, I first commited the unedited version
+"   of this file, and then I edited it, so you can diff the two:
+"
+"     git diff 199e387..HEAD -- syntax/ruby.vim
+"
+" - To monitor for upstream changes, compare this version against
+"   the source code version or the installed runtime version.
+"
+"   1) Specify the local path to the upstream file.
+"
+"      If that file is from the source code, it might look like this:
+"
+"        upstream=/path/to/sources/vim/runtime/syntax/ruby.vim
+"
+"      Or if that file is from the runtime installation, then like this:
+"
+"        upstream=/path/to/install/vim/vim82/syntax/ruby.vim
+"
+"   2) Next, diff the original, unedited version of the file
+"      (from 199e387) against the latest upstream version:
+"
+"        diff <(git show dfa39b3:syntax/ruby.vim) ${upstream}
+"
+"   3) If you see any changes, copy the upstream file over this one,
+"      and make a new commit.
+"
+"      Replace the previous IDs (199e387) in this comment with the
+"      new commit ID; reapply the previous edits to the code below;
+"      and commit the changes. Voilà!
+"
 " ----------------------------------------------------------------------------
 "
 " Previous Maintainer:	Mirko Nasato
@@ -11,7 +52,7 @@
 " ----------------------------------------------------------------------------
 
 " Prelude {{{1
-if exists("b:current_syntax")
+if exists("b:current_syntax_override")
   finish
 endif
 
@@ -360,7 +401,7 @@ if !exists("b:ruby_no_expensive") && !exists("ruby_no_expensive")
   syn match rubyClass  "\<class\>"  nextgroup=rubyClassDeclaration,rubyEigenClassOperator skipwhite skipnl
   syn match rubyModule "\<module\>" nextgroup=rubyModuleDeclaration			  skipwhite skipnl
 
-  SynFold 'def'    syn region rubyMethodBlock start="\<def\>"	 matchgroup=rubyDefine skip="\<end:\|\%(\<def\_s\+\)\@<=end\>" end="\<end\>" contains=ALLBUT,@rubyNotTop
+  SynFold 'def'    syn region rubyMethodBlock start="\<def\>"	 matchgroup=rubyDefine skip="\<end:\|\%(\<def\_s\+\)\@<=end\>" end="\<end\>" contains=ALLBUT,@rubyNotTop,@NoSpell
   SynFold 'class'  syn region rubyClassBlock  start="\<class\>"  matchgroup=rubyClass  skip="\<end:"			       end="\<end\>" contains=ALLBUT,@rubyNotTop
   SynFold 'module' syn region rubyModuleBlock start="\<module\>" matchgroup=rubyModule skip="\<end:"			       end="\<end\>" contains=ALLBUT,@rubyNotTop
 
@@ -372,7 +413,7 @@ if !exists("b:ruby_no_expensive") && !exists("ruby_no_expensive")
 
   syn cluster rubyModifier contains=rubyConditionalModifier,rubyRepeatModifier,rubyRescueModifier
 
-  SynFold 'do' syn region rubyDoBlock matchgroup=rubyControl start="\<do\>" skip="\<end:" end="\<end\>" contains=ALLBUT,@rubyNotTop
+  SynFold 'do' syn region rubyDoBlock matchgroup=rubyControl start="\<do\>" skip="\<end:" end="\<end\>" contains=ALLBUT,@rubyNotTop,@NoSpell
 
   " curly bracket block or hash literal
   SynFold '{' syn region rubyCurlyBlock   matchgroup=rubyCurlyBlockDelimiter start="{"						    end="}" contains=ALLBUT,@rubyNotTop
@@ -586,7 +627,7 @@ hi def link rubyGlobalVariableError	rubyError
 hi def link rubySpaceError		rubyError
 
 " Postscript {{{1
-let b:current_syntax = "ruby"
+let b:current_syntax_override = "ruby"
 
 let &cpo = s:cpo_sav
 unlet! s:cpo_sav
