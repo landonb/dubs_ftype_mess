@@ -25,7 +25,7 @@
 "                     Fifth Floor, Boston, MA 02110-1301, USA.
 " ===================================================================
 
-" Only do this when not done yet for this buffer
+" Only do this when not done yet for this buffer.
 if exists("g:ftplugin_rst_dubsvim") || &cp
   finish
 endif
