@@ -4,6 +4,14 @@
 " License: https://creativecommons.org/publicdomain/zero/1.0/
 
 " ========================================================================
+" BOILERPLATE
+
+" Use dot-dot string concatenation (vimscript-2).
+" Use v:<vim-variables> name space (vimscript-3).
+" Leading zero does not mean octal (vimscript-4).
+if has("vimscript-4") | scriptversion 4 | endif
+
+" ------------------------------------------------------------------------
 
 " HINT: Use desktop notifications to trace your code, not `:echom`.
 "
@@ -23,9 +31,9 @@ function! s:Trace(msg)
   if !s:trace_ftplug | return | endif
 
   let l:cmd = "notify-send -i face-wink 'ftplugin/example'"
-  let l:bfn = "buf. no. " . bufnr('%')
+  let l:bfn = "buf. no. " .. bufnr('%')
 
-  execute "silent !" . l:cmd . " '" . a:msg . " (" . l:bfn . ")'"
+  execute "silent !" .. l:cmd .. " '" .. a:msg .. " (" .. l:bfn .. ")'"
 endfunction
 
 " ========================================================================
@@ -178,10 +186,10 @@ call <SID>Trace('Loading\!')
 
 function! s:update_undo_ftplugin(snippet)
   if b:undo_ftplugin != ""
-    let b:undo_ftplugin = b:undo_ftplugin . " | "
+    let b:undo_ftplugin = b:undo_ftplugin .. " | "
   endif
 
-  let b:undo_ftplugin = b:undo_ftplugin . a:snippet
+  let b:undo_ftplugin = b:undo_ftplugin .. a:snippet
 endfunction
 
 " ========================================================================
