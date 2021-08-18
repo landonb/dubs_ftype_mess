@@ -1,63 +1,53 @@
-" Opinionated Bash/Shell filetype buffer (setlocal) behavior.
+" Vim filetype plugin: Opinionated Bash/Shell behavior.
 " Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
 " Online: https://github.com/landonb/vim-synsible-sh#🐚
 " License: https://creativecommons.org/publicdomain/zero/1.0/
+" Revision: 2021-08-18
 
 " Ref: For details on boilerplace constructs used herein, consult:
 "
-"        https://github.com/landonb/vim-synsible-ftplugin-lesson#𝘼➕
+"      https://github.com/landonb/vim-synsible-ftplugin-lesson#𝘼➕
+
+" Usage: This plugin is enabled by default.
+"
+"        To disable, set "g:vim_synsible_sh_off" to a truthy value.
 
 " ========================================================================
+" BOILERPLATE
 
-function! s:Trace(msg)
-  if !s:trace_ftplug | return | endif
+" Be modern.
+if has("vimscript-4") | scriptversion 4 | endif
 
-  let l:cmd = "notify-send -i face-wink 'ftplugin/example'"
-  let l:bfn = "buf. no. " . bufnr('%')
+" ------------------------------------------------------------------------
 
-  execute "silent !" . l:cmd . " '" . a:msg . " (" . l:bfn . ")'"
-endfunction
-
-" ========================================================================
-
-let s:trace_ftplug = 0
-" YOU/DEV: Uncomment the following to see trace messages.
-"  let s:trace_ftplug = 1
-
-call <SID>Trace('Go\!')
-
-" ========================================================================
-
-if exists('b:did_ftplugin_too')
-  finish
-endif
+" Load guard.
+if exists('b:did_ftplugin_too') | finish | endif
 
 let b:did_ftplugin_too = 1
 
-call <SID>Trace('IN\!')
+" ------------------------------------------------------------------------
 
-" ========================================================================
-
+" Undo builder.
 function! s:update_undo_ftplugin(snippet)
-  if b:undo_ftplugin != ""
-    let b:undo_ftplugin = b:undo_ftplugin . " | "
+  if !exists("b:undo_ftplugin")
+    let b:undo_ftplugin = ""
+  elseif b:undo_ftplugin != ""
+    let b:undo_ftplugin = b:undo_ftplugin .. " | "
   endif
 
-  let b:undo_ftplugin = b:undo_ftplugin . a:snippet
+  let b:undo_ftplugin = b:undo_ftplugin .. a:snippet
 endfunction
-
-" ========================================================================
-
-if !exists("b:undo_ftplugin") | let b:undo_ftplugin = "" | endif
 
 call <SID>update_undo_ftplugin("unlet! b:did_ftplugin_too")
 
-" ========================================================================
+" ------------------------------------------------------------------------
 
+" Compatibility two-step.
 let s:save_cpo = &cpo
 set cpo-=C
 
 " ========================================================================
+" FUNCTIONALITY
 
 " - Fix problem with starting a comment and then typing a colon: it
 "   indents the line thinking we're typing Python code, or something.
@@ -69,7 +59,7 @@ function! s:ft_sh_set_indentkeys()
   call <SID>update_undo_ftplugin("setlocal indentkeys<")
 endfunction
 
-" ========================================================================
+" ------------------------------------------------------------------------
 
 " ------------------------------------------------------
 " Bash Highlighting
@@ -114,7 +104,7 @@ function! s:ft_sh_set_comments()
   call <SID>update_undo_ftplugin("setlocal comments<")
 endfunction
 
-" ========================================================================
+" ------------------------------------------------------------------------
 
 function! s:ft_sh_set_formatoptions()
   setlocal formatoptions+=croql
@@ -122,42 +112,36 @@ function! s:ft_sh_set_formatoptions()
   call <SID>update_undo_ftplugin("setlocal formatoptions<")
 endfunction
 
-" ========================================================================
+" ------------------------------------------------------------------------
 
+" Specify nosmartindent, else Vim won't tab your octothorpes
 function! s:ft_sh_set_smartindent()
-  " Specify nosmartindent, else Vim won't tab your octothorpes
   setlocal nosmartindent
 
   call <SID>update_undo_ftplugin("setlocal smartindent<")
 endfunction
 
-" ========================================================================
+" ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-function! s:trace_undo()
-  if s:trace_ftplug
-    call <SID>update_undo_ftplugin("silent \!notify-send -i face-wink 'ftplugin/sh' 'Cleanup\\!'")
-  endif
-endfunction
-
-" ========================================================================
-
+" Plugin main.
 function! s:load_plugin()
   call <SID>ft_sh_set_indentkeys()
   call <SID>ft_sh_set_comments()
   call <SID>ft_sh_set_formatoptions()
   call <SID>ft_sh_set_smartindent()
-
-  call <SID>trace_undo()
 endfunction
 
 " ========================================================================
+" BOILERPLATE
 
+" Plugin enablement.
 if !exists("g:vim_synsible_sh_off") || !g:vim_synsible_sh_off
   call <SID>load_plugin()
 endif
 
-" ========================================================================
+" ------------------------------------------------------------------------
 
+" Restore compatibility options.
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
