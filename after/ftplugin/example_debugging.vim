@@ -185,7 +185,9 @@ call <SID>Trace('Loading\!')
 "   $VIMRUNTIME/ftplugin/*.vim scripts to see if I can find the answer.)
 
 function! s:update_undo_ftplugin(snippet)
-  if b:undo_ftplugin != ""
+  if !exists("b:undo_ftplugin")
+    let b:undo_ftplugin = ""
+  elseif b:undo_ftplugin != ""
     let b:undo_ftplugin = b:undo_ftplugin .. " | "
   endif
 
@@ -213,6 +215,8 @@ endfunction
 "   and a subsequent `set ft=`, `:edit`, or BufEnter won't work, because
 "   the guard clause atop the global ftplugin script will `finish` early.
 
+" NOTE: This is redundant if your plugin call update_undo_ftplugin().
+"       But it's here so you remember in case you use b:did_ftplugin.
 if !exists("b:undo_ftplugin") | let b:undo_ftplugin = "" | endif
 
 " Because of the custom guard clause, ensure that the custom guard variable
