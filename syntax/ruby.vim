@@ -31,7 +31,9 @@
 "
 "      Or if that file is from the runtime installation, then like this:
 "
-"        upstream=/path/to/install/vim/vim82/syntax/ruby.vim
+"        upstream=/path/to/runtime/vim/vim82/syntax/ruby.vim
+"
+"      (where you can get the runtime path from $VIMRUNTIME).
 "
 "   2) Next, diff the original, unedited version of the file
 "      (from 199e387) against the latest upstream version:
