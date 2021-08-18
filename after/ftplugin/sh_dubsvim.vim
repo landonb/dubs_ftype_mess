@@ -1,68 +1,63 @@
 " Opinionated Bash/Shell filetype buffer (setlocal) behavior.
 " Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
-" Online: https://github.com/landonb/dubs_ftype_mess
+" Online: https://github.com/landonb/vim-synsible-sh#🐚
 " License: https://creativecommons.org/publicdomain/zero/1.0/
+
+" Ref: For details on boilerplace constructs used herein, consult:
+"
+"        https://github.com/landonb/vim-synsible-ftplugin-lesson#𝘼➕
 
 " ========================================================================
 
-" (lb): Just a few debugging hints...
-" LATER/2020-02-27: Remove from this file. Here for now because this the
-" only ftplugin, and I don't want this info to get lost quite yet (i.e.,
-" so I can remind myself in a month or two when I migrate more code from
-" plugin/dubs_ftype_mess.vim to ftplugin/*).
 function! s:Trace(msg)
-  " 2020-02-27: (lb) I moved this code from (abused) `autocmd BufRead *.sh set`
-  " calls in plugin/dubs_ftype_mess.vim, and I added `echom` calls to help trace:
-  "     echom "Loading ftplugin/sh..."
-  " but I did not see these messages. But I could see that the buffer locals
-  " were being set (e.g., `:set comments?` replied correctly). Also, I could
-  " trigger a shell command to see this file being executed when opening a
-  " shell filetype.
-  " - So if you want to see for your self, call this function!
-  let s:bfn = bufnr('%')
-  execute "!notify-send -i face-wink 'ftplugin/sh' '".a:msg." (".s:bfn.")'"
+  if !s:trace_ftplug | return | endif
+
+  let l:cmd = "notify-send -i face-wink 'ftplugin/example'"
+  let l:bfn = "buf. no. " . bufnr('%')
+
+  execute "silent !" . l:cmd . " '" . a:msg . " (" . l:bfn . ")'"
 endfunction
+
+" ========================================================================
 
 let s:trace_ftplug = 0
 " YOU/DEV: Uncomment the following to see trace messages.
 "  let s:trace_ftplug = 1
 
-if s:trace_ftplug | call <SID>Trace('Go\!') | endif
+call <SID>Trace('Go\!')
 
 " ========================================================================
 
-" Only do this when not done yet for this buffer.
-" (lb): I added a notify-send to the `if` and never saw it trigger,
-" even though I see this file being sourced one, two, or sometimes
-" three times when I load a file of the associated filetype.
-" - So not quite sure why `:h ftplugin` says to add this code, but
-"   here 'tis!
-if exists('b:did_ftplugin') | finish | endif
-let b:did_ftplugin = 1
+if exists('b:did_ftplugin_too')
+  finish
+endif
 
-if s:trace_ftplug | call <SID>Trace('IN\!') | endif
+let b:did_ftplugin_too = 1
+
+call <SID>Trace('IN\!')
 
 " ========================================================================
 
 function! s:update_undo_ftplugin(snippet)
-  " (lb): I tested and it's somewhat okay if the undo snippet starts with a
-  " pipe, " e.g., "| setlocal ... | setlocal ...", except that Vim echoes a
-  " line (such as the line under the cursor) for every commandless pipe section.
-  " Similarly with an starting echo, e.g., g:undo_ftplugin="echo | setlocal ...".
-  " - Which is why this wrapper function, to decide when to add the pipe.
-  " (lb): I also tested and it seems the only time the undo code is run is
-  " if you deliberately change the filetype, e.g., closing the file or opening
-  " another file will not trigger it. But if you, say, open a shell file, and
-  " then `:set ft=conf`, you'll see the undo code run (which you can verify
-  " by adding a `| !notify-send` to the end of the undo sequence; see below).
   if b:undo_ftplugin != ""
     let b:undo_ftplugin = b:undo_ftplugin . " | "
   endif
+
   let b:undo_ftplugin = b:undo_ftplugin . a:snippet
 endfunction
 
 " ========================================================================
 
+if !exists("b:undo_ftplugin") | let b:undo_ftplugin = "" | endif
+
+call <SID>update_undo_ftplugin("unlet! b:did_ftplugin_too")
+
+" ========================================================================
+
+let s:save_cpo = &cpo
+set cpo-=C
+
+" ========================================================================
 
 " - Fix problem with starting a comment and then typing a colon: it
 "   indents the line thinking we're typing Python code, or something.
@@ -70,6 +65,7 @@ endfunction
 "   indentkeys=0{,0},!^F,o,O,e,<:>,=elif,=except,0=then,0=do,0=else,0=elif,0=fi,0=esac,0=done,),0=;;,0=;&,0=fin,0=fil,0=fip,0=fir,0=fix
 function! s:ft_sh_set_indentkeys()
   setlocal indentkeys=0{,0},!^F,o,O,e,=elif,=except,0=then,0=do,0=else,0=elif,0=fi,0=esac,0=done,),0=;;,0=;&,0=fin,0=fil,0=fip,0=fir,0=fix
+
   call <SID>update_undo_ftplugin("setlocal indentkeys<")
 endfunction
 
@@ -114,6 +110,7 @@ endfunction
 "       ,fb:-
 function! s:ft_sh_set_comments()
   setlocal comments=sb:#\ FIXME:,m:#\ \ \ \ \ \ \ ,ex:#.,sb:#\ NOTE:,m:#\ \ \ \ \ \ ,ex:#.,sb:#\ FIXME,m:#\ \ \ \ \ \ ,ex:#.,sb:#\ NOTE,m:#\ \ \ \ \ ,ex:#.,s1:/*,mb:**,ex:*/,b:#
+
   call <SID>update_undo_ftplugin("setlocal comments<")
 endfunction
 
@@ -121,6 +118,7 @@ endfunction
 
 function! s:ft_sh_set_formatoptions()
   setlocal formatoptions+=croql
+
   call <SID>update_undo_ftplugin("setlocal formatoptions<")
 endfunction
 
@@ -129,33 +127,37 @@ endfunction
 function! s:ft_sh_set_smartindent()
   " Specify nosmartindent, else Vim won't tab your octothorpes
   setlocal nosmartindent
+
   call <SID>update_undo_ftplugin("setlocal smartindent<")
 endfunction
 
 " ========================================================================
 
-function! s:ft_sh_set_locals()
-  let b:undo_ftplugin = ""
-  call <SID>ft_sh_set_indentkeys()
-  call <SID>ft_sh_set_comments()
-  call <SID>ft_sh_set_formatoptions()
-  call <SID>ft_sh_set_smartindent()
-  " (lb): If you want to see when the undo code is run, uncomment this call
-  "       (and then trigger the undo with `set ft=...`).
-  " - Note the `silent `, otherwise Vim echoes the `notify-send ...`.
-  " - Note also the escaped !, one escape on the former, so it's !{cmd};
-  "   and two escapes on the latter, so that "Cleanup!" is punctuated.
+function! s:trace_undo()
   if s:trace_ftplug
     call <SID>update_undo_ftplugin("silent \!notify-send -i face-wink 'ftplugin/sh' 'Cleanup\\!'")
   endif
 endfunction
 
 " ========================================================================
-" ------------------------------------------------------------------------
+
+function! s:load_plugin()
+  call <SID>ft_sh_set_indentkeys()
+  call <SID>ft_sh_set_comments()
+  call <SID>ft_sh_set_formatoptions()
+  call <SID>ft_sh_set_smartindent()
+
+  call <SID>trace_undo()
+endfunction
+
 " ========================================================================
 
-if !exists("g:dubs_ftype_mess_ftplugin_sh_no_locals")
-    \ || !g:dubs_ftype_mess_ftplugin_sh_no_locals
-  call <SID>ft_sh_set_locals()
+if !exists("g:vim_synsible_sh_off") || !g:vim_synsible_sh_off
+  call <SID>load_plugin()
 endif
+
+" ========================================================================
+
+let &cpo = s:save_cpo
+unlet s:save_cpo
 
