@@ -13,5 +13,4 @@ endif
 let b:did_vim_syntax_text_set_spell = 1
 
 setlocal spell
-setlocal spellcapcheck=
 
