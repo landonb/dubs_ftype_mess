@@ -36,7 +36,7 @@ function! s:Trace(msg)
   execute "silent !" .. l:cmd .. " '" .. a:msg .. " (" .. l:bfn .. ")'"
 endfunction
 
-" ========================================================================
+" ------------------------------------------------------------------------
 
 " HINT: Use this DEV switch to enable/disable the Trace mechanism.
 
@@ -46,7 +46,7 @@ let s:trace_ftplug = 1
 
 call <SID>Trace('Pre-load\!')
 
-" ========================================================================
+" ------------------------------------------------------------------------
 
 " HINT: Use a load guard.
 "
@@ -144,7 +144,7 @@ let b:did_ftplugin_too = 1
 
 call <SID>Trace('Loading\!')
 
-" ========================================================================
+" ------------------------------------------------------------------------
 
 " HINT: Use b:undo_ftplugin to run cleanup code... (but how useful is it?).
 "
@@ -192,7 +192,7 @@ function! s:update_undo_ftplugin(snippet)
   let b:undo_ftplugin = b:undo_ftplugin .. a:snippet
 endfunction
 
-" ========================================================================
+" ------------------------------------------------------------------------
 
 " CAVEAT: If load guard named b:did_ftplugin, you must define b:undo_ftplugin.
 "
@@ -220,7 +220,7 @@ if !exists("b:undo_ftplugin") | let b:undo_ftplugin = "" | endif
 
 call <SID>update_undo_ftplugin("unlet! b:did_ftplugin_too")
 
-" ========================================================================
+" ------------------------------------------------------------------------
 
 " HINT: Temporarily adjust compatible-options if using continuation lines.
 "
@@ -245,6 +245,7 @@ set cpo-=C
 " And then refer to the bottom of this file for restoring cpoptions.
 
 " ========================================================================
+" FUNCTIONALITY
 
 " HINT: Use `setlocal {option}<` to reset local values.
 "
@@ -270,7 +271,7 @@ function! s:setup_pound_comments()
   call <SID>update_undo_ftplugin("setlocal cms<")
 endfunction
 
-" ========================================================================
+" ------------------------------------------------------------------------
 
 " HINT: Use a modular approach.
 "
@@ -287,7 +288,7 @@ function! s:setup_something_var()
   call <SID>update_undo_ftplugin("unlet! b:something")
 endfunction
 
-" ========================================================================
+" ------------------------------------------------------------------------
 
 " HINT: Add an undo trace to better understand the ftplugin lifecycle.
 "
@@ -305,7 +306,7 @@ function! s:trace_undo()
   endif
 endfunction
 
-" ========================================================================
+" ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 " HINT: Use a global load guard to let users globally
 "       enable or disable your cool new filetype plugin.
@@ -320,7 +321,12 @@ function! s:load_plugin()
   call <SID>trace_undo()
 endfunction
 
-" ... and then call that main setup function conditionally:
+" ========================================================================
+" BOILERPLATE
+
+" HINT: Call the main setup function conditionally.
+"
+" - This gives the user a way to disable the plugin programmatically.
 
 if !exists("g:vim_synsible_ftplugin_lesson_off")
     \ || !g:vim_synsible_ftplugin_lesson_off
