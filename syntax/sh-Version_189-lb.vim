@@ -1,5 +1,6 @@
 " [lb] Copied from vim81/syntax/sh.vim
 " See the two `if 0`'s below, heredocs and backticks after comments # ... ` breaking syntax highs.
+" Also disable spell checking in quoted strings.
 
 " Vim syntax file
 " Language:		shell (sh) Korn shell (ksh) bash (sh)
@@ -359,9 +360,11 @@ elseif !exists("g:sh_no_error")
  syn region  shExSingleQuote	matchGroup=Error start=+\$'+ skip=+\\\\\|\\.+ end=+'+	contains=shStringSpecial
  syn region  shExDoubleQuote	matchGroup=Error start=+\$"+ skip=+\\\\\|\\.+ end=+"+	contains=shStringSpecial
 endif
-syn region  shSingleQuote	matchgroup=shQuote start=+'+ end=+'+		contains=@Spell	nextgroup=shSpecialStart,shSpecialSQ
+" 2022-01-24: [lb] disabling quoted string spell checking.
+syn region  shSingleQuote	matchgroup=shQuote start=+'+ end=+'+		contains=@NoSpell	nextgroup=shSpecialStart,shSpecialSQ
 syn region  shDoubleQuote	matchgroup=shQuote start=+\%(\%(\\\\\)*\\\)\@<!"+ skip=+\\"+ end=+"+	contains=@shDblQuoteList,shStringSpecial,@Spell	nextgroup=shSpecialStart
-syn region  shDoubleQuote	matchgroup=shQuote start=+"+ skip=+\\"+ end=+"+		contained contains=@shDblQuoteList,shStringSpecial,@Spell	nextgroup=shSpecialStart
+" 2022-01-24: [lb] disabling quoted string spell checking.
+syn region  shDoubleQuote	matchgroup=shQuote start=+"+ skip=+\\"+ end=+"+		contained contains=@shDblQuoteList,shStringSpecial,@NoSpell	nextgroup=shSpecialStart
 syn match   shStringSpecial	"[^[:print:] \t]"			contained
 syn match   shStringSpecial	"[^\\]\zs\%(\\\\\)*\\[\\"'`$()#]"			nextgroup=shComment
 syn match   shStringSpecial	"[^\\]\zs\%(\\\\\)*\\[\\"'`$()#]"
