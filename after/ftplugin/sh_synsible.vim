@@ -4,7 +4,7 @@
 " License: https://creativecommons.org/publicdomain/zero/1.0/
 " Revision: 2021-08-18
 
-" Ref: For details on boilerplace constructs used herein, consult:
+" Ref: For details on boilerplate constructs used herein, consult:
 "
 "      https://github.com/landonb/vim-synsible-ftplugin-lesson#𝘼➕
 
