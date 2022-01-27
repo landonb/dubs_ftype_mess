@@ -26,6 +26,10 @@ if has("vimscript-4") | scriptversion 4 | endif
 "   will generate output.
 "
 " So instead, send yourself notifications!
+"
+" - You can call the Trace function, or copy this one-off:
+"
+"     silent !notify-send -i face-wink 'You there' 'Yes, you\!'
 
 function! s:Trace(msg)
   if !s:trace_ftplug | return | endif
