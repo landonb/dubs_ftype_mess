@@ -37,7 +37,7 @@ let g:ftplugin_python_dubsvim = 1
 
 " :h line-continuation
 
-function! s:Python_Abbrev_PDB_Left_Hand_Middle_Pointy_Middle_Pointy_SO_COMPLICATED()
+function! s:Python_Abbrev_PDB_Right_Hand_Middles_and_Pointies_SO_COMPLICATED()
   " [lb] loves me some breakpoint action.
   " And this is a silly/great macro to insert in-code bps quickly.
   " Simply type the magic sequence and then hit space or return, et voilà!
@@ -95,11 +95,15 @@ endfunction
 " I think it works better, too, something with l:rhs_clean was not working
 " and I kept getting left with an extra character after the alias...? prob
 " user error, but, anyway, at least for now, this!
-function! s:Python_Abbrev_PDB_Left_Hand_Middle_Pointy_Middle_Pointy()
-  autocmd BufEnter,BufRead *.py iabbrev <buffer> ';'; import os, pdb; os.system("stty sane"); pdb.set_trace()<C-o>54<Left><C-R>
+function! s:Python_Abbrev_PDB_Set_Trace_Right_Hand_Middle_Pointy_Middle_Pointy()
+  autocmd BufEnter,BufRead *.py iabbrev <buffer> ';'; import pdb; pdb.set_trace()<C-o>26<Left><C-R>
 endfunction
 
-function! s:Python_Abbrev_RPDB2_Left_Hand_Middle_Pointy_Pointy_Middle()
+function! s:Python_Abbrev_PDB_Stty_Prep_Right_Hand_Middle_Pointy_Pointy_Middle()
+  autocmd BufEnter,BufRead *.py iabbrev <buffer> ';;' import os, pdb; os.system("stty sane"); pdb.set_trace()<C-o>54<Left><C-R>
+endfunction
+
+function! s:Python_Abbrev_RPDB2_Right_Hand_Middle_Pointy_Pointy_Middle()
   autocmd BufEnter,BufRead *.py iabbrev <buffer> ;ll; import rpdb2; rpdb2.start_embedded_debugger('password', fAllowRemote=True)<Home><Up><End><CR><C-O>0<C-O>D#<Down><End><CR><C-R>=Eatchar('\s')<CR>
   iabbrev <buffer> ;ll; import rpdb2; rpdb2.start_embedded_debugger('password', fAllowRemote=True)<Home><Up><End><CR><C-O>0<C-O>D#<Down><End><CR><C-R>=Eatchar('\s')<CR>
 endfunction
@@ -161,8 +165,10 @@ endfunction
 " ------------------------------------------------------
 
 function! s:Python_Main()
-  call <SID>Python_Abbrev_PDB_Left_Hand_Middle_Pointy_Middle_Pointy()
-  call <SID>Python_Abbrev_RPDB2_Left_Hand_Middle_Pointy_Pointy_Middle()
+  " call <SID>Python_Abbrev_PDB_Right_Hand_Middles_and_Pointies_SO_COMPLICATED()
+  call <SID>Python_Abbrev_PDB_Set_Trace_Right_Hand_Middle_Pointy_Middle_Pointy()
+  call <SID>Python_Abbrev_PDB_Stty_Prep_Right_Hand_Middle_Pointy_Pointy_Middle()
+  call <SID>Python_Abbrev_RPDB2_Right_Hand_Middle_Pointy_Pointy_Middle()
   call <SID>Python_Configure_iskeyword()
   call <SID>Python_Comments_FIXME_NOTE_highlighting()
   call <SID>Python_Prevent_smartindent_Undent_Cstyle_Macro()
