@@ -51,7 +51,7 @@ function! s:Python_Abbrev_PDB_Right_Hand_Middles_and_Pointies_SO_COMPLICATED()
   let l:rhs_clean = "<Home><Up><End><CR><C-O>0<C-O>D#<Down><End><CR><C-R>=Eatchar('\\\s')<CR>"
 
   let l:lhs_pdbbp = "';';"
-  let l:rhs_pdbbp = 'import sys, pdb; pdb.set_trace()'
+  let l:rhs_pdbbp = 'import pdb; pdb.set_trace()'
   " Just for ref, without the intermediate variables, it'd be:
   "   autocmd BufEnter,BufRead *.py
   "     \ iabbrev <buffer> ';';
