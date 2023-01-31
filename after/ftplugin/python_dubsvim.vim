@@ -134,9 +134,17 @@ endfunction
 " ***
 
 function! s:Python_Abbrev_PDB_Stty_Prep_Right_Hand_Middle_Pointy_Pointy_Middle()
-  autocmd BufEnter,BufRead *.py iabbrev <buffer> ';;' import os, pdb; os.system("stty sane"); pdb.set_trace()<C-o>54<Left><C-R>
+  " Leave cursor on same line, at start of 'import os...':
+  "
+  "   autocmd BufEnter,BufRead *.py iabbrev <buffer> ';;' import os, pdb; os.system("stty sane"); pdb.set_trace()<C-o>54<Left><C-R>
+  "
+  " Or what I've liked better recently, throw a pass line after
+  " and don't worry about repositioning the cursor (also I added
+  " hands-off-`black` pragma):
+  autocmd BufEnter,BufRead *.py iabbrev <buffer> ';;' import os, pdb; os.system("stty sane"); pdb.set_trace()  # fmt: skip<CR>pass<C-R>
 endfunction
 
+" FIXME/2023-01-31 15:36: Or don't care (don't use this), but ;ll; not working for me. Anywhere.
 function! s:Python_Abbrev_RPDB2_Right_Hand_Middle_Pointy_Pointy_Middle()
   autocmd BufEnter,BufRead *.py iabbrev <buffer> ;ll; import rpdb2; rpdb2.start_embedded_debugger('password', fAllowRemote=True)<Home><Up><End><CR><C-O>0<C-O>D#<Down><End><CR><C-R>=Eatchar('\s')<CR>
   iabbrev <buffer> ;ll; import rpdb2; rpdb2.start_embedded_debugger('password', fAllowRemote=True)<Home><Up><End><CR><C-O>0<C-O>D#<Down><End><CR><C-R>=Eatchar('\s')<CR>
