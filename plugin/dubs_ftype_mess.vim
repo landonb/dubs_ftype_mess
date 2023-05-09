@@ -602,3 +602,9 @@ autocmd FileType gitcommit set spell
 
 autocmd BufRead,BufNewFile .envrc setfiletype sh
 
+" ------------------------------------------------------
+" Insert comment leader on <Enter>
+" ------------------------------------------------------
+autocmd FileType cfg setlocal formatoptions+=r
+autocmd FileType toml setlocal formatoptions+=r
+
