@@ -1,15 +1,16 @@
 " [lb] Copied from vim90/syntax/sh.vim
 
 " 2023-05-15: For v189, I disabled two features (on 2016-10-26, 2022-01-24):
-" - I disabled quoted string ('' and "") spell checking (@NoSpell).
 " - I disabled heredoc highlighting.
-" But v203 fixes heredoc highlighting, and I'm not sure I still
-" want to disable quoted string spell checking (I'll find out
-" eventually; many times quoted strings contain code references,
-" so I'll likely want to disable these again, but leaving enabled
-" for now until I find out for sure).
-" - As such, this file is currently no different than v203 except
-"   for one [lb] comment below above shSingleQuote/shDoubleQuote.
+"   - v203 fixes heredoc highlighting, so it's now enabled again.
+" - I disabled quoted string ('' and "") spell checking (@NoSpell).
+"   - I'm not sure that I still want to disable quoted string spell
+"     checking, so leaving them both re-enabled for now. But many
+"     times quoted strings contain code references (which will be
+"     under-squiggled in red to indicate misspelled), so I'll likely
+"     want to disable these again (but leaving enabled until I verify).
+" - As such, this file mostly no different than v203 except for one
+"   [lb] comment below above shSingleQuote/shDoubleQuote.
 "
 " See below: Comment re: Disable spell checking in quoted strings.
 "
@@ -462,6 +463,9 @@ ShFoldHereDoc syn region shHereDoc matchgroup=shHereDoc16 start="<<-\s*\\\_$\_s*
 " Here Strings: {{{1
 " =============
 " available for: bash; ksh (really should be ksh93 only) but not if its a posix
+" - SAVVY/2023-05-28: (lb): If syntax highlighting fails on a Here String, e.g.,
+"     some/command <<<"${some_var}"
+"   You likely have ft=sh, not ft=bash.
 if exists("b:is_bash") || (exists("b:is_kornshell") && !exists("b:is_posix"))
  syn match shHereString "<<<"	skipwhite	nextgroup=shCmdParenRegion
 endif
