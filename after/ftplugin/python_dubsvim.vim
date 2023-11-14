@@ -216,7 +216,7 @@ function! s:Python_Main()
   call <SID>Python_Comments_FIXME_NOTE_highlighting()
   call <SID>Python_Prevent_smartindent_Undent_Cstyle_Macro()
   call <SID>Python_Configure_nosmartindent()
-  call <SID>Python_Configure_spell()
+  " call <SID>Python_Configure_spell()
 endfunction
 
 call <SID>Python_Main()
