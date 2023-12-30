@@ -141,6 +141,11 @@ function! s:Python_Abbrev_PDB_Stty_Prep_Right_Hand_Middle_Pointy_Pointy_Middle()
   " Or what I've liked better recently, throw a pass line after
   " and don't worry about repositioning the cursor (also I added
   " hands-off-`black` pragma):
+  " 2023-12-20: Note `black` ignores `# fmt: skip` unless it's the sole comment.
+  " - So cannot add `noqa: E702` to tell flake8 to not gripe, e.g.,
+  "     E702 multiple statements on one line (semicolon)
+  " - Issue is sorta fixed, but requires `black --preview`, which you don't want to use.
+  "   https://github.com/psf/black/pull/3959
   autocmd BufEnter,BufRead *.py iabbrev <buffer> ';;' import os, pdb; os.system("stty sane"); pdb.set_trace()  # fmt: skip<CR>pass<C-R>
 endfunction
 
