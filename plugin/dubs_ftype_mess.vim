@@ -609,3 +609,9 @@ autocmd BufRead,BufNewFile .envrc setfiletype sh
 autocmd FileType cfg setlocal formatoptions+=r
 autocmd FileType toml setlocal formatoptions+=r
 
+" ------------------------------------------------------
+" Enable automatic ctontab comment continuation
+" ------------------------------------------------------
+
+autocmd FileType crontab setlocal formatoptions+=r
+
