@@ -592,16 +592,14 @@ endif
 " Git ignore can ignore spelling mistakes!
 " ------------------------------------------------------
 
-" 2018-05-02: Do I really want to disable spell checking,
-" or just enable for comments only?
-"autocmd BufRead .gitignore setlocal nospell
-"autocmd BufRead .gitignore.local setlocal nospell
-
 " Not needed:
-"   autocmd BufRead .gitignore setlocal nospell
-autocmd BufRead .gitignore.local setfiletype conf
-" 2019-01-12: Since when? A random .gitignore (nark's, no less!) not being filetype'd!
-autocmd BufRead .gitignore setfiletype conf
+"   autocmd BufEnter,BufRead .gitignore setlocal nospell
+"   autocmd BufEnter,BufRead .gitignore.local setlocal nospell
+
+" Rather than ft=gitignore, use conf, diff. being 'conf' highlights
+" paths as plain white, whereas 'gitignore' colorizes path separators.
+" - 2024-06-05: Demoing just now, author prefers solid-color paths.
+autocmd BufEnter,BufRead .gitignore,.gitignore.local setfiletype conf
 
 " ------------------------------------------------------
 " Fugitive Blame Buffers, too!
