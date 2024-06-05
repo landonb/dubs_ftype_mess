@@ -21,6 +21,27 @@
 "       here is probably easier to maintain.
 " ====================================================================
 
+" SAVVY: A common 'formatoptions' you'll see below is 
+"
+"           formatoptions+=croql
+"
+"        Which enables inserting comment leader on Enter, and more.
+"
+" REFER: :help fo-table
+"
+"   c Auto-wrap comments using &tw; inserts comment leader automatically.
+"
+"   r Inserts comment leader after hitting <Enter> in Insert mode.
+"
+"   o Inserts comment leader after hitting 'o' or 'O' in Normal mode.
+"     In case unwanted use CTRL-U to quickly delete it.
+"
+"   q Allow formatting of comments with "gq".
+"
+"   l Long lines are not broken in insert mode: When a line was longer than
+"     'textwidth' when the insert command started, Vim does not
+"     automatically format it.
+"
 " ========================================================================
 " ------------------------------------------------------------------------
 " ========================================================================
