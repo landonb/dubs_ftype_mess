@@ -596,10 +596,11 @@ endif
 "   autocmd BufEnter,BufRead .gitignore setlocal nospell
 "   autocmd BufEnter,BufRead .gitignore.local setlocal nospell
 
-" Rather than ft=gitignore, use conf, diff. being 'conf' highlights
+" Rather than ft=gitignore, could use ft=conf — 'conf' highlights
 " paths as plain white, whereas 'gitignore' colorizes path separators.
-" - 2024-06-05: Demoing just now, author prefers solid-color paths.
-autocmd BufEnter,BufRead .gitignore,.gitignore.local setfiletype conf
+"
+"  autocmd BufEnter,BufRead .gitignore,.gitignore.local setfiletype conf
+autocmd BufEnter,BufRead .gitignore,.gitignore.local setfiletype gitignore
 
 " SAVVY/2024-06-05: ft=gitignore defaults formatoptions=tcq
 " and before no 'r' option, pressing <Enter> on commented
