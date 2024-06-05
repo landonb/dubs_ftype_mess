@@ -601,6 +601,20 @@ endif
 " - 2024-06-05: Demoing just now, author prefers solid-color paths.
 autocmd BufEnter,BufRead .gitignore,.gitignore.local setfiletype conf
 
+" SAVVY/2024-06-05: ft=gitignore defaults formatoptions=tcq
+" and before no 'r' option, pressing <Enter> on commented
+" line doesn't start new line with comment leader like you
+" probably enjoy.
+"
+" - Mostly just FYI, if you were to use ft=gitignore. But unnecessary
+"   (redundant) when ft=conf, as 'fo=croql' is already configured.
+"
+" - REFER: :help fo-table
+"
+"     t Auto-wrap text using 'textwidth'
+"       - Tho tw=0, so disabled.
+autocmd BufEnter,BufRead .gitignore,.gitignore.local setlocal formatoptions+=croql
+
 " ------------------------------------------------------
 " Fugitive Blame Buffers, too!
 " ------------------------------------------------------
