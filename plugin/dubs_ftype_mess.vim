@@ -75,7 +75,7 @@ filetype plugin on
 " Search-under-cursor tweak.
 " ------------------------------------------------------
 
-" LATER/2020-02-27: This code came after the `autocmd BufRead *.sh`
+" LATER/2020-02-27: This code came after the `autocmd BufEnter,BufRead *.sh`
 " code that was moved to ftplugin/sh_dubsvim.vim, so I think it was
 " related to an issue with Bash/shell filetypes. However the code was
 " not part of the autocmd, so applied globally.
@@ -113,7 +113,7 @@ endif
 "     comments=sO:" -,mO:"  ,eO:"",:"
 "   You have to escape this string to set it, i.e.,
 "     set comments=sO:\"\ -,mO:\"\ \ ,eO:\"\",:\"
-autocmd BufRead *.vim setlocal
+autocmd BufEnter,BufRead *.vim setlocal
   \ comments=sb:\"\ FIXME:,m:\"\ \ \ \ \ \ \ ,ex:\".,sb:\"\ NOTE:,m:\"\ \ \ \ \ \ ,ex:\".,sb:\"\ FIXME,m:\"\ \ \ \ \ \ ,ex:\".,sb:\"\ NOTE,m:\"\ \ \ \ \ ,ex:\".,sO:\"\ -,mO:\"\ \ ,eO:\"\",:\"
   \ formatoptions+=croql
 
@@ -136,13 +136,13 @@ autocmd FileType dosini setlocal
 " SQL Highlighting
 " ------------------------------------------------------
 
-"autocmd BufRead *.sql setlocal
+"autocmd BufEnter,BufRead *.sql setlocal
 "  \ comments=sb:--\ FIXME:,m:--\ \ \ \ \ \ \ \ ,ex:--.,sb:--\ NOTE:,m:--\ \ \ \ \ \ \ ,ex:--.,sb:--\ FIXME,m:--\ \ \ \ \ \ \ ,ex:--.,sb:--\ NOTE,m:--\ \ \ \ \ \ ,ex:--.,s:/*\ FIXME:,m:*\ \ \ \ \ ,ex:*/,s:/*\ NOTE:,m:*\ \ \ \ ,ex:*/,:--,s:/*\ FIXME,m:*\ \ \ \ ,ex:*/,s:/*\ NOTE,m:*\ \ \ ,ex:*/,:--,s1:/*,mb:*,ex:*/
 "  \ formatoptions+=croql
 "  \ smartindent
 " This one prefixes * to secondary lines in a /* */ comment:
 " 2015.01.14: This line is redunant, isn't it? Commenting-out:
-"autocmd BufRead *.sql setlocal
+"autocmd BufEnter,BufRead *.sql setlocal
 "  \ comments=sb:--\ FIXME:,m:--\ \ \ \ \ \ \ \ ,ex:--.,sb:--\ NOTE:,m:--\ \ \ \ \ \ \ ,ex:--.,sb:--\ FIXME,m:--\ \ \ \ \ \ \ ,ex:--.,sb:--"\ NOTE,m:--\ \ \ \ \ \ ,ex:--.,s:/*\ FIXME:,m:*\ \ \ \ \ ,ex:*/,s:/*\ NOTE:,m:*\ \ \ \ ,ex:*/,s:/*\ FIXME,m:*\ \ \ \ ,ex:*/,s:/*\ NOTE,m:*"\ \ \ ,ex:*/,s1:/*,mb:*,ex:*/
 "  \ formatoptions+=croql
 "  \ smartindent
@@ -154,7 +154,7 @@ autocmd FileType dosini setlocal
 " worked right, and middle lines are ugly with asterisks) and also with
 " indentkeys (pressing colon ':' would indent line, which was making writing
 " FIXME:s annoying).
-autocmd BufRead *.sql setlocal
+autocmd BufEnter,BufRead *.sql setlocal
   \ comments=sb:--\ FIXME:,m:--\ \ \ \ \ \ \ \ ,ex:--.,sb:--\ NOTE:,m:--\ \ \ \ \ \ \ ,ex:--.,sb:--\ FIXME,m:--\ \ \ \ \ \ \ ,ex:--.,sb:--\ NOTE,m:--\ \ \ \ \ \ ,ex:--.,sb:/*\ FIXME:,m:\ \ \ \ \ \ ,e:*/,sb:/*\ NOTE:,m:\ \ \ \ \ ,e:*/,sb:/*\ FIXME,m:\ \ \ \ \ ,e:*/,sb:/*\ NOTE,m:\ \ \ \ ,e:*/,s:/*,m:\ ,e:*/,s:--,m:--\ ,e:--
   \ formatoptions+=croql
   \ smartindent
@@ -204,7 +204,7 @@ autocmd BufRead *.sql setlocal
 " NOTE I tried to get //. to work w/ just :// but it's not having it. That is,
 "          sb://,mb://,ex://.
 
-autocmd BufRead *.as setlocal
+autocmd BufEnter,BufRead *.as setlocal
   \ filetype=actionscript
   \ comments=sb://\ FIXME:,m://\ \ \ \ \ \ \ \ ,ex://.,sb://\ NOTE:,m://\ \ \ \ \ \ \ ,ex://.,sb://\ FIXME,m://\ \ \ \ \ \ \ ,ex://.,sb://\ NOTE,m://\ \ \ \ \ \ ,ex://.,s:/*\ FIXME:,m:*\ \ \ \ \ \ \ \ \ ,ex:*/,s:/*\ NOTE:,m:*\ \ \ \ \ \ \ \ ,ex:*/,://,s:/*\ FIXME,m:*\ \ \ \ \ \ \ \ ,ex:*/,s:/*\ NOTE,m:*\ \ \ \ \ \ \ ,ex:*/,://,s1:/*,mb:**,ex:*/
   \ formatoptions+=croql
@@ -213,7 +213,7 @@ autocmd BufRead *.as setlocal
   \ indentkeys=0{,0},!^F,o,O,e,<:>,=elif,=except
 " This is messing me up: XML indenting causes both lines to re-indent
 "    indentexpr=XmlIndentGet(v:lnum,1)
-autocmd BufRead *.mxml setlocal
+autocmd BufEnter,BufRead *.mxml setlocal
   \ filetype=mxml
   \ comments=sb://\ FIXME:,m://\ \ \ \ \ \ \ \ ,ex://.,sb://\ NOTE:,m://\ \ \ \ \ \ \ ,ex://.,sb://\ FIXME,m://\ \ \ \ \ \ \ ,ex://.,sb://\ NOTE,m://\ \ \ \ \ \ ,ex://.,s:/*\ FIXME:,m:*\ \ \ \ \ \ \ \ \ ,ex:*/,s:/*\ NOTE:,m:*\ \ \ \ \ \ \ \ ,ex:*/,://,s:/*\ FIXME,m:*\ \ \ \ \ \ \ \ ,ex:*/,s:/*\ NOTE,m:*\ \ \ \ \ \ \ ,ex:*/,sb:<!--\ FIXME:,m:\ \ \ \ \ \ \ \ \ \ \ \ ,ex:-->,sb:<!--\ NOTE:,m:\ \ \ \ \ \ \ \ \ \ \ ,ex:-->,sb:<!--\ FIXME,m:\ \ \ \ \ \ \ \ \ \ \ ,ex:-->,sb:<!--\ NOTE,m:\ \ \ \ \ \ \ \ \ \ ,ex:-->,://,s1:/*,mb:**,ex:*/,sb:<!--,m:\ \ \ \ \ ,ex:-->
   \ formatoptions+=croql
@@ -354,25 +354,25 @@ autocmd BufEnter,BufRead *.css iabbrev <buffer> // /*<CR><CR>*/<Up><Tab>
 " ------------------------------------------------------
 " Because who doesn't love Jimmy Wales?
 " Even his name is Super Sexy!
-"autocmd BufRead *.wp setlocal filetype=wp
-autocmd BufRead,BufNewFile *.wiki setfiletype wikipedia
-autocmd BufRead,BufNewFile *.wikipedia.org* setfiletype wikipedia
-autocmd BufRead,BufNewFile *.wp setfiletype wikipedia
+"autocmd BufEnter,BufRead *.wp setlocal filetype=wp
+autocmd BufEnter,BufRead,BufNewFile *.wiki setfiletype wikipedia
+autocmd BufEnter,BufRead,BufNewFile *.wikipedia.org* setfiletype wikipedia
+autocmd BufEnter,BufRead,BufNewFile *.wp setfiletype wikipedia
 
 " ------------------------------------------------------
 " Silver Searcher .agignore
 " ------------------------------------------------------
-autocmd BufRead,BufNewFile .agignore setfiletype conf
+autocmd BufEnter,BufRead,BufNewFile .agignore setfiletype conf
 " All the tools coalesced around .ignore.
-autocmd BufRead,BufNewFile .ignore setfiletype conf
+autocmd BufEnter,BufRead,BufNewFile .ignore setfiletype conf
 
 " ------------------------------------------------------
 " I have a little Gradle, I made it out of clay.
 " ------------------------------------------------------
 " Eh, good enough. Or maybe not. python looks okay except for comments.
-"autocmd BufRead,BufNewFile *.gradle setfiletype python
+"autocmd BufEnter,BufRead,BufNewFile *.gradle setfiletype python
 " So `//` comments work:
-autocmd BufRead,BufNewFile *.gradle setfiletype java
+autocmd BufEnter,BufRead,BufNewFile *.gradle setfiletype java
 
 " ------------------------------------------------------
 " Markdown Syntax
@@ -380,17 +380,17 @@ autocmd BufRead,BufNewFile *.gradle setfiletype java
 " http://daringfireball.net/projects/markdown/
 
 augroup markdown
-  au! BufRead,BufNewFile *.mkd setfiletype mkd
-  autocmd BufRead *.mkd setlocal ai formatoptions=tcroqn2 comments=n:>
+  au! BufEnter,BufRead,BufNewFile *.mkd setfiletype mkd
+  autocmd BufEnter,BufRead *.mkd setlocal ai formatoptions=tcroqn2 comments=n:>
   " Also map *.txt files, since you
   " love Markdown so much
   " au! BufRead,BufNewFile *.txt
   "   \ setlocal nowrap sw=2 sts=2 ts=8
   "au BufRead,BufNewFile *.txt setfiletype mkd
-  "autocmd BufRead *.txt setlocal ai formatoptions=tcroqn2 comments=n:>
+  "autocmd BufEnter,BufRead *.txt setlocal ai formatoptions=tcroqn2 comments=n:>
 augroup END
 "augroup mkd
-"  autocmd BufRead *.mkd setlocal ai formatoptions=tcroqn2 comments=n:>
+"  autocmd BufEnter,BufRead *.mkd setlocal ai formatoptions=tcroqn2 comments=n:>
 "augroup END
 
 " I keep waffling on this, but I can get used to
@@ -430,13 +430,13 @@ augroup END
 " Mardown Markup
 " ------------------------------------------------------
 " 2015.06.09: Strange. You'd think this would be set already.
-"autocmd BufRead,BufNewFile .md setfiletype markdown
+"autocmd BufEnter,BufRead,BufNewFile .md setfiletype markdown
 " 2018-02-08: You'd think I'd've noticed the missing glob!
 "   (Which goes to show: I almost never touch Markdown!
 "   Long Live reST!)
-autocmd BufRead,BufNewFile *.md setfiletype markdown
+autocmd BufEnter,BufRead,BufNewFile *.md setfiletype markdown
 " 2018-02-08: Markdown Makefile!
-autocmd BufRead,BufNewFile *.ronn setfiletype markdown
+autocmd BufEnter,BufRead,BufNewFile *.ronn setfiletype markdown
 
 " ------------------------------------------------------
 " Textile Markup
@@ -447,25 +447,25 @@ autocmd BufRead,BufNewFile *.ronn setfiletype markdown
 " being applied. So here it is, just in case you ever read another textile
 " document (per projects I have cloned on my machine, I see that Glyr uses
 " it; and there's one such doc in the Cassandra source; but nothing else).
-autocmd BufRead,BufNewFile *.textile setfiletype textile
+autocmd BufEnter,BufRead,BufNewFile *.textile setfiletype textile
 
 " ------------------------------------------------------
 " What's a .map file?
 " ------------------------------------------------------
 
-autocmd BufRead *.map setlocal
+autocmd BufEnter,BufRead *.map setlocal
   \ filetype=python
   \ formatoptions+=croql
 
 " ------------------------------------------------------
 " Dockerfile 'tis of thee
 " ------------------------------------------------------
-autocmd BufRead,BufNewFile Dockerfile setfiletype conf
+autocmd BufEnter,BufRead,BufNewFile Dockerfile setfiletype conf
 
 " ------------------------------------------------------
 " Go can spell
 " ------------------------------------------------------
-autocmd BufRead,BufNewFile *.go setfiletype go
+autocmd BufEnter,BufRead,BufNewFile *.go setfiletype go
 " Argh, I have it when it does that, all the quoted
 " map keys get red squiggly underlined. Nuts to that.
 " 2016-10-11: I add contains=@NoSpell to goString in syntax/go.vim.
@@ -482,7 +482,7 @@ autocmd BufEnter,BufRead *.yaml setlocal nospell
 " ------------------------------------------------------
 " Go can comments
 " ------------------------------------------------------
-autocmd BufRead *.go setlocal
+autocmd BufEnter,BufRead *.go setlocal
   \ filetype=go
   \ comments=sb://\ FIXME:,m://\ \ \ \ \ \ \ \ ,ex://.,sb://\ NOTE:,m://\ \ \ \ \ \ \ ,ex://.,sb://\ FIXME,m://\ \ \ \ \ \ \ ,ex://.,sb://\ NOTE,m://\ \ \ \ \ \ ,ex://.,s:/*\ FIXME:,m:*\ \ \ \ \ \ \ \ \ ,ex:*/,s:/*\ NOTE:,m:*\ \ \ \ \ \ \ \ ,ex:*/,://,s:/*\ FIXME,m:*\ \ \ \ \ \ \ \ ,ex:*/,s:/*\ NOTE,m:*\ \ \ \ \ \ \ ,ex:*/,://,s1:/*,mb:**,ex:*/
   \ formatoptions+=croql
@@ -493,7 +493,7 @@ autocmd BufRead *.go setlocal
 " ------------------------------------------------------
 " Ino has an itis
 " ------------------------------------------------------
-autocmd BufRead,BufNewFile *.ino setfiletype cpp
+autocmd BufEnter,BufRead,BufNewFile *.ino setfiletype cpp
 autocmd BufEnter,BufRead *.h setlocal spell
 autocmd BufEnter,BufRead *.cpp setlocal spell
 
@@ -501,9 +501,9 @@ autocmd BufEnter,BufRead *.cpp setlocal spell
 " To HJSON is Human.
 " ------------------------------------------------------
 " 2016-11-17: So, like, what the heck? Now setfiletype isn't sticking?
-"autocmd BufRead,BufNewFile *.json setfiletype hjson
-"autocmd BufRead,BufNewFile *.json setfiletype=hjson
-autocmd BufRead,BufNewFile *.json setlocal ft=hjson
+"autocmd BufEnter,BufRead,BufNewFile *.json setfiletype hjson
+"autocmd BufEnter,BufRead,BufNewFile *.json setfiletype=hjson
+autocmd BufEnter,BufRead,BufNewFile *.json setlocal ft=hjson
 
 autocmd BufEnter,BufRead *.hjson setlocal spell
 
@@ -516,12 +516,12 @@ autocmd BufEnter,BufRead *.hjson setlocal spell
 " Sh Defaults:
 "  indentexpr=GetShIndent()
 "  indentkeys=0{,0},!^F,o,O,e,<:>,=elif,=except,0=then,0=do,0=else,0=elif,0=fi,0=esac,0=done,),0=;;,0=;&,0=fin,0=fil,0=fip,0=fir,0=fix
-autocmd BufRead *.sh setlocal indentkeys-=<:>
+autocmd BufEnter,BufRead *.sh setlocal indentkeys-=<:>
 "
 " Yaml Defaults:
 "  indentexpr=GetYAMLIndent(v:lnum)
 "  indentkeys=!^F,o,O,0#,0},0],<:>,-
-autocmd BufRead *.yaml setlocal indentkeys-=<:>
+autocmd BufEnter,BufRead *.yaml setlocal indentkeys-=<:>
 
 " ------------------------------------------------------
 " Ruby on my mind.
@@ -540,9 +540,9 @@ autocmd BufEnter,BufRead *.rb setlocal spell
 "  https://github.com/fatih/vim-go
 " I don't think I need all the other fancy stuff that
 " project offers.
-autocmd BufRead,BufNewFile *.gotmpl setfiletype gotexttmpl
-autocmd BufRead,BufNewFile *.gotpl setfiletype gotexttmpl
-autocmd BufRead,BufNewFile *.tmpl setfiletype gotexttmpl
+autocmd BufEnter,BufRead,BufNewFile *.gotmpl setfiletype gotexttmpl
+autocmd BufEnter,BufRead,BufNewFile *.gotpl setfiletype gotexttmpl
+autocmd BufEnter,BufRead,BufNewFile *.tmpl setfiletype gotexttmpl
 
 " ------------------------------------------------------
 " Shell Polish
@@ -600,7 +600,7 @@ autocmd FileType gitcommit setlocal spell
 " dirshenvy
 " ------------------------------------------------------
 
-autocmd BufRead,BufNewFile .envrc setfiletype sh
+autocmd BufEnter,BufRead,BufNewFile .envrc setfiletype sh
 
 " ------------------------------------------------------
 " Insert comment leader on <Enter>
