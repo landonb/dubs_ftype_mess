@@ -381,11 +381,11 @@ autocmd BufEnter,BufRead,BufNewFile *.wikipedia.org* setfiletype wikipedia
 autocmd BufEnter,BufRead,BufNewFile *.wp setfiletype wikipedia
 
 " ------------------------------------------------------
-" Silver Searcher .agignore
+" rg/ag/grep ignore rules, same as Git exclude (below)
 " ------------------------------------------------------
-autocmd BufEnter,BufRead,BufNewFile .agignore setfiletype conf
-" All the tools coalesced around .ignore.
-autocmd BufEnter,BufRead,BufNewFile .ignore setfiletype conf
+
+autocmd BufEnter,BufRead,BufNewFile .ignore,_ignore,.agignore setfiletype gitignore
+autocmd BufEnter,BufRead,BufNewFile .ignore,_ignore,.agignore setlocal formatoptions+=croql
 
 " ------------------------------------------------------
 " I have a little Gradle, I made it out of clay.
@@ -589,7 +589,7 @@ endif
 "let g:GPGDebugLevel = 3
 
 " ------------------------------------------------------
-" Git ignore can ignore spelling mistakes!
+" Git exclude rules
 " ------------------------------------------------------
 
 " Not needed:
