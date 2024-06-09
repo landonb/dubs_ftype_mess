@@ -134,7 +134,7 @@ endif
 "     comments=sO:" -,mO:"  ,eO:"",:"
 "   You have to escape this string to set it, i.e.,
 "     set comments=sO:\"\ -,mO:\"\ \ ,eO:\"\",:\"
-autocmd BufEnter,BufRead *.vim setlocal
+autocmd BufEnter,BufRead,BufNewFile *.vim setlocal
   \ comments=sb:\"\ FIXME:,m:\"\ \ \ \ \ \ \ ,ex:\".,sb:\"\ NOTE:,m:\"\ \ \ \ \ \ ,ex:\".,sb:\"\ FIXME,m:\"\ \ \ \ \ \ ,ex:\".,sb:\"\ NOTE,m:\"\ \ \ \ \ ,ex:\".,sO:\"\ -,mO:\"\ \ ,eO:\"\",:\"
   \ formatoptions+=croql
 
@@ -175,7 +175,7 @@ autocmd FileType dosini setlocal
 " worked right, and middle lines are ugly with asterisks) and also with
 " indentkeys (pressing colon ':' would indent line, which was making writing
 " FIXME:s annoying).
-autocmd BufEnter,BufRead *.sql setlocal
+autocmd BufEnter,BufRead,BufNewFile *.sql setlocal
   \ comments=sb:--\ FIXME:,m:--\ \ \ \ \ \ \ \ ,ex:--.,sb:--\ NOTE:,m:--\ \ \ \ \ \ \ ,ex:--.,sb:--\ FIXME,m:--\ \ \ \ \ \ \ ,ex:--.,sb:--\ NOTE,m:--\ \ \ \ \ \ ,ex:--.,sb:/*\ FIXME:,m:\ \ \ \ \ \ ,e:*/,sb:/*\ NOTE:,m:\ \ \ \ \ ,e:*/,sb:/*\ FIXME,m:\ \ \ \ \ ,e:*/,sb:/*\ NOTE,m:\ \ \ \ ,e:*/,s:/*,m:\ ,e:*/,s:--,m:--\ ,e:--
   \ formatoptions+=croql
   \ smartindent
@@ -225,7 +225,7 @@ autocmd BufEnter,BufRead *.sql setlocal
 " NOTE I tried to get //. to work w/ just :// but it's not having it. That is,
 "          sb://,mb://,ex://.
 
-autocmd BufEnter,BufRead *.as setlocal
+autocmd BufEnter,BufRead,BufNewFile *.as setlocal
   \ filetype=actionscript
   \ comments=sb://\ FIXME:,m://\ \ \ \ \ \ \ \ ,ex://.,sb://\ NOTE:,m://\ \ \ \ \ \ \ ,ex://.,sb://\ FIXME,m://\ \ \ \ \ \ \ ,ex://.,sb://\ NOTE,m://\ \ \ \ \ \ ,ex://.,s:/*\ FIXME:,m:*\ \ \ \ \ \ \ \ \ ,ex:*/,s:/*\ NOTE:,m:*\ \ \ \ \ \ \ \ ,ex:*/,://,s:/*\ FIXME,m:*\ \ \ \ \ \ \ \ ,ex:*/,s:/*\ NOTE,m:*\ \ \ \ \ \ \ ,ex:*/,://,s1:/*,mb:**,ex:*/
   \ formatoptions+=croql
@@ -234,7 +234,7 @@ autocmd BufEnter,BufRead *.as setlocal
   \ indentkeys=0{,0},!^F,o,O,e,<:>,=elif,=except
 " This is messing me up: XML indenting causes both lines to re-indent
 "    indentexpr=XmlIndentGet(v:lnum,1)
-autocmd BufEnter,BufRead *.mxml setlocal
+autocmd BufEnter,BufRead,BufNewFile *.mxml setlocal
   \ filetype=mxml
   \ comments=sb://\ FIXME:,m://\ \ \ \ \ \ \ \ ,ex://.,sb://\ NOTE:,m://\ \ \ \ \ \ \ ,ex://.,sb://\ FIXME,m://\ \ \ \ \ \ \ ,ex://.,sb://\ NOTE,m://\ \ \ \ \ \ ,ex://.,s:/*\ FIXME:,m:*\ \ \ \ \ \ \ \ \ ,ex:*/,s:/*\ NOTE:,m:*\ \ \ \ \ \ \ \ ,ex:*/,://,s:/*\ FIXME,m:*\ \ \ \ \ \ \ \ ,ex:*/,s:/*\ NOTE,m:*\ \ \ \ \ \ \ ,ex:*/,sb:<!--\ FIXME:,m:\ \ \ \ \ \ \ \ \ \ \ \ ,ex:-->,sb:<!--\ NOTE:,m:\ \ \ \ \ \ \ \ \ \ \ ,ex:-->,sb:<!--\ FIXME,m:\ \ \ \ \ \ \ \ \ \ \ ,ex:-->,sb:<!--\ NOTE,m:\ \ \ \ \ \ \ \ \ \ ,ex:-->,://,s1:/*,mb:**,ex:*/,sb:<!--,m:\ \ \ \ \ ,ex:-->
   \ formatoptions+=croql
@@ -267,7 +267,7 @@ autocmd Filetype js setlocal iskeyword=@,48-57,_,192-255
 
 " 2017-11-12: Activating spell check on comments is too distracting.
 " - Prefer enabling manually (w/ [os).
-autocmd BufEnter,BufRead *.js,*.jsx,*.ts,*.tsx setlocal nospell
+autocmd BufEnter,BufRead,BufNewFile *.js,*.jsx,*.ts,*.tsx setlocal nospell
 
 " 2016.01.25: What the heck? When did this start happening to bash, too?
 " Ctrl-left/right-arrow is skipping periods
@@ -278,7 +278,7 @@ autocmd BufEnter,BufRead *.js,*.jsx,*.ts,*.tsx setlocal nospell
 "             undenting closing braces. What gives! What happened?
 "               :set indentexpr
 "               indentexpr=GetVimIndent()
-autocmd BufEnter,BufRead *.js setlocal indentexpr=
+autocmd BufEnter,BufRead,BufNewFile *.js setlocal indentexpr=
 
 " 2020-09-24: (lb): I had a `=Eatchar('\s')<CR>` postfix on the iabbrev,
 " but I'm not sure why. Demoing, I see that, with Eatchar, if I use <CR>
@@ -298,9 +298,9 @@ autocmd BufEnter,BufRead *.js setlocal indentexpr=
 " but not as useful because not allowed in some situations.
 "   autocmd BufEnter,BufRead *.js,*.jsx,*.tsx iabbrev <buffer> ';'; if (true) { debugger; /* eslint-disable-line no-debugger */ }<C-o>52<Left><C-R>
 " 46: Place cursor at the start of the injection, before the 'd'ebugger.
-autocmd BufEnter,BufRead *.js,*.jsx,*.ts,*.tsx iabbrev <buffer> ';'; debugger; /* eslint-disable-line no-debugger */<C-o>46<Left><C-R>
+autocmd BufEnter,BufRead,BufNewFile *.js,*.jsx,*.ts,*.tsx iabbrev <buffer> ';'; debugger; /* eslint-disable-line no-debugger */<C-o>46<Left><C-R>
 
-autocmd BufEnter,BufRead *.js,*.jsx,*.ts,*.tsx iabbrev <buffer> ';; console.log(''); // eslint-disable-line no-console<C-o>36<Left><C-R>
+autocmd BufEnter,BufRead,BufNewFile *.js,*.jsx,*.ts,*.tsx iabbrev <buffer> ';; console.log(''); // eslint-disable-line no-console<C-o>36<Left><C-R>
 
 " 2020-09-24: See also ESLint `alert` warning disablement (I don't really use alert, so not wired).
 "
@@ -326,15 +326,15 @@ autocmd FileType javascript.jsx let b:surround_45 = "{/* \r */}"
 "      and replaced by vim-js and vim-jsx-pretty. See also new TS
 "      syntax highlighter, yats.vim.
 "      - Not sure how that affects this code!]
-autocmd BufNewFile,BufRead *.tsx let b:jsx_ext_found = 1
+autocmd BufEnter,BufRead,BufNewFile *.tsx let b:jsx_ext_found = 1
 
 " 2020-09-16: It's just a JSON file.
-autocmd BufNewFile,BufRead *.eslintrc setlocal ft=json
+autocmd BufEnter,BufRead,BufNewFile *.eslintrc setlocal ft=json
 
 " 2020-09-16: Thanks!
 "   https://gist.github.com/richardsonlima/fd42bf8f34ca4444cc828a34c8093f4c
 " <Jenkinsfile VIM syntax highlighting>
-autocmd BufNewFile,BufRead Jenkinsfile setf groovy
+autocmd BufEnter,BufRead,BufNewFile Jenkinsfile setf groovy
 
 " ------------------------------------------------------
 " CSS
@@ -348,7 +348,7 @@ autocmd BufNewFile,BufRead Jenkinsfile setf groovy
 
 " But I think I still opt for none at all.
 
-autocmd BufEnter,BufRead *.css setlocal comments=
+autocmd BufEnter,BufRead,BufNewFile *.css setlocal comments=
 
 " Well, no to a comment-autocomplete, but yes to a comment alias.
 " In spirit of the python 'set_trace' macro.
@@ -368,7 +368,7 @@ autocmd BufEnter,BufRead *.css setlocal comments=
 "
 " Oh, whatever, typing slash-slash-space-backspace is still easier than
 " make the stupid slash-star-return-return-star-slash-up-tab motion.
-autocmd BufEnter,BufRead *.css iabbrev <buffer> // /*<CR><CR>*/<Up><Tab>
+autocmd BufEnter,BufRead,BufNewFile *.css iabbrev <buffer> // /*<CR><CR>*/<Up><Tab>
 
 " ------------------------------------------------------
 " Wikitext
@@ -402,7 +402,7 @@ autocmd BufEnter,BufRead,BufNewFile *.gradle setfiletype java
 
 augroup markdown
   au! BufEnter,BufRead,BufNewFile *.mkd setfiletype mkd
-  autocmd BufEnter,BufRead *.mkd setlocal ai formatoptions=tcroqn2 comments=n:>
+  autocmd BufEnter,BufRead,BufNewFile *.mkd setlocal ai formatoptions=tcroqn2 comments=n:>
   " Also map *.txt files, since you
   " love Markdown so much
   " au! BufRead,BufNewFile *.txt
@@ -444,7 +444,7 @@ noremap <Leader>l :let tmp=@/<CR>:s/\(http[s]\?:\/\/[^ \t()\[\]]\+\)/[\1](\1)/ge
 " but convention says to use .nsh for
 " include (header?) files.
 augroup nsis
-  au BufRead,BufNewFile *.nsh setfiletype nsis
+  au BufEnter,BufRead,BufNewFile *.nsh setfiletype nsis
 augroup END
 
 " ------------------------------------------------------
@@ -474,7 +474,7 @@ autocmd BufEnter,BufRead,BufNewFile *.textile setfiletype textile
 " What's a .map file?
 " ------------------------------------------------------
 
-autocmd BufEnter,BufRead *.map setlocal
+autocmd BufEnter,BufRead,BufNewFile *.map setlocal
   \ filetype=python
   \ formatoptions+=croql
 
@@ -490,20 +490,20 @@ autocmd BufEnter,BufRead,BufNewFile *.go setfiletype go
 " Argh, I have it when it does that, all the quoted
 " map keys get red squiggly underlined. Nuts to that.
 " 2016-10-11: I add contains=@NoSpell to goString in syntax/go.vim.
-autocmd BufEnter,BufRead *.go setlocal spell
+autocmd BufEnter,BufRead,BufNewFile *.go setlocal spell
 
-autocmd BufEnter,BufRead *.go iabbrev <buffer> ';'; contract.Contract(false)<Left><C-R>=Eatchar('\s')<CR>
+autocmd BufEnter,BufRead,BufNewFile *.go iabbrev <buffer> ';'; contract.Contract(false)<Left><C-R>=Eatchar('\s')<CR>
 
 " ------------------------------------------------------
 " Yaml don't spell
 " ------------------------------------------------------
 " 2016-10-18 Since when?
-autocmd BufEnter,BufRead *.yaml setlocal nospell
+autocmd BufEnter,BufRead,BufNewFile *.yaml setlocal nospell
 
 " ------------------------------------------------------
 " Go can comments
 " ------------------------------------------------------
-autocmd BufEnter,BufRead *.go setlocal
+autocmd BufEnter,BufRead,BufNewFile *.go setlocal
   \ filetype=go
   \ comments=sb://\ FIXME:,m://\ \ \ \ \ \ \ \ ,ex://.,sb://\ NOTE:,m://\ \ \ \ \ \ \ ,ex://.,sb://\ FIXME,m://\ \ \ \ \ \ \ ,ex://.,sb://\ NOTE,m://\ \ \ \ \ \ ,ex://.,s:/*\ FIXME:,m:*\ \ \ \ \ \ \ \ \ ,ex:*/,s:/*\ NOTE:,m:*\ \ \ \ \ \ \ \ ,ex:*/,://,s:/*\ FIXME,m:*\ \ \ \ \ \ \ \ ,ex:*/,s:/*\ NOTE,m:*\ \ \ \ \ \ \ ,ex:*/,://,s1:/*,mb:**,ex:*/
   \ formatoptions+=croql
@@ -515,8 +515,8 @@ autocmd BufEnter,BufRead *.go setlocal
 " Ino has an itis
 " ------------------------------------------------------
 autocmd BufEnter,BufRead,BufNewFile *.ino setfiletype cpp
-autocmd BufEnter,BufRead *.h setlocal spell
-autocmd BufEnter,BufRead *.cpp setlocal spell
+autocmd BufEnter,BufRead,BufNewFile *.h setlocal spell
+autocmd BufEnter,BufRead,BufNewFile *.cpp setlocal spell
 
 " ------------------------------------------------------
 " To HJSON is Human.
@@ -526,7 +526,7 @@ autocmd BufEnter,BufRead *.cpp setlocal spell
 "autocmd BufEnter,BufRead,BufNewFile *.json setfiletype=hjson
 autocmd BufEnter,BufRead,BufNewFile *.json setlocal ft=hjson
 
-autocmd BufEnter,BufRead *.hjson setlocal spell
+autocmd BufEnter,BufRead,BufNewFile *.hjson setlocal spell
 
 " ------------------------------------------------------
 " Stop: Re-indenting: Lines: When: I, <:>Colon<:>
@@ -537,22 +537,22 @@ autocmd BufEnter,BufRead *.hjson setlocal spell
 " Sh Defaults:
 "  indentexpr=GetShIndent()
 "  indentkeys=0{,0},!^F,o,O,e,<:>,=elif,=except,0=then,0=do,0=else,0=elif,0=fi,0=esac,0=done,),0=;;,0=;&,0=fin,0=fil,0=fip,0=fir,0=fix
-autocmd BufEnter,BufRead *.sh setlocal indentkeys-=<:>
+autocmd BufEnter,BufRead,BufNewFile *.sh setlocal indentkeys-=<:>
 "
 " Yaml Defaults:
 "  indentexpr=GetYAMLIndent(v:lnum)
 "  indentkeys=!^F,o,O,0#,0},0],<:>,-
-autocmd BufEnter,BufRead *.yaml setlocal indentkeys-=<:>
+autocmd BufEnter,BufRead,BufNewFile *.yaml setlocal indentkeys-=<:>
 
 " ------------------------------------------------------
 " Ruby on my mind.
 " ------------------------------------------------------
-autocmd BufEnter,BufRead *.rb,Rakefile iabbrev <buffer> ';'; require 'byebug' ; byebug if true<C-R>=Eatchar('\s')<CR>
+autocmd BufEnter,BufRead,BufNewFile *.rb,Rakefile iabbrev <buffer> ';'; require 'byebug' ; byebug if true<C-R>=Eatchar('\s')<CR>
 " Alternative debugger; but no step capabilities.
 "autocmd BufEnter,BufRead *.rb iabbrev <buffer> ';'; require 'pry' ; binding.pry if true<C-R>=Eatchar('\s')<CR>
 
 " 2017-05-01: I find that most co-workers don't care about spelling. But I do!
-autocmd BufEnter,BufRead *.rb setlocal spell
+autocmd BufEnter,BufRead,BufNewFile *.rb setlocal spell
 
 " ------------------------------------------------------
 " Golang Templates
@@ -600,7 +600,7 @@ endif
 " paths as plain white, whereas 'gitignore' colorizes path separators.
 "
 "  autocmd BufEnter,BufRead .gitignore,.gitignore.local setfiletype conf
-autocmd BufEnter,BufRead .gitignore,.gitignore.local setfiletype gitignore
+autocmd BufEnter,BufRead,BufNewFile .gitignore,.gitignore.local setfiletype gitignore
 
 " SAVVY/2024-06-05: ft=gitignore defaults formatoptions=tcq
 " and before no 'r' option, pressing <Enter> on commented
@@ -614,7 +614,7 @@ autocmd BufEnter,BufRead .gitignore,.gitignore.local setfiletype gitignore
 "
 "     t Auto-wrap text using 'textwidth'
 "       - Tho tw=0, so disabled.
-autocmd BufEnter,BufRead .gitignore,.gitignore.local setlocal formatoptions+=croql
+autocmd BufEnter,BufRead,BufNewFile .gitignore,.gitignore.local setlocal formatoptions+=croql
 
 " ------------------------------------------------------
 " Fugitive Blame Buffers, too!
@@ -622,7 +622,7 @@ autocmd BufEnter,BufRead .gitignore,.gitignore.local setlocal formatoptions+=cro
 
 " 2020-08-07: Otherwise the hashes each have a red squiggly underline.
 
-autocmd BufEnter,BufRead *.fugitiveblame setlocal nospell
+autocmd BufEnter,BufRead,BufNewFile *.fugitiveblame setlocal nospell
 
 " ------------------------------------------------------
 " Git commit --verbose editing template should show spelling errors
