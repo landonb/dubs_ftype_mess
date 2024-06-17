@@ -381,11 +381,11 @@ autocmd BufEnter,BufRead,BufNewFile *.wikipedia.org* setfiletype wikipedia
 autocmd BufEnter,BufRead,BufNewFile *.wp setfiletype wikipedia
 
 " ------------------------------------------------------
-" rg/ag/grep ignore rules, same as Git exclude (below)
+" rg/ag/grep/fd ignore rules, same as Git exclude (below)
 " ------------------------------------------------------
 
-autocmd BufEnter,BufRead,BufNewFile .ignore,_ignore,.agignore setfiletype gitignore
-autocmd BufEnter,BufRead,BufNewFile .ignore,_ignore,.agignore setlocal formatoptions+=croql
+autocmd BufEnter,BufRead,BufNewFile .ignore,_ignore,.agignore,.fdignore setfiletype gitignore
+autocmd BufEnter,BufRead,BufNewFile .ignore,_ignore,.agignore,.fdignore setlocal formatoptions+=croql
 
 " ------------------------------------------------------
 " I have a little Gradle, I made it out of clay.
