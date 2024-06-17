@@ -600,7 +600,7 @@ endif
 " paths as plain white, whereas 'gitignore' colorizes path separators.
 "
 "  autocmd BufEnter,BufRead .gitignore,.gitignore.local setfiletype conf
-autocmd BufEnter,BufRead,BufNewFile .gitignore,.gitignore.local setfiletype gitignore
+autocmd BufEnter,BufRead,BufNewFile .gitignore,.gitignore.local,exclude setfiletype gitignore
 
 " SAVVY/2024-06-05: ft=gitignore defaults formatoptions=tcq
 " and before no 'r' option, pressing <Enter> on commented
@@ -614,7 +614,7 @@ autocmd BufEnter,BufRead,BufNewFile .gitignore,.gitignore.local setfiletype giti
 "
 "     t Auto-wrap text using 'textwidth'
 "       - Tho tw=0, so disabled.
-autocmd BufEnter,BufRead,BufNewFile .gitignore,.gitignore.local setlocal formatoptions+=croql
+autocmd BufEnter,BufRead,BufNewFile .gitignore,.gitignore.local,exclude setlocal formatoptions+=croql
 
 " ------------------------------------------------------
 " Fugitive Blame Buffers, too!
