@@ -649,3 +649,31 @@ autocmd FileType toml setlocal formatoptions+=r
 
 autocmd FileType crontab setlocal formatoptions+=r
 
+" ------------------------------------------------------
+" Fix @macOS iskeyword injection
+" ------------------------------------------------------
+
+" DUNNO/2024-07-10: I searched
+"   /opt/homebrew/Caskroom/macvim/179/MacVim.app/Contents/Resources/vim
+" and my ~/.vim/pack, but I cannot tell what's the culprit.
+" - On Linux Mint (Ubuntu/Debian), I've never seen this (AFAIK).
+" - But on @macOS I see:
+"     :echo &iskeyword
+"     @,48-57,_,192-255,*,/
+"   - The forward slash ('/'), specifically, changes <Ctrl-Left>/<Ctrl-Right>
+"     (which moves the cursor by word), changes double-click (which selects
+"     the word under the cursor), etc.
+"   - Note this is just for those file types that Dubs Vim does not
+"     already customize, e.g., ft=rst works fine, but not ft=bash.
+" - On Linux, it's just
+"     :echo &iskeyword
+"     @,48-57,_,192-255
+"   So we should just be able to remove the two characters
+"   of shady persuasion from where I not know they originated.
+"
+" NOTED: `iskeyword-=*,/` only works if they appear in that order...
+"   which they seem to always be. And, if not, maybe that's another
+"   clue to help figure out what source is injecting these annoy-bees.
+
+autocmd BufEnter,BufRead,BufNewFile * setlocal iskeyword-=*,/
+
