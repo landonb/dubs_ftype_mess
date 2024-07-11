@@ -140,7 +140,7 @@ autocmd BufEnter,BufRead,BufNewFile *.vim setlocal
 
 " 2017-12-06: Surprised I hadn't been bothered by the octothorpe
 " being included in '*' and <F1> searches...
-"autocmd Filetype vim setlocal iskeyword=@,48-57,_,192-255,#
+"  autocmd Filetype vim setlocal iskeyword=@,48-57,_,192-255,#
 autocmd Filetype vim setlocal iskeyword=@,48-57,_,192-255
 
 " ------------------------------------------------------
