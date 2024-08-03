@@ -563,7 +563,7 @@ autocmd BufEnter,BufRead,BufNewFile *.rb setlocal spell
 " project offers.
 autocmd BufEnter,BufRead,BufNewFile *.gotmpl setfiletype gotexttmpl
 autocmd BufEnter,BufRead,BufNewFile *.gotpl setfiletype gotexttmpl
-autocmd BufEnter,BufRead,BufNewFile *.tmpl setfiletype gotexttmpl
+autocmd BufEnter,BufRead,BufNewFile $HOME/.gopath/src/*.tmpl setfiletype gotexttmpl
 
 " ------------------------------------------------------
 " Shell Polish
