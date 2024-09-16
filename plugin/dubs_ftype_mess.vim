@@ -677,3 +677,14 @@ autocmd FileType crontab setlocal formatoptions+=r
 
 autocmd BufEnter,BufRead,BufNewFile * setlocal iskeyword-=*,/
 
+" ------------------------------------------------------
+" Basic shell, C, and Python comment folding
+" ------------------------------------------------------
+
+" THANX/2024-03-30:
+" https://vi.stackexchange.com/questions/3512/how-to-fold-comments
+
+autocmd FileType c      setlocal foldmethod=expr foldexpr=getline(v:lnum)=~'^\\s*//'
+autocmd FileType sh     setlocal foldmethod=expr foldexpr=getline(v:lnum)=~'^\\s*//'
+autocmd FileType python setlocal foldmethod=expr foldexpr=getline(v:lnum)=~'^\\s*#'
+
