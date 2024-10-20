@@ -49,4 +49,4 @@ CREDITS                                                      *textile-credits*
 - "Tim Harper":http://tim.theenchanter.com/  : improved syntax highlighting,
                                                 plugin
 
-vim:tw=78:noet:wrap:ts=2:expandtab:ft=help:norl:
+vim:tw=78:wrap:ts=2:expandtab:ft=help:norl:
