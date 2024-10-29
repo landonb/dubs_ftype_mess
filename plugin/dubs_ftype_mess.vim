@@ -640,7 +640,11 @@ autocmd BufEnter,BufRead,BufNewFile .envrc setfiletype sh
 " Insert comment leader on <Enter>
 " ------------------------------------------------------
 
+" Albeit works on `#` comments, not `--`. 
+autocmd FileType applescript setlocal formatoptions+=r
+
 autocmd FileType cfg setlocal formatoptions+=r
+
 autocmd FileType toml setlocal formatoptions+=r
 
 " ------------------------------------------------------
