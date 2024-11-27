@@ -146,7 +146,11 @@ function! s:Python_Abbrev_PDB_Stty_Prep_Right_Hand_Middle_Pointy_Pointy_Middle()
   "     E702 multiple statements on one line (semicolon)
   " - Issue is sorta fixed, but requires `black --preview`, which you don't want to use.
   "   https://github.com/psf/black/pull/3959
-  autocmd BufEnter,BufRead *.py iabbrev <buffer> ';;' import os, pdb; os.system("stty sane"); pdb.set_trace()  # fmt: skip<CR>pass<C-R>
+  "
+  " HSTRY/2024-11-26: Change ';;' to use pdbr, and move original pdb abbrev to ;'';
+  " (not that I'm likely to remember or to use the pdb variant).
+  autocmd BufEnter,BufRead *.py iabbrev <buffer> ;''; import os, pdb; os.system("stty sane"); pdb.set_trace()  # fmt: skip<CR>pass<C-R>
+  autocmd BufEnter,BufRead *.py iabbrev <buffer> ';;' import os, pdbr; os.system("stty sane"); pdbr.set_trace()  # fmt: skip<CR>pass<C-R>
 endfunction
 
 " SAVVY/2024-11-26: Author rarely (never) uses this abbreviation.
