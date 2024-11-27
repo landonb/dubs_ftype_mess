@@ -149,10 +149,9 @@ function! s:Python_Abbrev_PDB_Stty_Prep_Right_Hand_Middle_Pointy_Pointy_Middle()
   autocmd BufEnter,BufRead *.py iabbrev <buffer> ';;' import os, pdb; os.system("stty sane"); pdb.set_trace()  # fmt: skip<CR>pass<C-R>
 endfunction
 
-" FIXME/2023-01-31 15:36: Or don't care (don't use this), but ;ll; not working for me. Anywhere.
+" SAVVY/2024-11-26: Author rarely (never) uses this abbreviation.
 function! s:Python_Abbrev_RPDB2_Right_Hand_Middle_Pointy_Pointy_Middle()
   autocmd BufEnter,BufRead *.py iabbrev <buffer> ;ll; import rpdb2; rpdb2.start_embedded_debugger('password', fAllowRemote=True)<Home><Up><End><CR><C-O>0<C-O>D#<Down><End><CR><C-R>=Eatchar('\s')<CR>
-  iabbrev <buffer> ;ll; import rpdb2; rpdb2.start_embedded_debugger('password', fAllowRemote=True)<Home><Up><End><CR><C-O>0<C-O>D#<Down><End><CR><C-R>=Eatchar('\s')<CR>
 endfunction
 
 " What'sAKeyword See The F1 Command / Ctrl-R Ctrl-W
