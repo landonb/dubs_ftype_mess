@@ -80,5 +80,5 @@ let g:rst_syntax_code_list = [
 " so you don't have to do, e.g., .. code-block:: sh
 " we made a symlink, i.e.,
 "   cd $HOME/.vim/pack/landonb/start/dubs_ftype_mess/syntax/
-"   /bin/ln -s sh.vim bash.vim
+"   ln -s sh.vim bash.vim
 
