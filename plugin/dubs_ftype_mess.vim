@@ -424,7 +424,13 @@ augroup END
 "   http://www.google.com/a/cpanel/domain/new
 " becomes
 "   [http://www.google.com/a/cpanel/domain/new](http://www.google.com/a/cpanel/domain/new)
-noremap <Leader>l :let tmp=@/<CR>:s/\(http[s]\?:\/\/[^ \t()\[\]]\+\)/[\1](\1)/ge<CR>:let @/=tmp<CR>
+"
+" HSTRY/2024-12-08: Was <Leader>l and applied globally; now restricted to
+" Markdown files and moved to <Leader>u, so that \l can be used for
+" vim-easymotion config.
+autocmd FileType markdown noremap <Leader>u
+  \ :let tmp=@/<CR>:s/\(http[s]\?:\/\/[^ \t()\[\]]\+\)/[\1](\1)/ge<CR>:let @/=tmp<CR>
+
 " MAYBE: In Markdown, surround the link in angle
 "        brackets does the same thing, e.g.,
 "          <http://www.google.com/a/cpanel/domain/new>
