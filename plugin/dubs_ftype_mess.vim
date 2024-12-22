@@ -400,23 +400,25 @@ autocmd BufEnter,BufRead,BufNewFile *.gradle setfiletype java
 " ------------------------------------------------------
 " http://daringfireball.net/projects/markdown/
 
-augroup markdown
-  au! BufEnter,BufRead,BufNewFile *.mkd setfiletype mkd
-  autocmd BufEnter,BufRead,BufNewFile *.mkd setlocal ai formatoptions=tcroqn2 comments=n:>
-  " Also map *.txt files, since you
-  " love Markdown so much
-  " au! BufRead,BufNewFile *.txt
-  "   \ setlocal nowrap sw=2 sts=2 ts=8
-  "au BufRead,BufNewFile *.txt setfiletype mkd
-  "autocmd BufEnter,BufRead *.txt setlocal ai formatoptions=tcroqn2 comments=n:>
-augroup END
-"augroup mkd
-"  autocmd BufEnter,BufRead *.mkd setlocal ai formatoptions=tcroqn2 comments=n:>
-"augroup END
-
-" I keep waffling on this, but I can get used to
-" naming my text files *.mkd, I suppose...
-"au BufRead,BufNewFile *.txt setfiletype mkd
+" ISOFF/2024-12-22: When did I ever use .mkd for .md files?
+"
+" augroup markdown
+"   au! BufEnter,BufRead,BufNewFile *.mkd setfiletype mkd
+"   autocmd BufEnter,BufRead,BufNewFile *.mkd setlocal ai formatoptions=tcroqn2 comments=n:>
+"   " Also map *.txt files, since you
+"   " love Markdown so much
+"   " au! BufRead,BufNewFile *.txt
+"   "   \ setlocal nowrap sw=2 sts=2 ts=8
+"   "au BufRead,BufNewFile *.txt setfiletype mkd
+"   "autocmd BufEnter,BufRead *.txt setlocal ai formatoptions=tcroqn2 comments=n:>
+" augroup END
+" "augroup mkd
+" "  autocmd BufEnter,BufRead *.mkd setlocal ai formatoptions=tcroqn2 comments=n:>
+" "augroup END
+"
+" " I keep waffling on this, but I can get used to
+" " naming my text files *.mkd, I suppose...
+" "au BufRead,BufNewFile *.txt setfiletype mkd
 
 " Convert HTML link to Markdown link
 " --------------------------------
