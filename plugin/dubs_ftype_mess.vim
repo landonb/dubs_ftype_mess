@@ -467,6 +467,8 @@ autocmd BufEnter,BufRead,BufNewFile *.md setfiletype markdown
 " 2018-02-08: Markdown Makefile!
 autocmd BufEnter,BufRead,BufNewFile *.ronn setfiletype markdown
 
+autocmd BufEnter,BufRead,BufNewFile *.md setlocal spell
+
 " ------------------------------------------------------
 " Textile Markup
 " ------------------------------------------------------
