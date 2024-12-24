@@ -23,4 +23,8 @@
 
 " Default: hi def link vimCommentString	vimString
 hi! link vimCommentString vimLineComment
+" vimCommentTitle is also applied sometimes, but that's the same
+" highlight group as `" TITLE: ...` comments... (maybe this is a
+" losing battle).
+"  hi! link vimCommentTitle vimLineComment
 
