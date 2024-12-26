@@ -3,6 +3,24 @@
 " License: GPLv3 | Copyright © 2015-2016 Landon Bouma.
 " Summary: Opinionated Vim filetype (buffer setlocal) tweaks (syntax highlighting, etc.).
 
+" -------------------------------------------------------------------------
+
+" GUARD: Press <F9> to reload this plugin (or :source it).
+" - Via: https://github.com/embrace-vim/vim-source-reloader#↩️
+
+if expand('%:p') ==# expand('<sfile>:p')
+  unlet! g:loaded_dubs_ftype_mess_plugin
+endif
+
+if exists('g:loaded_dubs_ftype_mess_plugin') || &cp
+
+  finish
+endif
+
+let g:loaded_dubs_ftype_mess_plugin = 1
+
+" -------------------------------------------------------------------
+
 " ====================================================================
 " In lieu of a bunch of small ~/.vim/ftplugin/*.vim files, this file!
 " ====================================================================
@@ -41,16 +59,6 @@
 "   l Long lines are not broken in insert mode: When a line was longer than
 "     'textwidth' when the insert command started, Vim does not
 "     automatically format it.
-"
-" ========================================================================
-" ------------------------------------------------------------------------
-" ========================================================================
-
-" Load this script just once
-if exists("g:plugin_dubs_ftype_mess") || &cp
-  finish
-endif
-let g:plugin_dubs_ftype_mess = 1
 
 " ========================================================================
 " ------------------------------------------------------------------------

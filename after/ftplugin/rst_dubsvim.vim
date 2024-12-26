@@ -3,11 +3,23 @@
 " License: GPLv3 | Copyright © 2015-2017 Landon Bouma.
 " Summary: Dubs Vim reST filetype behavior
 
-" Only do this when not done yet for this buffer.
-if exists("g:ftplugin_rst_dubsvim") || &cp
+" -------------------------------------------------------------------------
+
+" GUARD: Press <F9> to reload this plugin (or :source it).
+" - Via: https://github.com/embrace-vim/vim-source-reloader#↩️
+
+if expand('%:p') ==# expand('<sfile>:p')
+  unlet! g:loaded_dubs_ftype_mess_ftplugin_rst_dubsvim
+endif
+
+if exists('g:loaded_dubs_ftype_mess_ftplugin_rst_dubsvim') || &cp
+
   finish
 endif
-let g:ftplugin_rst_dubsvim = 1
+
+let g:loaded_dubs_ftype_mess_ftplugin_rst_dubsvim = 1
+
+" -------------------------------------------------------------------
 
 " Snippets-Insertion Shortcuts
 " ------------------------------------------------------
