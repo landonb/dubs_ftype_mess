@@ -1,7 +1,7 @@
-" Opinionated Vim filetype (buffer setlocal) tweaks (syntax highlighting, etc.).
-" Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
-" Online: https://github.com/landonb/dubs_ftype_mess
-" License: https://creativecommons.org/publicdomain/zero/1.0/
+" Author: Landon Bouma <https://tallybark.com/>
+" Project: https://github.com/landonb/dubs_ftype_mess#🧹
+" License: GPLv3 | Copyright © 2015-2016 Landon Bouma.
+" Summary: Opinionated Vim filetype (buffer setlocal) tweaks (syntax highlighting, etc.).
 
 " ====================================================================
 " In lieu of a bunch of small ~/.vim/ftplugin/*.vim files, this file!
