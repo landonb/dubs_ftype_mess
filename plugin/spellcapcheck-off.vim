@@ -1,12 +1,12 @@
-" Disables spellcapcheck. With an overexplanation why.
-" Author: Landon Bouma (landonb &#x40; retrosoft &#x2E; com)
+" Author: Landon Bouma <https://tallybark.com/>
 " Online: https://github.com/landonb/dubs_ftype_mess#🧹
 " License: https://creativecommons.org/publicdomain/zero/1.0/
+" Summary: Disables spellcapcheck. With an overexplanation why.
 
-" -----------------------------------------------------------------------------
-" Spell-checking Capitalization... is 'So Very Broken!' so turn it *Off*.
+" ----------------------------------------------------------------------
+" Spell-checking Capitalization... is 'So Very Broken!' so turn it *Off*
 "                                  〰                   ⁉⁉
-" -----------------------------------------------------------------------------
+" ----------------------------------------------------------------------
 
 " 2014-11-20: Words after an ellipsis are flagged as not capitalized.
 "             E.g., after the dot-dot-dot in 'blah... blah', the second
