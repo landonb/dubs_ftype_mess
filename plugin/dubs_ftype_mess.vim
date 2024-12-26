@@ -3,7 +3,7 @@
 " License: GPLv3 | Copyright © 2015-2016 Landon Bouma.
 " Summary: Opinionated Vim filetype (buffer setlocal) tweaks (syntax highlighting, etc.).
 
-" -------------------------------------------------------------------------
+" -------------------------------------------------------------------
 
 " GUARD: Press <F9> to reload this plugin (or :source it).
 " - Via: https://github.com/embrace-vim/vim-source-reloader#↩️

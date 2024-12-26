@@ -3,7 +3,7 @@
 " License: GPLv3 | Copyright © 2015-2017 Landon Bouma.
 " Summary: Dubs Vim reST filetype behavior
 
-" -------------------------------------------------------------------------
+" -------------------------------------------------------------------
 
 " GUARD: Press <F9> to reload this plugin (or :source it).
 " - Via: https://github.com/embrace-vim/vim-source-reloader#↩️
