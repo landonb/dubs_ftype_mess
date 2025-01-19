@@ -109,12 +109,12 @@ for codemap in g:rst_syntax_code_list_dubs
   " few specific places for the syntax file.
   let syntax_file = ''
   for vim_dir in pathogen#split(&rtp)
-    let try_file = vim_dir . '/after/syntax/' . synf.'.vim'
+    let try_file = vim_dir .. '/after/syntax/' .. synf .. '.vim'
     if filereadable(try_file)
       let syntax_file = try_file
       break
     endif
-    let try_file = vim_dir . '/syntax/' . synf.'.vim'
+    let try_file = vim_dir .. '/syntax/' .. synf .. '.vim'
     if filereadable(try_file)
       let syntax_file = try_file
       break
@@ -124,21 +124,21 @@ for codemap in g:rst_syntax_code_list_dubs
     " Turn into a full path. See :h filename-modifiers
     let syntax_file = fnamemodify(syntax_file, ':p')
   else
-    let syntax_file = $VIMRUNTIME . '/syntax/' . synf.'.vim'
+    let syntax_file = $VIMRUNTIME .. '/syntax/' .. synf .. '.vim'
   endif
   " echomsg 'codemap: ' . codemap.fext '/ syntax_file: ' . syntax_file
   if syntax_file != ''
     if !filereadable(syntax_file)
-      echom 'Warning: Dubs could find: ' . synf.'.vim'
+      echom 'Warning: Dubs could find: ' .. synf .. '.vim'
     else
-      exe 'syn include @rst' . fext . ' ' . syntax_file
+      exe 'syn include @rst' .. fext .. ' ' .. syntax_file
     endif
   endif
-  exe 'syn region rstDirective'.fext.' matchgroup=rstDirective fold '
-        \.'start=#\%(sourcecode\|code\%(-block\)\=\)::\s\+' . fext . '\s*$# '
-        \.'skip=#^$# '
-        \.'end=#^\s\@!# contains=@NoSpell,@rst' . fext
-  exe 'syn cluster rstDirectives add=rstDirective' . fext
+  exe 'syn region rstDirective' .. fext .. ' matchgroup=rstDirective fold '
+        \ .. 'start=#\%(sourcecode\|code\%(-block\)\=\)::\s\+' .. fext .. '\s*$# '
+        \ .. 'skip=#^$# '
+        \ .. 'end=#^\s\@!# contains=@NoSpell,@rst' .. fext
+  exe 'syn cluster rstDirectives add=rstDirective' .. fext
   unlet codemap
 endfor
 " There's also a non-syntax, filetype plugin:
