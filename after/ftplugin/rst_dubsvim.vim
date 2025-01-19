@@ -108,6 +108,7 @@ for codemap in g:rst_syntax_code_list_dubs
   " a depthy search can noticeably delay Vim boot time. So only look in a
   " few specific places for the syntax file.
   let syntax_file = ''
+
   for vim_dir in pathogen#split(&rtp)
     let try_file = vim_dir .. '/after/syntax/' .. synf .. '.vim'
     if filereadable(try_file)
@@ -120,6 +121,7 @@ for codemap in g:rst_syntax_code_list_dubs
       break
     endif
   endfor
+
   if syntax_file != ''
     " Turn into a full path. See :h filename-modifiers
     let syntax_file = fnamemodify(syntax_file, ':p')
@@ -127,6 +129,7 @@ for codemap in g:rst_syntax_code_list_dubs
     let syntax_file = $VIMRUNTIME .. '/syntax/' .. synf .. '.vim'
   endif
   " echomsg 'codemap: ' . codemap.fext '/ syntax_file: ' . syntax_file
+
   if syntax_file != ''
     if !filereadable(syntax_file)
       echom 'ALERT: rst_dubsvim.vim: could not find: ' .. syntax_file
@@ -134,11 +137,13 @@ for codemap in g:rst_syntax_code_list_dubs
       exe 'syn include @rst' .. fext .. ' ' .. syntax_file
     endif
   endif
+
   exe 'syn region rstDirective' .. fext .. ' matchgroup=rstDirective fold '
         \ .. 'start=#\%(sourcecode\|code\%(-block\)\=\)::\s\+' .. fext .. '\s*$# '
         \ .. 'skip=#^$# '
         \ .. 'end=#^\s\@!# contains=@NoSpell,@rst' .. fext
   exe 'syn cluster rstDirectives add=rstDirective' .. fext
+
   unlet codemap
 endfor
 " There's also a non-syntax, filetype plugin:
