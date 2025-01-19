@@ -6,13 +6,6 @@
 " ========================================================================
 " BOILERPLATE
 
-" Use dot-dot string concatenation (vimscript-2).
-" Use v:<vim-variables> name space (vimscript-3).
-" Leading zero does not mean octal (vimscript-4).
-if has("vimscript-4") | scriptversion 4 | endif
-
-" ------------------------------------------------------------------------
-
 " HINT: Use desktop notifications to trace your code, not `:echom`.
 "
 " - You cannot `:echo` or `:echom` from ftplugin code.

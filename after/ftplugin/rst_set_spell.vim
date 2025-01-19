@@ -15,9 +15,6 @@
 " ========================================================================
 " BOILERPLATE
 
-" Be modern.
-if has("vimscript-4") | scriptversion 4 | endif
-
 " Load guard.
 if exists('b:did_ftplugin_too') | finish | endif
 
