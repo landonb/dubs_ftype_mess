@@ -111,7 +111,11 @@ function! s:load_nonstandard_rst_code_block_syntax(fext, synf) abort
   " few specific places for the syntax file.
   let l:syntax_file = ''
 
-  let l:syntax_file = s:find_syntax_file_vim(a:synf)
+  if has('nvim')
+    let l:syntax_file = s:find_syntax_file_nvim(a:synf)
+  else
+    let l:syntax_file = s:find_syntax_file_vim(a:synf)
+  endif
 
   if l:syntax_file != ''
     " Turn into a full path. See :h filename-modifiers
@@ -139,6 +143,65 @@ endfunction
 "  /usr/share/vim/vim81/ftplugin/rst.vim
 
 " ***
+
+" Note that Vim adds auto-loaded ~/.vim/pack/*/start/* dirs to runtimepath,
+" e.g.,
+"   :echo &rtp
+" in Vim prints
+"   /Users/user/.vim,/Users/user/.vim/pack/foo/start/bar,/Users/user/.vim/pack/baz/start/bat,...
+"
+" But in Neovim, instead of individual plugin paths, &rtp includes a glob path:
+"   /Users/user/.vim/pack/*/start/*
+" e.g.,
+"   :echo &rtp
+" in Neovim prints 
+"  /Users/user/.vim,/Users/user/.vim/pack/*/start/*,/Users/user/.config/nvim,...
+"
+" - You'll also see a few other 'after/' paths in nvim you won't see in vim, e.g.,:
+"     /Users/user/.local/share/nvim/site/after
+"     /Users/user/.config/nvim/after
+"     etc.
+"
+" REFER: See nvim's :help packages
+"   
+" REFER: nvim `:help rtp` says not to use wildcards:
+"          Note that, unlike 'path', no wildcards like "**" are allowed.  Normal
+"          wildcards are allowed, but can significantly slow down searching for
+"          runtime files.  For speed, use as few items as possible and avoid
+"          wildcards.
+"        Except apparently for nvim itself, then wildcards are okay...
+"
+" SAVVY: nvim suggests nvim_get_runtime_file, not &rtp, to find files.
+"
+" - USAGE: You cannot just pass the basename, e.g.,
+"
+"     nvim_get_runtime_file('somefile.vim', 1)
+"
+"   returns: []
+"
+" - So include the directory name or glob, e.g.,
+"
+"     nvim_get_runtime_file('syntax/somefile.vim', 1)
+"     nvim_get_runtime_file('*/somefile.vim', 1)
+
+function! s:find_syntax_file_nvim(synf) abort
+  let l:syntax_file = ''
+
+  let l:all = 1
+  let l:matches = nvim_get_runtime_file('syntax/' .. a:synf .. '.vim', l:all)
+
+  if len(l:matches) > 1
+    echom 'ALERT: rst_dubsvim.vim: More than one match for: syntax/' .. a:synf .. '.vim'
+    echom l:matches
+  endif
+
+  if len(l:matches) > 0
+    " Eh.
+    let l:syntax_file = l:matches[0]
+  endif
+
+  return l:syntax_file
+endfunction
 
 function! s:find_syntax_file_vim(synf) abort
   let l:syntax_file = ''
