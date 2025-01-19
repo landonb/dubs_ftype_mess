@@ -129,7 +129,7 @@ for codemap in g:rst_syntax_code_list_dubs
   " echomsg 'codemap: ' . codemap.fext '/ syntax_file: ' . syntax_file
   if syntax_file != ''
     if !filereadable(syntax_file)
-      echomsg 'Warning: Dubs could find: ' . synf.'.vim'
+      echom 'Warning: Dubs could find: ' . synf.'.vim'
     else
       exe 'syn include @rst' . fext . ' ' . syntax_file
     endif
