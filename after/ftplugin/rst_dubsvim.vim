@@ -84,70 +84,85 @@ if !exists('g:rst_syntax_code_list_dubs')
 endif
 " The following code is adapted from
 "   /usr/share/vim/vim81/syntax/rst.vim
-" I added ~/.vim/, the nested list, a lookup in ~, and some spaces.
-" Note that you cannot run the for-in loop without unletting first, else,
-"   E706: Variable type mismatch for: code.
-" That is, unless you use a unique name rather than `code`.
-" I'm not sure where it's set (the syntax/rst.vim system file?),
-" and it's not a global, or at least `:echo g:code` shows naught.
-" So either use a unique name or just unlet, to be safe, or both.
-" See also:
-"   :help E706.
-let search_paths = pathogen#split(&rtp)
-unlet! codemap
-for codemap in g:rst_syntax_code_list_dubs
-  let fext = codemap.fext
-  let synf = codemap.synf
+" I added ~/.vim/, the nested list, a lookup in ~, and refactored.
+function! s:load_nonstandard_rst_code_block_syntaxes() abort
+  let l:search_paths = pathogen#split(&rtp)
+
+  for l:codemap in g:rst_syntax_code_list_dubs
+    let fext = codemap.fext
+    let synf = codemap.synf
+
+    call s:load_nonstandard_rst_code_block_syntax(fext, synf)
+  endfor
+endfunction
+
+" ***
+
+function! s:load_nonstandard_rst_code_block_syntax(fext, synf) abort
   unlet! b:current_syntax
+
   " The first entry in the runtime path is the user's base Vim directory,
   " usually ~/.vim. We could search all files therein, e.g.,
   "
-  "     let syntax_file = findfile(synf.'.vim', pathogen#split(&rtp)[0] . '/**')
+  "     let syntax_file = findfile(a:synf.'.vim', pathogen#split(&rtp)[0] . '/**')
   "
   " but if you have, e.g., a symlink to a large directory tree somewhere,
   " a depthy search can noticeably delay Vim boot time. So only look in a
   " few specific places for the syntax file.
-  let syntax_file = ''
+  let l:syntax_file = ''
 
-  for vim_dir in pathogen#split(&rtp)
-    let try_file = vim_dir .. '/after/syntax/' .. synf .. '.vim'
-    if filereadable(try_file)
-      let syntax_file = try_file
+  let l:syntax_file = s:find_syntax_file_vim(a:synf)
+
+  if l:syntax_file != ''
+    " Turn into a full path. See :h filename-modifiers
+    let l:syntax_file = fnamemodify(l:syntax_file, ':p')
+  else
+    let l:syntax_file = $VIMRUNTIME .. '/syntax/' .. a:synf .. '.vim'
+  endif
+  " echomsg 'codemap.fext: ' . a:fext '/ syntax_file: ' l:syntax_file
+
+  if l:syntax_file != ''
+    if !filereadable(l:syntax_file)
+      echom 'ALERT: rst_dubsvim.vim: could not find: ' .. l:syntax_file
+    else
+      exe 'syn include @rst' .. a:fext .. ' ' .. l:syntax_file
+    endif
+  endif
+
+  exe 'syn region rstDirective' .. a:fext .. ' matchgroup=rstDirective fold '
+        \ .. 'start=#\%(sourcecode\|code\%(-block\)\=\)::\s\+' .. a:fext .. '\s*$# '
+        \ .. 'skip=#^$# '
+        \ .. 'end=#^\s\@!# contains=@NoSpell,@rst' .. a:fext
+  exe 'syn cluster rstDirectives add=rstDirective' .. a:fext
+endfunction
+" There's also a non-syntax, filetype plugin:
+"  /usr/share/vim/vim81/ftplugin/rst.vim
+
+" ***
+
+function! s:find_syntax_file_vim(synf) abort
+  let l:syntax_file = ''
+
+  for l:vim_dir in pathogen#split(&rtp)
+    let l:try_file = l:vim_dir .. '/after/syntax/' .. a:synf .. '.vim'
+    if filereadable(l:try_file)
+      let l:syntax_file = try_file
+
       break
     endif
-    let try_file = vim_dir .. '/syntax/' .. synf .. '.vim'
-    if filereadable(try_file)
-      let syntax_file = try_file
+
+    let l:try_file = l:vim_dir .. '/syntax/' .. a:synf .. '.vim'
+    if filereadable(l:try_file)
+      let l:syntax_file = l:try_file
+
       break
     endif
   endfor
 
-  if syntax_file != ''
-    " Turn into a full path. See :h filename-modifiers
-    let syntax_file = fnamemodify(syntax_file, ':p')
-  else
-    let syntax_file = $VIMRUNTIME .. '/syntax/' .. synf .. '.vim'
-  endif
-  " echomsg 'codemap: ' . codemap.fext '/ syntax_file: ' . syntax_file
+  return l:syntax_file
+endfunction
 
-  if syntax_file != ''
-    if !filereadable(syntax_file)
-      echom 'ALERT: rst_dubsvim.vim: could not find: ' .. syntax_file
-    else
-      exe 'syn include @rst' .. fext .. ' ' .. syntax_file
-    endif
-  endif
-
-  exe 'syn region rstDirective' .. fext .. ' matchgroup=rstDirective fold '
-        \ .. 'start=#\%(sourcecode\|code\%(-block\)\=\)::\s\+' .. fext .. '\s*$# '
-        \ .. 'skip=#^$# '
-        \ .. 'end=#^\s\@!# contains=@NoSpell,@rst' .. fext
-  exe 'syn cluster rstDirectives add=rstDirective' .. fext
-
-  unlet codemap
-endfor
-" There's also a non-syntax, filetype plugin:
-"  /usr/share/vim/vim81/ftplugin/rst.vim
+call s:load_nonstandard_rst_code_block_syntaxes()
 
 " ======================================================
 " =============================================== EOF ==
