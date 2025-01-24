@@ -127,7 +127,9 @@ function! s:load_nonstandard_rst_code_block_syntax(fext, synf) abort
 
   if l:syntax_file != ''
     if !filereadable(l:syntax_file)
-      echom 'ALERT: rst_dubsvim.vim: could not find: ' .. l:syntax_file
+      echom 'ALERT: rst_dubsvim.vim: could not find syntax file: ' .. a:synf
+      echom '- It was not found on any runtimepath, nor at: ' .. l:syntax_file
+      echom '- REFER: Current &rtp: ' .. &rtp
     else
       exe 'syn include @rst' .. a:fext .. ' ' .. l:syntax_file
     endif
