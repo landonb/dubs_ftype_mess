@@ -26,7 +26,7 @@
 "                                   'php', 'python', 'perl']
 "   endif
 " but we can do better than that, eh?
-" Each language type is just bouced to another syntax file; see:
+" Each language type is just bounced to another syntax file; see:
 "   ls /usr/share/vim/vim74/syntax
 " We could add them in ftplugin/rst_dubsvim.vim, but it's
 "  a wee bit easier to setup the array that rst.vim uses.
