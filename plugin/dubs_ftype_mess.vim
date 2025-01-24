@@ -82,6 +82,44 @@ endfunc
 "  iabbr <silent> if if ()<Left><C-R>=Eatchar('\s')<CR>
 
 " ------------------------------------------------------
+" Enable ~/.vim/ftplugin/<filetype>_<whatever>.vim
+" ------------------------------------------------------
+
+" By default, Vim doesn't load ftplugin/*.vim files.
+
+filetype plugin on
+
+" -------------------------------------------------------------------
+
+" ------------------------------------------------------
+" VIM GPG/GPG2 DECRYPT/ENCRYPT PLUGIN [hits no metal]
+" ------------------------------------------------------
+" See:
+"   /home/landonb/.vim/pack/jamessan/start/vim-gnupg/plugin/gnupg.vim
+" 2018-01-24: Default to gpg2. For old 14.04 machine whose gpg is whack.
+if (!exists("g:GPGExecutable"))
+  if executable("gpg2")
+    let g:GPGExecutable = "gpg2 --trust-model always"
+  elseif executable("gpg")
+    let g:GPGExecutable = "gpg --trust-model always"
+  "else
+  "  echom "GnuPG: No `gpg` or `gpg2"
+  endif
+endif
+" Uncomment to see ``:messages``. Levels 1, 2, and 3.
+"let g:GPGDebugLevel = 3
+
+" ========================================================================
+" ------------------------------------------------------------------------
+" ========================================================================
+
+" HSTRY/2025-01-23: This augroup added eons after all the autocmd calls
+" below, and author didn't want to refactor or indent (edit) other lines.
+" - MAYBE: Fix indentation below. Prob. refactor this file into fcns., too.
+augroup DubsFtypeMessPython
+  autocmd!
+
+" ------------------------------------------------------
 " Fix Syntax Highlighting (Always Parse from the Top)
 " ------------------------------------------------------
 
@@ -91,44 +129,6 @@ endfunc
 " window or thereabouts and not from the start of the buffer.
 
 autocmd BufNewFile,BufRead * syntax sync fromstart
-
-" ------------------------------------------------------
-" Enable ~/.vim/ftplugin/<filetype>_<whatever>.vim
-" ------------------------------------------------------
-
-" By default, Vim doesn't load ftplugin/*.vim files.
-
-filetype plugin on
-
-" ------------------------------------------------------
-" Search-under-cursor tweak.
-" ------------------------------------------------------
-
-" LATER/2020-02-27: This code came after the `autocmd BufEnter,BufRead *.sh`
-" code that was moved to ftplugin/sh_dubsvim.vim, so I think it was
-" related to an issue with Bash/shell filetypes. However the code was
-" not part of the autocmd, so applied globally.
-" - In any case, I looked at the latest syntax/sh.vim, and there's now
-"   code therein that touches g:sh_noisk if the user has not set it.
-"   So I'm trying without this enabled anymore, with the hopes of
-"   LATER/2020-02-27: ... removing this code eventually.
-"   - But for now, just disabled, should I have a problem in the near
-"     future, so I can easily re-enable it.
-if 0
-  " 2016-11-29: When did this start happening? I think we I copied bash.vim
-  " in dubs_ftype_mess/after/syntax/, periods starting getting sucked into
-  " search-under-cursor.
-  "   Wrong:
-  "     iskeyword=@,48-57,_,192-255,.
-  "   If we just set g:sh_noisk, bash.vim won't add . to the isk.
-  if !exists("g:sh_noisk")
-    let g:sh_noisk = 1
-  endif
-endif
-
-" ========================================================================
-" ------------------------------------------------------------------------
-" ========================================================================
 
 " ------------------------------------------------------
 " Vim Highlighting
@@ -439,9 +439,9 @@ autocmd FileType markdown noremap <Leader>u
 " The defauft NSIS file extension is .nsi,
 " but convention says to use .nsh for
 " include (header?) files.
-augroup nsis
+"  augroup nsis
   au BufEnter,BufRead,BufNewFile *.nsh setfiletype nsis
-augroup END
+"  augroup END
 
 " ------------------------------------------------------
 " Mardown Markup
@@ -569,24 +569,6 @@ autocmd BufEnter,BufRead,BufNewFile $HOME/.gopath/src/*.tmpl setfiletype gotextt
 autocmd FileType bash,sh iabbrev <buffer> ';; >&2 echo ""<C-o><Left><Right><C-R>
 
 " ------------------------------------------------------
-" VIM GPG/GPG2 DECRYPT/ENCRYPT PLUGIN [hits no metal]
-" ------------------------------------------------------
-" See:
-"   /home/landonb/.vim/pack/jamessan/start/vim-gnupg/plugin/gnupg.vim
-" 2018-01-24: Default to gpg2. For old 14.04 machine whose gpg is whack.
-if (!exists("g:GPGExecutable"))
-  if executable("gpg2")
-    let g:GPGExecutable = "gpg2 --trust-model always"
-  elseif executable("gpg")
-    let g:GPGExecutable = "gpg --trust-model always"
-  "else
-  "  echom "GnuPG: No `gpg` or `gpg2"
-  endif
-endif
-" Uncomment to see ``:messages``. Levels 1, 2, and 3.
-"let g:GPGDebugLevel = 3
-
-" ------------------------------------------------------
 " Git exclude rules
 " ------------------------------------------------------
 
@@ -689,4 +671,12 @@ autocmd BufEnter,BufRead,BufNewFile * setlocal iskeyword-=*,/
 autocmd FileType c      setlocal foldmethod=expr foldexpr=getline(v:lnum)=~'^\\s*//'
 autocmd FileType sh     setlocal foldmethod=expr foldexpr=getline(v:lnum)=~'^\\s*//'
 autocmd FileType python setlocal foldmethod=expr foldexpr=getline(v:lnum)=~'^\\s*#'
+
+" -------------------------------------------------------------------
+
+augroup END
+
+" ========================================================================
+" ------------------------------------------------------------------------
+" ========================================================================
 

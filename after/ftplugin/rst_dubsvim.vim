@@ -21,6 +21,22 @@ let g:loaded_dubs_ftype_mess_ftplugin_rst_dubsvim = 1
 
 " -------------------------------------------------------------------
 
+function! s:DubsFtypeMessRstClearAutocommands()
+  if exists('#DubsFtypeMessRst')
+    augroup DubsFtypeMessRst
+      autocmd!
+    augroup END
+    augroup! DubsFtypeMessRst
+  endif
+endfunction
+
+call s:DubsFtypeMessRstClearAutocommands()
+
+" -------------------------------------------------------------------
+
+augroup DubsFtypeMessRst
+  autocmd!
+
 " Snippets-Insertion Shortcuts
 " ------------------------------------------------------
 
@@ -47,6 +63,8 @@ let g:loaded_dubs_ftype_mess_ftplugin_rst_dubsvim = 1
 " Doesn't work: autocmd Filetype rst iabbrev <buffer> ``` `<CR><>`__
 autocmd BufEnter,BufRead *.rst iabbrev <buffer> ``` `<CR><>`__
 
+" -------------------------------------------------------------------
+
 " What'sAKeyword See The F1 Command / Ctrl-R Ctrl-W
 " ------------------------------------------------------
 
@@ -57,8 +75,13 @@ autocmd BufEnter,BufRead *.rst iabbrev <buffer> ``` `<CR><>`__
 "
 " Either BufEnter/BufRead and Filetype should work... the latter
 " should run just once which should be all we need.
+"
 "  autocmd BufEnter,BufRead *.rst setlocal iskeyword=@,48-57,_,192-255
 autocmd Filetype rst setlocal iskeyword=@,48-57,_,192-255
+
+augroup END
+
+" -------------------------------------------------------------------
 
 " ======================================================
 " =============================================== EOF ==
