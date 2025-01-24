@@ -201,20 +201,37 @@ function! s:Python_Configure_spell()
   setlocal spell
 endfunction
 
+" -------------------------------------------------------------------
+
+function! s:DubsFtypeMessPythonClearAutocommands()
+  if exists('#DubsFtypeMessPython')
+    augroup DubsFtypeMessPython
+      autocmd!
+    augroup END
+    augroup! DubsFtypeMessPython
+  endif
+endfunction
+
 " Snippets-Insertion Shortcuts
 " ------------------------------------------------------
 
 function! s:Python_Main()
-  " call <SID>Python_Abbrev_PDB_Right_Hand_Middles_and_Pointies__SO_COMPLICATED()
-  " call <SID>Python_Abbrev_PDB_Set_Trace_Right_Hand_Middle_Pointy_Middle_Pointy__THIS_WORKS()
-  call <SID>Python_Abbrev_PDB_Set_Trace_Right_Hand_Middle_Pointy_Middle_Pointy__ACTUAL()
-  call <SID>Python_Abbrev_PDB_Stty_Prep_Right_Hand_Middle_Pointy_Pointy_Middle()
-  call <SID>Python_Abbrev_RPDB2_Right_Hand_Middle_Pointy_Pointy_Middle()
-  call <SID>Python_Configure_iskeyword()
-  call <SID>Python_Comments_FIXME_NOTE_highlighting()
-  call <SID>Python_Prevent_smartindent_Undent_Cstyle_Macro()
-  call <SID>Python_Configure_nosmartindent()
-  " call <SID>Python_Configure_spell()
+  call s:DubsFtypeMessPythonClearAutocommands()
+
+  augroup DubsFtypeMessPython
+    autocmd!
+
+    " call <SID>Python_Abbrev_PDB_Right_Hand_Middles_and_Pointies__SO_COMPLICATED()
+    " call <SID>Python_Abbrev_PDB_Set_Trace_Right_Hand_Middle_Pointy_Middle_Pointy__THIS_WORKS()
+    call <SID>Python_Abbrev_PDB_Set_Trace_Right_Hand_Middle_Pointy_Middle_Pointy__ACTUAL()
+    call <SID>Python_Abbrev_PDB_Stty_Prep_Right_Hand_Middle_Pointy_Pointy_Middle()
+    call <SID>Python_Abbrev_RPDB2_Right_Hand_Middle_Pointy_Pointy_Middle()
+    call <SID>Python_Configure_iskeyword()
+    call <SID>Python_Comments_FIXME_NOTE_highlighting()
+    call <SID>Python_Prevent_smartindent_Undent_Cstyle_Macro()
+    call <SID>Python_Configure_nosmartindent()
+    " call <SID>Python_Configure_spell()
+  augroup END
 endfunction
 
 call <SID>Python_Main()
