@@ -94,8 +94,8 @@ filetype plugin on
 " ------------------------------------------------------
 " VIM GPG/GPG2 DECRYPT/ENCRYPT PLUGIN [hits no metal]
 " ------------------------------------------------------
-" See:
-"   /home/landonb/.vim/pack/jamessan/start/vim-gnupg/plugin/gnupg.vim
+" CXREF: See the vim-gnupg plugin, in a DepoXy env. at:
+"   ~/.kit/nvim/jamessan/start/vim-gnupg/plugin/gnupg.vim
 " 2018-01-24: Default to gpg2. For old 14.04 machine whose gpg is whack.
 if (!exists("g:GPGExecutable"))
   if executable("gpg2")
