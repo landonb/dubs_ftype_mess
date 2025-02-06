@@ -5,6 +5,10 @@
 
 " ------------------------------------------
 
+" ISOFF/2025-02-05: Because load order and opinionated, this g:var should
+" be set from user's init.lua/.vimrc.
+finish
+
 " ------------------------------------------------------------
 " Extend the reST syntax highlighter's code vocabulary
 " by overriding the ``.. code-block:: <language>`` mapping.
