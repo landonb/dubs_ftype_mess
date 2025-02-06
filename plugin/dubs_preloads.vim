@@ -4,19 +4,12 @@
 " License: https://creativecommons.org/publicdomain/zero/1.0/
 
 " ------------------------------------------
-" About:
-
-" If you want to set any g:global variables to override stock
-" Vim script behavior, you have to set the globals *before*
-" sourcing the shared Vim files. So the `.vimrc` for Dubs Vim
-" (https://github.com/landonb/dubs-vim) sources this script
-" before loading any system scripts.
 
 " ------------------------------------------------------------
 " Extend the reST syntax highlighter's code vocabulary
 " by overriding the ``.. code-block:: <language>`` mapping.
 " ------------------------------------------------------------
-" SYNC_ME: Similar *.rst changes in dubs_preloads.vim and rst_dubsvim.vim.
+" USYNC: Similar *.rst changes in dubs_preloads.vim and rst_dubsvim.vim.
 
 " See the Vim package file that takes care of reST syntax highlighting:
 "  /usr/share/vim/vim74/syntax/rst.vim
@@ -37,7 +30,9 @@
 
 " Note that you cannot add 'rst' to this list without
 " causing errors probably due to recursivenosity.
-" NOTE: Add to this list to add languages to the .. code-block:: recognizer.
+"
+" USAGE: Adjust this list to enable/disable `.. code-block::` languages.
+
 let g:rst_syntax_code_list = [
   \ 'bash',
   \ 'javascript',
