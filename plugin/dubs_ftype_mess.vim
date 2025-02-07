@@ -140,7 +140,7 @@ autocmd BufNewFile,BufRead * syntax sync fromstart
 " Following are the original comments for the specified filetypes
 "   for filetype=vim
 "     comments=sO:" -,mO:"  ,eO:"",:"
-"   You have to escape this string to set it, i.e.,
+"   Or,
 "     set comments=sO:\"\ -,mO:\"\ \ ,eO:\"\",:\"
 autocmd BufEnter,BufRead,BufNewFile *.vim setlocal
   \ comments=sb:\"\ FIXME:,m:\"\ \ \ \ \ \ \ ,ex:\".,sb:\"\ NOTE:,m:\"\ \ \ \ \ \ ,ex:\".,sb:\"\ FIXME,m:\"\ \ \ \ \ \ ,ex:\".,sb:\"\ NOTE,m:\"\ \ \ \ \ ,ex:\".,sO:\"\ -,mO:\"\ \ ,eO:\"\",:\"
