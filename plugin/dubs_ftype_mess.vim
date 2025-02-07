@@ -151,6 +151,12 @@ autocmd BufEnter,BufRead,BufNewFile *.vim setlocal
 "  autocmd Filetype vim setlocal iskeyword=@,48-57,_,192-255,#
 autocmd Filetype vim setlocal iskeyword=@,48-57,_,192-255
 
+" THANX: https://stackoverflow.com/a/37889460/5332257
+" https://stackoverflow.com/questions/19320747/prevent-vim-from-indenting-line-when-typing-a-colon-in-python
+" CXREF: Adjusts indentkeys set by $VIMRUNTIME/indent/vim.vim
+autocmd FileType vim setlocal indentkeys-=<:>
+autocmd FileType vim setlocal indentkeys-=:
+
 " ------------------------------------------------------
 " DOSINI Behavior
 " ------------------------------------------------------
