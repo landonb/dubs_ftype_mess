@@ -1,2 +1,7 @@
+# vim:tw=0:ts=2:sw=2:et:norl:ft=gitignore
+# Author: Landon Bouma <https://tallybark.com/>
+# Project: https://github.com/landonb/dubs_ftype_mess#🧹
+# License: GPLv3
+
 doc/tags
 
