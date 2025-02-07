@@ -143,6 +143,13 @@ call <SID>Trace('Loading\!')
 
 " ------------------------------------------------------------------------
 
+" SILLY/2025-02-07: Where'd I see this functionality?
+" - I've never used it... seems like a strange use case, changing &ft.
+"   - I'd maybe suggest closing/wiping such a buffer and re-opening it.
+" - And mostly what happens is the new file type will just clobber
+"   settings, e.g., &comment and &commentstring. Though I guess I could
+"   see a use case for spell vs. nospell... maybe.
+
 " HINT: Use b:undo_ftplugin to run cleanup code... (but how useful is it?).
 "
 " Assemble one or more undo commands that run when changing the filetype.
