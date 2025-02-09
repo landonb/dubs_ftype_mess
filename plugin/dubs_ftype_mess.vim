@@ -157,6 +157,12 @@ autocmd Filetype vim setlocal iskeyword=@,48-57,_,192-255
 autocmd FileType vim setlocal indentkeys-=<:>
 autocmd FileType vim setlocal indentkeys-=:
 
+" So that `*` works better in (Neo)Vim help.
+" - Default:
+"     " echom &iskeyword
+"     !-~,^*,^|,^",192-255
+autocmd Filetype help setlocal iskeyword=@,48-57,_,192-255
+
 " ------------------------------------------------------
 " DOSINI Behavior
 " ------------------------------------------------------
