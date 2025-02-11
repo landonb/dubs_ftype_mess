@@ -1,5 +1,5 @@
 " Opinionated Vim filetype (buffer setlocal) tweaks (syntax highlighting, etc.).
-" Author: Landon Bouma <https://tallybark.com/> 
+" Author: Landon Bouma <https://tallybark.com/>
 " Online: https://github.com/landonb/dubs_ftype_mess#🧹
 " License: https://creativecommons.org/publicdomain/zero/1.0/
 
