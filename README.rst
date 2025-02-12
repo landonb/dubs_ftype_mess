@@ -1,15 +1,13 @@
-#################################
-Dubs Vim |em_dash| Filetype Hacks
-#################################
+###################################
+Dubs Vim |em_dash| Filetype Mess 🧹
+###################################
 
 .. |em_dash| unicode:: 0x2014 .. em dash
 
 About This Plugin
 =================
 
-This plugin customizes filetype-specific behavior,
-mostly by adding syntax highlighting for non-standard
-filetypes.
+This plugin customizes a mess of ``filetype``-specific behavior.
 
 Installation
 ============
