@@ -687,6 +687,13 @@ autocmd FileType c      setlocal foldmethod=expr foldexpr=getline(v:lnum)=~'^\\s
 autocmd FileType sh     setlocal foldmethod=expr foldexpr=getline(v:lnum)=~'^\\s*//'
 autocmd FileType python setlocal foldmethod=expr foldexpr=getline(v:lnum)=~'^\\s*#'
 
+" ------------------------------------------------------
+" Don't redent when colon used in Lua comment
+" ------------------------------------------------------
+
+" OWISE: 0{,0},!^F,o,O,e,<:>,=elif,=except
+autocmd FileType lua setlocal indentkeys-=<:>
+
 " -------------------------------------------------------------------
 
 augroup END
