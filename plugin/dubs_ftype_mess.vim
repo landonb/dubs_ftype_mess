@@ -154,8 +154,11 @@ autocmd Filetype vim setlocal iskeyword=@,48-57,_,192-255
 " THANX: https://stackoverflow.com/a/37889460/5332257
 " https://stackoverflow.com/questions/19320747/prevent-vim-from-indenting-line-when-typing-a-colon-in-python
 " CXREF: Adjusts indentkeys set by $VIMRUNTIME/indent/vim.vim
+" OWISE: 0{,0},!^F,o,O,e,<:>,=elif,=except,=endif,=enddef,=endfu,=endfor,=endwh,=endtry,=},=else,=cat,=finall,=END,0\,0="\ 
 autocmd FileType vim setlocal indentkeys-=<:>
-autocmd FileType vim setlocal indentkeys-=:
+" I saw this in S/O answer, but for me, does nothing.
+" - But maybe in some other environment?
+"  autocmd FileType vim setlocal indentkeys-=:
 
 " So that `*` works better in (Neo)Vim help.
 " - Default:
