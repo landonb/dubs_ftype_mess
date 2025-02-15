@@ -565,7 +565,9 @@ autocmd BufEnter,BufRead,BufNewFile *.rb,Rakefile iabbrev <buffer> ';'; require 
 "autocmd BufEnter,BufRead *.rb iabbrev <buffer> ';'; require 'pry' ; binding.pry if true<C-R>=Eatchar('\s')<CR>
 
 " 2017-05-01: I find that most co-workers don't care about spelling. But I do!
-autocmd BufEnter,BufRead,BufNewFile *.rb setlocal spell
+" - 2025-02-14: No I don't. (Also comments always give false-positives when
+"   you're reffing code.)
+autocmd BufEnter,BufRead,BufNewFile *.rb setlocal nospell
 
 " ------------------------------------------------------
 " Golang Templates
