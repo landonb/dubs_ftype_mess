@@ -151,15 +151,6 @@ autocmd BufEnter,BufRead,BufNewFile *.vim setlocal
 "  autocmd Filetype vim setlocal iskeyword=@,48-57,_,192-255,#
 autocmd Filetype vim setlocal iskeyword=@,48-57,_,192-255
 
-" THANX: https://stackoverflow.com/a/37889460/5332257
-" https://stackoverflow.com/questions/19320747/prevent-vim-from-indenting-line-when-typing-a-colon-in-python
-" CXREF: Adjusts indentkeys set by $VIMRUNTIME/indent/vim.vim
-" OWISE: 0{,0},!^F,o,O,e,<:>,=elif,=except,=endif,=enddef,=endfu,=endfor,=endwh,=endtry,=},=else,=cat,=finall,=END,0\,0="\ 
-autocmd FileType vim setlocal indentkeys-=<:>
-" I saw this in S/O answer, but for me, does nothing.
-" - But maybe in some other environment?
-"  autocmd FileType vim setlocal indentkeys-=:
-
 " So that `*` works better in (Neo)Vim help.
 " - Default:
 "     " echom &iskeyword
@@ -544,18 +535,36 @@ autocmd BufEnter,BufRead,BufNewFile *.hjson setlocal spell
 " ------------------------------------------------------
 " Stop: Re-indenting: Lines: When: I, <:>Colon<:>
 " ------------------------------------------------------
+"  (Inhibit re-denting lines when colon (:) typed.)
 " See:
 "  :help cinkeys-format
+
+" " REFER/2025-02-14: Ha, THANX nothing, I re-discovered this
+" " setting recently...
+" " THANX: https://stackoverflow.com/a/37889460/5332257
+" " https://stackoverflow.com/questions/19320747/prevent-vim-from-indenting-line-when-typing-a-colon-in-python
+" " CXREF: Adjusts indentkeys set by $VIMRUNTIME/indent/vim.vim
+" " OWISE: 0{,0},!^F,o,O,e,<:>,=elif,=except,=endif,=enddef,=endfu,=endfor,=endwh,=endtry,=},=else,=cat,=finall,=END,0\,0="\
+" autocmd FileType vim setlocal indentkeys-=<:>
+" " I saw this in S/O answer, but for me, does nothing.
+" " - But maybe in some other environment?
+" "  autocmd FileType vim setlocal indentkeys-=:
 "
-" Sh Defaults:
-"  indentexpr=GetShIndent()
-"  indentkeys=0{,0},!^F,o,O,e,<:>,=elif,=except,0=then,0=do,0=else,0=elif,0=fi,0=esac,0=done,),0=;;,0=;&,0=fin,0=fil,0=fip,0=fir,0=fix
-autocmd BufEnter,BufRead,BufNewFile *.sh setlocal indentkeys-=<:>
+" " Sh Defaults:
+" "  indentexpr=GetShIndent()
+" "  indentkeys=0{,0},!^F,o,O,e,<:>,=elif,=except,0=then,0=do,0=else,0=elif,0=fi,0=esac,0=done,),0=;;,0=;&,0=fin,0=fil,0=fip,0=fir,0=fix
+" autocmd BufEnter,BufRead,BufNewFile *.sh setlocal indentkeys-=<:>
+" "
+" " Yaml Defaults:
+" "  indentexpr=GetYAMLIndent(v:lnum)
+" "  indentkeys=!^F,o,O,0#,0},0],<:>,-
+" autocmd BufEnter,BufRead,BufNewFile *.yaml setlocal indentkeys-=<:>
 "
-" Yaml Defaults:
-"  indentexpr=GetYAMLIndent(v:lnum)
-"  indentkeys=!^F,o,O,0#,0},0],<:>,-
-autocmd BufEnter,BufRead,BufNewFile *.yaml setlocal indentkeys-=<:>
+" " Don't redent when colon used in Lua comment
+" " OWISE: 0{,0},!^F,o,O,e,<:>,=elif,=except
+" autocmd FileType lua setlocal indentkeys-=<:>
+
+autocmd FileType * setlocal indentkeys-=<:>
 
 " ------------------------------------------------------
 " Ruby on my mind.
@@ -688,13 +697,6 @@ autocmd BufEnter,BufRead,BufNewFile * setlocal iskeyword-=*,/
 autocmd FileType c      setlocal foldmethod=expr foldexpr=getline(v:lnum)=~'^\\s*//'
 autocmd FileType sh     setlocal foldmethod=expr foldexpr=getline(v:lnum)=~'^\\s*//'
 autocmd FileType python setlocal foldmethod=expr foldexpr=getline(v:lnum)=~'^\\s*#'
-
-" ------------------------------------------------------
-" Don't redent when colon used in Lua comment
-" ------------------------------------------------------
-
-" OWISE: 0{,0},!^F,o,O,e,<:>,=elif,=except
-autocmd FileType lua setlocal indentkeys-=<:>
 
 " -------------------------------------------------------------------
 
