@@ -78,6 +78,6 @@ let g:rst_syntax_code_list = [
 " Re: bash syntax defined by sh.vim, so to make it work
 " so you don't have to do, e.g., .. code-block:: sh
 " we made a symlink, i.e.,
-"   cd $HOME/.vim/pack/landonb/start/dubs_ftype_mess/syntax/
+"   cd $HOME/.kit/nvim/landonb/dubs_ftype_mess/syntax/
 "   ln -s sh.vim bash.vim
 
