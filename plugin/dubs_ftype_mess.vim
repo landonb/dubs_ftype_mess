@@ -151,7 +151,7 @@ autocmd BufEnter,BufRead,BufNewFile *.vim setlocal
 "  autocmd Filetype vim setlocal iskeyword=@,48-57,_,192-255,#
 autocmd Filetype vim setlocal iskeyword=@,48-57,_,192-255
 
-" So that `*` works better in (Neo)Vim help.
+" So that <C-]> and `*` work better in (Neo)Vim help.
 " - Default:
 "     " echom &iskeyword
 "     !-~,^*,^|,^",192-255
