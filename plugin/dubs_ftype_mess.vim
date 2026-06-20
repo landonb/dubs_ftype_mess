@@ -422,9 +422,9 @@ autocmd BufEnter,BufRead,BufNewFile *.gradle setfiletype java
 "   [http://www.google.com/a/cpanel/domain/new](http://www.google.com/a/cpanel/domain/new)
 "
 " HSTRY/2024-12-08: Was <Leader>l and applied globally; now restricted to
-" Markdown files and moved to <Leader>u, so that \l can be used for
+" Markdown files and moved to <LocalLeader>u, so that \l can be used for
 " vim-easymotion config.
-autocmd FileType markdown noremap <Leader>u
+autocmd FileType markdown noremap <LocalLeader>u
   \ :let tmp=@/<CR>:s/\(http[s]\?:\/\/[^ \t()\[\]]\+\)/[\1](\1)/ge<CR>:let @/=tmp<CR>
 
 " MAYBE: In Markdown, surround the link in angle
